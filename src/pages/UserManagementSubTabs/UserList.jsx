@@ -1,6 +1,12 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+import { titleIs } from '../../context/TitleContext';
 
 const UserList = () => {
+
+  const { setTitle } = useContext(titleIs);
+  useEffect(() => {
+    setTitle("User List");
+  }, []);
 
   const boxes = Array.from({ length: 3 });
 
