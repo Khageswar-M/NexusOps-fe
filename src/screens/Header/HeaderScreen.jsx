@@ -1,17 +1,9 @@
-import { useLocation } from "react-router-dom";
-import { operations } from "../../config/operations";
-import { titleIs } from "../../context/TitleContext";
+import { AppContext } from "../../context/TitleContext";
 import { useContext } from "react";
 
 const HeaderScreen = () => {
 
-    // const location = useLocation();
-    const{title} = useContext(titleIs);
-    // const currentOperation = operations.find(
-    //     (op) => location.pathname.startsWith(op.path)
-    // );
-
-    // const title = currentOperation?.title || "Dashboard";
+    const{title} = useContext(AppContext);
 
 
     return (

@@ -1,16 +1,16 @@
 import { createContext, useContext, useState } from "react";
 
-export const titleIs = createContext();
+export const AppContext = createContext();
 
-const TitleContextProvider = ({children}) => {
+const AppContextProvider = ({children}) => {
 
     const [title, setTitle] = useState("Dashboard");
 
   return (
-    <titleIs.Provider value={{title, setTitle}}>
+    <AppContext.Provider value={{title, setTitle}}>
         {children}
-    </titleIs.Provider>
+    </AppContext.Provider>
   )
 }
 
-export default TitleContextProvider;
+export default AppContextProvider;

@@ -1,9 +1,9 @@
-import { titleIs } from "../../context/TitleContext";
+import { AppContext } from "../../context/TitleContext";
 import { useContext, useEffect } from "react";
 
 const SystemSettings = () => {
 
-  const {setTitle} = useContext(titleIs);
+  const {setTitle} = useContext(AppContext);
   useEffect(() => {
     setTitle("System Settings")
   }, []);

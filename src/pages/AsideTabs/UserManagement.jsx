@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom"
-import { titleIs } from "../../context/TitleContext";
+import { AppContext } from "../../context/TitleContext";
 import { useEffect, useContext } from "react";
 const UserManagement = () => {
 
-  const {setTitle} = useContext(titleIs);
+  const {setTitle} = useContext(AppContext);
   useEffect(() => {
     setTitle("User Management");
   }, []);

@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react'
-import { titleIs } from '../../context/TitleContext';
+import { AppContext } from '../../context/TitleContext';
 
 const RolesPermissions = () => {
 
-  const { setTitle } = useContext(titleIs);
+  const { setTitle } = useContext(AppContext);
     useEffect(() => {
       setTitle("Roles & Permissions");
     }, []);

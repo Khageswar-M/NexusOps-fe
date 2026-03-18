@@ -1,12 +1,12 @@
 import KpiCards from "../Dashboard/KpiCards";
 import PerformanceChart from "../Dashboard/PerformanceChart";
 import ActivityFeed from "../Dashboard/ActivityFeed";
-import { titleIs } from "../../context/TitleContext";
+import { AppContext } from "../../context/TitleContext";
 import { useContext, useEffect } from "react";
 
 const Dashboard = () => {
 
-  const {setTitle} = useContext(titleIs);
+  const {setTitle} = useContext(AppContext);
 
   useEffect(() => {
     setTitle("Dashboard")
