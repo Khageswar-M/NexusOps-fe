@@ -14,7 +14,7 @@ import UserAnalytics from '../../pages/UserManagementSubTabs/UserAnalytics';
 
 const HeroScreen = () => {
     return (
-        <div className="bg-[hsl(0,0%,30%)] rounded-md h-full overflow-y-hidden">
+        <div className="bg-[hsl(0,0%,30%)] rounded-md h-full overflow-y-auto">
             <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/dashboard" element={<Dashboard />} />

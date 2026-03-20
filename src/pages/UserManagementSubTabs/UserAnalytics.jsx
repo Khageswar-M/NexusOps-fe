@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { AppContext } from '../../context/TitleContext';
 
 const UserAnalytics = () => {
-  const { setTitle } = useContext(AppContext);
+  const {setTitle } = useContext(AppContext);
     useEffect(() => {
       setTitle("User Analytics");
     }, []);

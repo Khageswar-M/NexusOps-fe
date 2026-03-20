@@ -3,7 +3,7 @@ import { AppContext } from '../../context/TitleContext';
 
 const RolesPermissions = () => {
 
-  const { setTitle } = useContext(AppContext);
+  const {setTitle } = useContext(AppContext);
     useEffect(() => {
       setTitle("Roles & Permissions");
     }, []);

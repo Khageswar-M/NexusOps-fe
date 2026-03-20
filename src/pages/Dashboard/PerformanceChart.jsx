@@ -49,14 +49,21 @@ const PerformanceChart = () => {
   ];
 
   return (
-    <div className='row-span-3 bg-[hsl(0,0%,40%)] rounded-md flex font-bold shadow-[0px_0px_5px_rgba(0,0,0,0.3)]'>
-      <div className='w-full h-full'>
+    <div className='row-span-3  rounded-md font-bold shadow-[0px_0px_5px_rgba(0,0,0,0.3)] grid grid-rows-[1fr_4fr] gap-1 text-white bg-[hsl(0,0%,40%)]'>
+      <div className=' flex items-center justify-between px-5'>
+        <h3>User Activity Over Time</h3>
+        <div className='flex items-center justify-between gap-2'>
+          <div>Year</div>
+          <div>Month</div>
+          <div>Week</div>
+        </div>
+      </div>
+      <div className='w-full h-full bg-[hsl(0,0%,40%)]'>
         <LineChart
           dataset={usUnemploymentRate}
           xAxis={xAxis}
           yAxis={yAxis}
           series={series}
-          // height={300}
           grid={{ vertical: true, horizontal: true }}
           
         />

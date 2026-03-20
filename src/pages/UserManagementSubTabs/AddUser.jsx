@@ -3,7 +3,7 @@ import { AppContext } from "../../context/TitleContext";
 
 const AddUser = () => {
 
-  const { setTitle } = useContext(AppContext);
+  const {setTitle } = useContext(AppContext);
   useEffect(() => {
     setTitle("Add User");
   }, []);

@@ -3,7 +3,7 @@ import { useContext, useEffect } from "react";
 
 const ActivityLogs = () => {
 
-  const { setTitle } = useContext(AppContext);
+  const {setTitle } = useContext(AppContext);
   useEffect(() => {
     setTitle("Activity Logs");
   }, []);
