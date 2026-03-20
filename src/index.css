@@ -8,5 +8,11 @@
 
 @theme {
     --font-poppins: Poppins, "sans-serif" ;
-    --font-pacifico: Pacifico, "sans-serif"
+    --font-pacifico: Pacifico, "sans-serif";
+    --bg-kpi-dark: linear-gradient(
+        130deg,
+        rgba(23,23,23,1) 0%,
+        rgba(41,41,41,1) 50%,
+        rgba(66,66,66,1) 100%
+    );
 }

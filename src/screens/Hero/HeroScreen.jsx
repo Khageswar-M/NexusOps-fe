@@ -14,10 +14,11 @@ import UserAnalytics from '../../pages/UserManagementSubTabs/UserAnalytics';
 
 const HeroScreen = () => {
     return (
-        <div className="bg-[hsl(0,0%,30%)] rounded-md h-full overflow-y-auto">
+        <div className="bg-[hsl(0,0%,10%)] rounded-md h-full overflow-y-auto">
             <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route index element={<Dashboard to="/" replace />} />
 
                 <Route path="/user-management" element={<UserManagement />}>
                     <Route index element={<Navigate to="user-list" replace />} />
