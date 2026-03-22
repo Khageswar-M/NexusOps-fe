@@ -3,11 +3,15 @@
 <h3>Smart Operations Platform<h3>
 <h3>Version: 1.0 (UI/Feature Overview)<h3>
   </div>
-1. Introduction
-NexusOps is a modern, all-in-one Smart Operations Platform designed for IT teams, DevOps engineers, platform admins, and business operations managers.
+
+<div>
+<h1>1. Introduction</h1>
+<p>
+  NexusOps is a modern, all-in-one Smart Operations Platform designed for IT teams, DevOps engineers, platform admins, and business operations managers.
 It centralizes user management, data analytics, automated workflows, system monitoring, security, backups, and reporting into a single, beautiful dark-themed dashboard.
-Core Purpose
-NexusOps solves the typical pain points of fragmented tools:
+  <p>
+<h3>Core Purpose</h3>
+<p>NexusOps solves the typical pain points of fragmented tools:
 
 Too many logins and dashboards
 Manual tracking of users, tasks, and alerts
@@ -15,7 +19,8 @@ Lack of real-time visibility into performance and security
 Slow backup & recovery processes
 Difficulty in scaling operations without custom scripts
 
-With NexusOps, teams get real-time visibility, automated operations, and enterprise-grade security in one intuitive React + Tailwind-powered interface.
+With NexusOps, teams get real-time visibility, automated operations, and enterprise-grade security in one intuitive React + Tailwind-powered interface.</p>
+</div>
 2. Key Benefits (First-Read Value)
 
 Instant Problem Detection – Critical CPU spikes, failed logins, queue overflows, and backup failures are flagged immediately with one-click actions.
