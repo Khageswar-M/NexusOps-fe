@@ -1,4 +1,4 @@
-NexusOps Documentation
+<h1>NexusOps Documentation</h1>
 Smart Operations Platform
 Version: 1.0 (UI/Feature Overview)
 1. Introduction
