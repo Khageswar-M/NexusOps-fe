@@ -1,6 +1,8 @@
 <h1>NexusOps Documentation</h1>
-Smart Operations Platform
-Version: 1.0 (UI/Feature Overview)
+<div>
+<h3>Smart Operations Platform<h3>
+<h3>Version: 1.0 (UI/Feature Overview)<h3>
+  </div>
 1. Introduction
 NexusOps is a modern, all-in-one Smart Operations Platform designed for IT teams, DevOps engineers, platform admins, and business operations managers.
 It centralizes user management, data analytics, automated workflows, system monitoring, security, backups, and reporting into a single, beautiful dark-themed dashboard.
