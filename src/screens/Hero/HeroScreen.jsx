@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Dashboard from '../../pages/AsideTabs/Dashboard';
 import UserManagement from '../../pages/AsideTabs/UserManagement';
 import DataAnalytics from '../../pages/AsideTabs/DataAnalytics';
+import Reports from '../../pages/AsideTabs/Reports';
 import TaskAutomation from '../../pages/AsideTabs/TaskAutomation';
 import SystemSettings from '../../pages/AsideTabs/SystemSettings';
 
@@ -18,7 +19,6 @@ const HeroScreen = () => {
             <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/dashboard" element={<Dashboard />} />
-                <Route index element={<Dashboard to="/" replace />} />
 
                 <Route path="/user-management" element={<UserManagement />}>
                     <Route index element={<Navigate to="user-list" replace />} />
@@ -30,6 +30,7 @@ const HeroScreen = () => {
                 </Route>
 
                 <Route path="/data-analytics" element={<DataAnalytics />} />
+                <Route path="/reports" element={<Reports/>}/>
                 <Route path="/task-automation" element={<TaskAutomation />} />
                 <Route path="/system-settings" element={<SystemSettings />} />
             </Routes>

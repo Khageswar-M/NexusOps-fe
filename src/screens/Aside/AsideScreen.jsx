@@ -6,42 +6,100 @@ import { FiUsers } from "react-icons/fi";
 import { FaChartLine } from "react-icons/fa6";
 import { FaListCheck } from "react-icons/fa6";
 import { IoSettingsOutline } from "react-icons/io5";
+import { BiSolidReport } from "react-icons/bi";
 
 const AsideScreen = ({ isLocation }) => {
 
-  const icons = [MdOutlineDashboard , FiUsers , FaChartLine , FaListCheck , IoSettingsOutline ];
+  const icons = [MdOutlineDashboard, FiUsers, FaChartLine, FaListCheck, IoSettingsOutline];
+
+  const sideBarTabs = [
+    {
+      title: "MAIN",
+      tabs: [
+        {
+          tabIcon: MdOutlineDashboard,
+          tabTitle: "Dashboard",
+          to: "/dashboard"
+        },
+        {
+          tabIcon: FiUsers,
+          tabTitle: "User Management",
+          to: "/user-management"
+        }
+      ]
+    },
+    {
+      title: "ANALYTICS",
+      tabs: [
+        {
+          tabIcon: FaChartLine,
+          tabTitle: "Data Analytics",
+          to: "/data-analytics"
+        },
+        {
+          tabIcon: BiSolidReport,
+          tabTitle: "Reports",
+          to: "/reports"
+        }
+      ]
+    },
+    {
+      title: "SYSTEM",
+      tabs: [
+        {
+          tabIcon: FaListCheck,
+          tabTitle: "Task Automation",
+          to: "/task-automation"
+        },
+        {
+          tabIcon: IoSettingsOutline,
+          tabTitle: "System Settings",
+          to: "/system-settings"
+        }
+      ]
+    },
+  ]
 
   return (
-    <div className={`${isLocation ? "row-span-3" : "row-span-2"} bg-[hsl(0,0%,10%)] rounded-md`}>
-      <div className='grid grid-cols-1 grid-rows-[repeat(10, 1fr)] gap-2 h-[80%] m-1 [&>div]:rounded-md  [&>div:not(:first-child)>h1]:font-pacifico [&>div:not(:first-child)>h1]:text-[clamp(10px,3vw,20px)] [&>div:not(:first-child)>h1]:text-center text-white'>
+    <div className={`${isLocation ? "row-span-3" : "row-span-2"} bg-surface rounded-md`}>
+      <div className=''>
 
-        <div className='flex items-center justify-center flex-col'>
-          <h1 className='font-poppins font-bold text-center text-[clamp(10px,3vw,40px)] cursor-pointer'>
+        <div className='flex items-center justify-center flex-col border-b border-text-muted px-0 py-5'>
+          <h1 className='font-poppins text-cyan font-bold text-center text-[clamp(10px,3vw,40px)] cursor-pointer'>
             NexusOps
           </h1>
-          <p className='font-bold text-[12px] text-center'>
+          <p className='font-bold text-[12px] text-center text-text-muted'>
             Smart Operations Management Dashboard
           </p>
         </div>
 
-        {operations.map((op, index) => {
-          const IconComponent = icons[index];
-          return (
-            <NavLink
-              key={op.path}
-              to={op.path}
-              className={({ isActive }) => `flex items-center px-5 cursor-pointer border  border-transparent rounded-md hover:border-white ${isActive ? 'bg-[linear-gradient(147deg,rgba(38,38,38,1)_0%,rgba(120,120,120,1)_50%,rgba(61,61,61,1)_100%)]' : "bg-[hsl(0,0%,20%)]"}`}>
-                <div className='flex flex-row items-center gap-5'>
-                  <div>
-                    <IconComponent size={24}/>
-                  </div>
-                  <h1 className='font-poppins font-bold'>
-                    {op.title}
-                  </h1>
-                </div>
-            </NavLink>
-          )
-        })}
+        <div className='py-2'>
+          {sideBarTabs.map((sideBarTab, index) => {
+            return (
+              <div
+                key={index}
+                className='grid grid-rows-[1fr_2fr_2fr] [&>div]:flex [&>div]:items-center px-4 py-0'
+              >
+                <div className='text-[12px] text-text-muted'>{sideBarTab.title}</div>
+                {sideBarTab.tabs.map((tab, i) => {
+                  const Icon = tab.tabIcon;
+                  return (
+                    <NavLink
+                      key={i}
+                      className='gap-3 flex flex-row items-center bg-surface-2 rounded-md mt-1 mb-1 py-2 px-3 border border-border'
+                      to={tab.to}
+                    >
+                      <Icon color='#fff' size={19} />
+                      <h3 className='text-cyan'>{tab.tabTitle}</h3>
+                    </NavLink>
+                  )
+                })}
+
+              </div>
+            )
+          })}
+        </div>
+
       </div>
     </div>
   )

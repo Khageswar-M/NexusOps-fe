@@ -97,7 +97,7 @@ const KpiCards = () => {
     ];
 
     return (
-        <div className='rounded-md grid grid-cols-[1fr_1fr_1fr_1fr] gap-2 [&>div]:bg-[linear-gradient(147deg,rgba(23,23,23,1)_0%,rgba(41,41,41,1)_50%,rgba(66,66,66,1)_100%)] [&>div]:rounded-md'>
+        <div className='rounded-md grid grid-cols-[1fr_1fr_1fr_1fr] gap-2 [&>div]:bg-primary [&>div]:rounded-md'>
 
             {kpiCards.map((kpi, index) => {
                 return (

@@ -50,7 +50,7 @@ const PerformanceChart = () => {
   ];
 
   return (
-    <div className='rounded-md font-bold shadow-[0px_0px_5px_rgba(0,0,0,0.3)] grid grid-rows-[1fr_10fr] gap-1 text-white  overflow-hidden bg-[linear-gradient(147deg,rgba(23,23,23,1)_0%,rgba(41,41,41,1)_50%,rgba(66,66,66,1)_100%)]'>
+    <div className='rounded-md font-bold shadow-[0px_0px_5px_rgba(0,0,0,0.3)] grid grid-rows-[1fr_10fr] gap-1 text-white  overflow-hidden bg-primary'>
       <div className=' flex items-center justify-between px-5 py-2'>
         <h3>User Activity Over Time:</h3>
         <div className='flex items-center justify-between gap-2'>

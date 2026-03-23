@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
 @font-face {
     font-family: Poppins;
     src: url("../src/assets/fonts/Poppins-Regular.ttf");
@@ -7,12 +8,23 @@
 @import "tailwindcss";
 
 @theme {
-    --font-poppins: Poppins, "sans-serif" ;
+    --font-poppins: Poppins, "sans-serif";
     --font-pacifico: Pacifico, "sans-serif";
-    --bg-kpi-dark: linear-gradient(
-        130deg,
-        rgba(23,23,23,1) 0%,
-        rgba(41,41,41,1) 50%,
-        rgba(66,66,66,1) 100%
-    );
+    --color-primary: hsl(0, 0%, 15%);
+    
+    --color-bg: #0b0e14;  /* Page / app background */
+    --color-surface: #111520; /* Sidebar, top bar, panels, card */
+    --color-surface-2: #161c2a; /* Inputs, dropdowns, hover rows */
+    --color-surface-3: #1c2436; /* Progress bars, code blocks */
+    --color-border: rgba(255,255,255,0.06); /* Default card / panel borders */
+    --color-border-hover: rgba(99,179,237,0.3); /* HOver, active, focus borders */
+    --color-text: #e2e8f0; /* Primary body text */
+    --color-text-muted: #64748b; /* Labels, descriptions, meta */
+    --color-text-hint: #94a3b8; /* Placeholders, hints, secondary */
+    --color-accent: #63b3ed; /* Primary accent . links, active states */
+    --color-success: #68d391; /* Active, completed, online, healthy */
+    --color-warning: #f6ad55; /* Pending, busy, warning, caution */
+    --color-danger: #fc8181; /* Failed, error, blocked, critical */
+    --color-purple: #b794f4; /* Admin role, API, security, 2FA */
+    --color-cyan: #76e4f7; /* Operator role, logo, performance */
 }

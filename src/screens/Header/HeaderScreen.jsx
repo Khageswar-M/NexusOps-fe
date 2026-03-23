@@ -9,7 +9,7 @@ const HeaderScreen = () => {
 
 
     return (
-        <div className="bg-[linear-gradient(147deg,rgba(23,23,23,1)_0%,rgba(41,41,41,1)_50%,rgba(66,66,66,1)_100%)] rounded-md flex items-center justify-between px-5">
+        <div className="bg-[hsl(0,0%,10%)] rounded-md flex items-center justify-between px-5">
             <h1 className="text-white  font-poppins text-2xl font-bold">
                 {title}
             </h1>
