@@ -13,9 +13,11 @@ import RolesPermissions from '../../pages/UserManagementSubTabs/RolesPermissions
 import ActivityLogsAny from '../../pages/UserManagementSubTabs/ActivityLogs';
 import UserAnalytics from '../../pages/UserManagementSubTabs/UserAnalytics';
 
+import NotificationPanel from '../Notification/NotificationPanel';
+
 const HeroScreen = () => {
     return (
-        <div className="bg-[hsl(0,0%,10%)] rounded-md h-full overflow-y-auto">
+        <div className="bg-surface rounded-md h-full overflow-y-auto border border-border">
             <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/dashboard" element={<Dashboard />} />
@@ -35,7 +37,8 @@ const HeroScreen = () => {
                 <Route path="/system-settings" element={<SystemSettings />} />
             </Routes>
 
-
+            {/* Global Modal */}
+            <NotificationPanel/>
         </div>
     )
 }

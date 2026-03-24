@@ -5,8 +5,9 @@ const TaskAutomation = () => {
 
   const { setTitle } = useContext(AppContext);
   useEffect(() => {
-    setTitle("Task Automation");
+    setTitle(["Task Automation"]);
   }, []);
+  
   return (
     <div className="grid grid-rows-[2fr_7fr_1fr] gap-2 p-2 h-full">
       <div className=" grid grid-cols-[1fr_1fr_1fr_1fr] gap-2">

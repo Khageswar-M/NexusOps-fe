@@ -1,28 +1,24 @@
-import React, { useContext, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { operations } from '../../config/operations';
-import { MdOutlineDashboard } from "react-icons/md";
-import { FiUsers } from "react-icons/fi";
-import { FaChartLine } from "react-icons/fa6";
-import { FaListCheck } from "react-icons/fa6";
-import { IoSettingsOutline } from "react-icons/io5";
-import { BiSolidReport } from "react-icons/bi";
+import { NavLink } from 'react-router-dom';
+import { MdOutlineDashboard, MdDashboard } from "react-icons/md";
+import { HiOutlineUsers, HiMiniUsers } from "react-icons/hi2";
+import { MdOutlineInsertChart, MdInsertChart } from "react-icons/md";
+import { RiFileList3Line, RiFileList3Fill } from "react-icons/ri";
+import { IoSettingsOutline, IoSettingsSharp } from "react-icons/io5";
+import { HiOutlineDocumentReport, HiDocumentReport } from "react-icons/hi";
 
 const AsideScreen = ({ isLocation }) => {
-
-  const icons = [MdOutlineDashboard, FiUsers, FaChartLine, FaListCheck, IoSettingsOutline];
 
   const sideBarTabs = [
     {
       title: "MAIN",
       tabs: [
         {
-          tabIcon: MdOutlineDashboard,
+          tabIcon: [MdOutlineDashboard, MdDashboard],
           tabTitle: "Dashboard",
           to: "/dashboard"
         },
         {
-          tabIcon: FiUsers,
+          tabIcon: [HiOutlineUsers, HiMiniUsers],
           tabTitle: "User Management",
           to: "/user-management"
         }
@@ -32,12 +28,12 @@ const AsideScreen = ({ isLocation }) => {
       title: "ANALYTICS",
       tabs: [
         {
-          tabIcon: FaChartLine,
+          tabIcon: [MdOutlineInsertChart, MdInsertChart],
           tabTitle: "Data Analytics",
           to: "/data-analytics"
         },
         {
-          tabIcon: BiSolidReport,
+          tabIcon: [HiOutlineDocumentReport, HiDocumentReport],
           tabTitle: "Reports",
           to: "/reports"
         }
@@ -47,12 +43,12 @@ const AsideScreen = ({ isLocation }) => {
       title: "SYSTEM",
       tabs: [
         {
-          tabIcon: FaListCheck,
+          tabIcon: [RiFileList3Line, RiFileList3Fill],
           tabTitle: "Task Automation",
           to: "/task-automation"
         },
         {
-          tabIcon: IoSettingsOutline,
+          tabIcon: [IoSettingsOutline, IoSettingsSharp],
           tabTitle: "System Settings",
           to: "/system-settings"
         }
@@ -61,10 +57,9 @@ const AsideScreen = ({ isLocation }) => {
   ]
 
   return (
-    <div className={`${isLocation ? "row-span-3" : "row-span-2"} bg-surface rounded-md`}>
+    <div className={`${isLocation ? "row-span-3" : "row-span-2"} bg-surface rounded-md overflow-y-auto relative border border-border`}>
       <div className=''>
-
-        <div className='flex items-center justify-center flex-col border-b border-text-muted px-0 py-5'>
+        <div className='flex items-center justify-center flex-col border-b border-border px-0 py-5'>
           <h1 className='font-poppins text-cyan font-bold text-center text-[clamp(10px,3vw,40px)] cursor-pointer'>
             NexusOps
           </h1>
@@ -78,28 +73,60 @@ const AsideScreen = ({ isLocation }) => {
             return (
               <div
                 key={index}
-                className='grid grid-rows-[1fr_2fr_2fr] [&>div]:flex [&>div]:items-center px-4 py-0'
+                className='grid grid-rows-[1fr_2fr_2fr] [&>div]:flex [&>div]:items-center px-4 mb-1 py-1'
               >
-                <div className='text-[12px] text-text-muted'>{sideBarTab.title}</div>
+                <div className='text-[12px] text-text-muted font-bold'>
+                  {sideBarTab.title}
+                </div>
                 {sideBarTab.tabs.map((tab, i) => {
-                  const Icon = tab.tabIcon;
+
                   return (
                     <NavLink
                       key={i}
-                      className='gap-3 flex flex-row items-center bg-surface-2 rounded-md mt-1 mb-1 py-2 px-3 border border-border'
+                      className={({ isActive }) =>
+                        `gap-3 flex flex-row items-center rounded-md mt-0 mb-1 py-2 px-3 border transition-all duration-200
+                        ${isActive
+                          ? "border-border-hover bg-surface-2 shadow-md text-cyan"
+                          : "border-transparent hover:border-border hover:bg-surface-2/50 text-text-muted"
+                        }`
+                      }
                       to={tab.to}
                     >
-                      <Icon color='#fff' size={19} />
-                      <h3 className='text-cyan'>{tab.tabTitle}</h3>
+                      {({ isActive }) => {
+                        const Icon = isActive ? tab.tabIcon[1] : tab.tabIcon[0];
+                        return (
+                          <>
+                            <Icon
+                              color={isActive ? '#22d3ee' : '#64748b'}
+                              size={19}
+                            />
+                            <h3 className='text-[15px]'>{tab.tabTitle}</h3>
+                          </>
+                        )
+                      }}
                     </NavLink>
                   )
                 })}
-
               </div>
             )
           })}
         </div>
 
+        <div className='absolute bottom-0 border-t border-border w-full py-3 flex items-center justify-center'>
+          <div className='flex flex-row items-center justify-between gap-3 bg-surface-2/50 border border-border px-5 py-2 w-[90%] max-w-[90%] rounded-md'>
+            <div className='flex flex-row gap-3'>
+              <div className="w-10 h-10 rounded-full bg-linear-to-br from-purple-500 via-pink-500 to-orange-400 flex items-center justify-center">
+                <span className="text-white font-bold text-sm">AD</span>
+              </div>
+
+              <div className='flex flex-col'>
+                <h2 className='font-bold text-[16px] text-white'>Admin</h2>
+                <h5 className='font-medium text-[13px] text-text-muted'>Super Admin</h5>
+              </div>
+            </div>
+            <div className="relative right-0 w-2.5 h-2.5 bg-green-400 rounded-full shadow-[0_0_6px_rgba(74,222,128,0.8)]" />
+          </div>
+        </div>
       </div>
     </div>
   )

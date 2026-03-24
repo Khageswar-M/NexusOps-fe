@@ -3,10 +3,10 @@ import { useContext, useEffect } from "react";
 
 const ActivityLogs = () => {
 
-  const {setTitle } = useContext(AppContext);
-  useEffect(() => {
-    setTitle("Activity Logs");
-  }, []);
+  const { setTitle } = useContext(AppContext);
+    useEffect(() => {
+      setTitle(["User Management", "Activity Logs"]);
+    }, []);
 
   return (
     <div className="grid grid-rows-[1fr_8fr_1fr] h-full gap-2 p-2">

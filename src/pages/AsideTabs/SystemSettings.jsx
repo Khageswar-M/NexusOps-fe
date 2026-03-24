@@ -3,9 +3,9 @@ import { useContext, useEffect } from "react";
 
 const SystemSettings = () => {
 
-  const {setTitle} = useContext(AppContext);
+  const { setTitle } = useContext(AppContext);
   useEffect(() => {
-    setTitle("System Settings")
+    setTitle(["System Settings"]);
   }, []);
   
   return (

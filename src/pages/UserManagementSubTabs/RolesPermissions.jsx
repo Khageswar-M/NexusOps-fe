@@ -3,10 +3,10 @@ import { AppContext } from '../../context/TitleContext';
 
 const RolesPermissions = () => {
 
-  const {setTitle } = useContext(AppContext);
-    useEffect(() => {
-      setTitle("Roles & Permissions");
-    }, []);
+  const { setTitle } = useContext(AppContext);
+  useEffect(() => {
+    setTitle(["User Management", "Roles & Permissions"]);
+  }, []);
 
   const data = [
     { id: 1, role: "Admin", description: "Full System Access", users: 3, createdDate: "2022-09-23" },

@@ -3,9 +3,9 @@ import { AppContext } from '../../context/TitleContext';
 
 const UserList = () => {
 
-  const {setTitle } = useContext(AppContext);
+  const {setTitle} = useContext(AppContext);
   useEffect(() => {
-    setTitle("User List");
+    setTitle(["User Management", "User List"]);
   }, []);
 
   const boxes = Array.from({ length: 3 });

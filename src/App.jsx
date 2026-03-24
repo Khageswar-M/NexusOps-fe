@@ -12,7 +12,8 @@ const App = () => {
     <main
       className={`grid grid-cols-[20%_1fr] ${isLocation ? "grid-rows-[10%_6%_1fr]" : "grid-rows-[10%_1fr]"} gap-2 h-screen p-2`}
     >
-      <AsideScreen isLocation={isLocation}/>
+
+      <AsideScreen isLocation={isLocation} />
       <HeaderScreen />
       {isLocation && <OperationsSubTabs />}
       <HeroScreen />

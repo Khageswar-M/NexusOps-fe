@@ -5,7 +5,7 @@ const DataAnalytics = () => {
 
   const { setTitle } = useContext(AppContext);
   useEffect(() => {
-    setTitle("Data Analytics");
+    setTitle(["Data Analytics"]);
   }, []);
 
   return (
