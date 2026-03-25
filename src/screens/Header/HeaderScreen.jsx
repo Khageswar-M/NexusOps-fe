@@ -3,12 +3,13 @@ import { UIContext } from "../../context/UIContext";
 import { useContext } from "react";
 import { IoIosNotifications } from "react-icons/io";
 import { IoSearch } from "react-icons/io5";
+import OnlineTag from "../../components/OnlineTag";
 
 const HeaderScreen = () => {
 
     const { title } = useContext(AppContext);
 
-    const {setIsNotificationOpen} = useContext(UIContext);
+    const { setIsNotificationOpen } = useContext(UIContext);
 
 
     return (
@@ -55,7 +56,11 @@ const HeaderScreen = () => {
 
                 {/* For live session*/}
                 <div className="flex flex-row items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-green-400 shadow-[0_0_3px_rgba(74,222,128,0.8)]" />
+
+                    <OnlineTag
+                        diameter={2}
+                        bgColor={"green"}
+                    />
 
                     <div className="flex flex-row items-center gap-3 text-text-muted text-[14px]">
                         <h5>Live</h5>
@@ -65,11 +70,16 @@ const HeaderScreen = () => {
                 </div>
 
                 {/* For Notification */}
-                <button 
+                <button
                     className="relative bg-surface-2 border border-border rounded-md p-2 cursor-pointer"
                     onClick={() => setIsNotificationOpen(true)}
                 >
-                    <div className="absolute right-1.25 top-2 w-2 h-2 rounded-full bg-[#f00]" />
+                    <div className="absolute right-1.25 top-2">
+                        <OnlineTag
+                            diameter={2}
+                            bgColor={"red"}
+                        />
+                    </div>
                     <IoIosNotifications
                         className="text-text-muted"
                         size={20}

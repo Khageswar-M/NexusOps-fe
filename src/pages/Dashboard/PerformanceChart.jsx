@@ -1,66 +1,96 @@
-import React from 'react'
-import { LineChart } from '@mui/x-charts/LineChart';
+
 import AreaChartComponent from '../../components/AreaChartComponent';
-
-const dateAxisFormatter = (date) => {
-  return date.toLocaleDateString("en-US", {
-    month: "short",
-    year: "numeric",
-  });
-};
-
-const percentageFormatter = (value) => {
-  return `${value}%`;
-};
 
 const PerformanceChart = () => {
 
-  const xAxis = [
+  const recentUsages = [
     {
-      dataKey: 'date',
-      scaleType: 'time',
-      valueFormatter: dateAxisFormatter,
-      
+      title: "CPU Usage",
+      value: 90
     },
-  ];
-
-  const yAxis = [
     {
-      valueFormatter: percentageFormatter,
+      title: "Memory",
+      value: 72
     },
-  ];
-
-  const series = [
     {
-      dataKey: 'rate',
-      showMark: false,
-      valueFormatter: percentageFormatter,
+      title: "Dish I/O",
+      value: 45
     },
-  ];
-
-  const usUnemploymentRate = [
-  { date: new Date('1948-01-01'), rate: 3.4 },
-  { date: new Date('1948-02-01'), rate: 3.8 },
-  { date: new Date('1948-03-01'), rate: 4.0 },
-  { date: new Date('1948-04-01'), rate: 3.9 },
-  { date: new Date('1948-05-01'), rate: 3.5 },
-  { date: new Date('1948-06-01'), rate: 3.6 },
-  { date: new Date('1948-07-01'), rate: 3.6 },
-  { date: new Date('1948-08-01'), rate: 3.9 },
-  ];
+    {
+      title: "Network",
+      value: 38
+    },
+    {
+      title: "Storage",
+      value: 61
+    }
+  ]
+  const colorMap = {
+    green: "text-green-400",
+    purple: "text-purple-400",
+    orange: "text-orange-400",
+    red: "text-red-400"
+  }
 
   return (
-    <div className='rounded-md font-bold shadow-[0px_0px_5px_rgba(0,0,0,0.3)] grid grid-rows-[1fr_10fr] gap-1 text-white  overflow-hidden bg-primary'>
-      <div className=' flex items-center justify-between px-5 py-2'>
-        <h3>User Activity Over Time:</h3>
-        <div className='flex items-center justify-between gap-2'>
-          <div className='bg-[hsl(0,0%,25%)] px-3 py-0.5 cursor-pointer rounded-md text-[14px]'>Last 7 Days</div>
-          <div className='bg-[hsl(0,0%,25%)] px-3 py-0.5 cursor-pointer rounded-md text-[14px]'>Last 30 Days</div>
+    <div className='rounded-md overflow-hidden  grid grid-cols-[1.5fr_1fr_1fr] gap-2 [&>div]:rounded-md [&>div]:border [&>div]:border-border'>
+      <div className='bg-surface-2'>1</div>
+      <div className='bg-surface-2 grid grid-rows-[1fr_5fr]'>
+        <div className='px-5 text-text-muted text-[15px] font-bold border-b border-b-border flex items-center'>
+          Recent Usages
+        </div>
+        <div className='grid grid-rows-[1fr_1fr_1fr_1fr_1fr]'>
+          {recentUsages.map((usage, index) => {
+            return (
+              <div
+                key={index}
+                className=''
+              >
+                <div className='flex flex-row items-center justify-between px-5 pb-1'>
+                  <div className='text-white/50 text-[12px]'>{usage.title}</div>
+                  <div className={`text-[12px] font-extrabold 
+                    ${usage.value >= 90 ?
+                      colorMap["red"] :
+                      usage.value >= 70 ?
+                        colorMap["orange"] :
+                        usage.value >= 40 ?
+                          colorMap["purple"] :
+                          colorMap["green"]
+                    }
+                    `}>{`${usage.value}%`}</div>
+                </div>
+                <div className='h-1.5 px-5'>
+                  <div className='w-full h-full bg-white/10 rounded-full overflow-hidden'>
+
+                    <div
+                      className={`
+                        h-full
+                        bg-linear-to-r
+                        ${usage.value >= 90
+                          ? "from-green-400 via-blue-400 to-red-500"
+                          : usage.value >= 70
+                            ? "from-green-400 via-blue-400 to-orange-500"
+                            : usage.value >= 40
+                              ? "from-green-400 via-blue-400 to-purple-500"
+                              : "from-green-400 to-blue-400"
+                        }
+                          transition-all duration-500`}
+                      style={{ width: `${usage.value}%` }}
+                    />
+
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+          {/* <div className='border-t border-border px-5 grid grid-rows-[1fr_1fr] gap-0'>
+             <div className='text-[10px] text-text-muted font-bold'>Traffic source</div>
+             <div></div>
+          </div> */}
         </div>
       </div>
-      <div className='w-full h-full  flex items-center justify-center'>
-        <AreaChartComponent/>
-      </div>
+      <div className='bg-surface-2'>3</div>
+
     </div>
   )
 }

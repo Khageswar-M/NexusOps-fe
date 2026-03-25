@@ -5,6 +5,7 @@ import { MdOutlineInsertChart, MdInsertChart } from "react-icons/md";
 import { RiFileList3Line, RiFileList3Fill } from "react-icons/ri";
 import { IoSettingsOutline, IoSettingsSharp } from "react-icons/io5";
 import { HiOutlineDocumentReport, HiDocumentReport } from "react-icons/hi";
+import OnlineTag from '../../components/OnlineTag';
 
 const AsideScreen = ({ isLocation }) => {
 
@@ -124,7 +125,13 @@ const AsideScreen = ({ isLocation }) => {
                 <h5 className='font-medium text-[13px] text-text-muted'>Super Admin</h5>
               </div>
             </div>
-            <div className="relative right-0 w-2.5 h-2.5 bg-green-400 rounded-full shadow-[0_0_6px_rgba(74,222,128,0.8)]" />
+            <div className='relative right-0 '>
+              <OnlineTag 
+                diameter={2.5} 
+                bgColor={"green"} 
+                shadow 
+              />
+            </div>
           </div>
         </div>
       </div>
