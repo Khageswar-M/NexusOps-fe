@@ -127,7 +127,7 @@ const AsideScreen = ({ isLocation }) => {
             </div>
             <div className='relative right-0 '>
               <OnlineTag 
-                diameter={2.5} 
+                diameter={10} 
                 bgColor={"green"} 
                 shadow 
               />

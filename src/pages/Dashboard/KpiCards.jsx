@@ -137,7 +137,7 @@ const KpiCards = () => {
         }
         return (
             <div className={`flex flex-row items-center gap-2 px-2 rounded-full ${colorMap[bgColor].bgCol}`} >
-                <OnlineTag diameter={2} bgColor={bgColor} />
+                <OnlineTag diameter={10} bgColor={bgColor} />
                 <span className={`${colorMap[bgColor].textCol} text-[13px]`}>{title}</span>
             </div>
         )

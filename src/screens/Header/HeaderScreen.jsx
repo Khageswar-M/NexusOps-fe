@@ -58,7 +58,7 @@ const HeaderScreen = () => {
                 <div className="flex flex-row items-center gap-2">
 
                     <OnlineTag
-                        diameter={2}
+                        diameter={7}
                         bgColor={"green"}
                     />
 
@@ -76,7 +76,7 @@ const HeaderScreen = () => {
                 >
                     <div className="absolute right-1.25 top-2">
                         <OnlineTag
-                            diameter={2}
+                            diameter={7}
                             bgColor={"red"}
                         />
                     </div>

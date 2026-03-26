@@ -26,11 +26,12 @@ const OnlineTag = ({ diameter, bgColor, shadow = false }) => {
 
     return (
         <div className={`
-        ${`w-${diameter} h-${diameter}`} 
-        ${color.bg} 
-        rounded-full 
-        ${shadow && color.shadow} 
-    `} />
+            ${color.bg} 
+            rounded-full 
+            ${shadow && color.shadow}`
+        } 
+        style={{width: `${diameter}px`, height: `${diameter}px`}}
+        />
     )
 }
 
