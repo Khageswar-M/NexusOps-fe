@@ -42,7 +42,7 @@ const KpiCards = () => {
         { value: 1700 },
         { value: 2000 },
         { value: 2300 },
-        { value: 2600 }
+        { value: 1600 }
     ];
 
     const systemHealth = [
@@ -54,7 +54,7 @@ const KpiCards = () => {
         { value: 97 },
         { value: 95 },
         { value: 98 },
-        { value: 99 }
+        { value: 79 }
     ];
 
     const kpiCards = [
@@ -151,7 +151,7 @@ const KpiCards = () => {
         )
     }
     return (
-        <div className='rounded-md grid grid-cols-[1fr_1fr_1fr_1fr] gap-2 [&>div]:bg-surface-2 [&>div]:rounded-md'>
+        <div className='rounded-md grid grid-cols-[1fr_1fr_1fr_1fr] gap-2 [&>div]:bg-surface [&>div]:rounded-md'>
 
             {kpiCards.map((kpi, index) => {
                 const Icon = kpi.icon ?? (<HandleKpiIcons

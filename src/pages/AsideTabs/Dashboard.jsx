@@ -13,7 +13,7 @@ const Dashboard = () => {
 
 
   return (
-    <div className='grid grid-rows-[1fr_3fr_3fr] gap-2 h-full p-2 overflow-y-auto'>
+    <div className='grid grid-rows-[1fr_3fr_3fr] gap-2 h-full  overflow-y-auto'>
       <KpiCards />
       <PerformanceChart />
       <ActivityFeed />

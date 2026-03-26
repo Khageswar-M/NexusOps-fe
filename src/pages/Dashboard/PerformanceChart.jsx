@@ -34,9 +34,9 @@ const PerformanceChart = () => {
 
   return (
     <div className='rounded-md overflow-hidden  grid grid-cols-[1.5fr_1fr_1fr] gap-2 [&>div]:rounded-md [&>div]:border [&>div]:border-border'>
-      <div className='bg-surface-2'>1</div>
-      <div className='bg-surface-2 grid grid-rows-[1fr_5fr]'>
-        <div className='px-5 text-text-muted text-[15px] font-bold border-b border-b-border flex items-center'>
+      <div className='bg-surface'>1</div>
+      <div className='bg-surface grid grid-rows-[1fr_5fr]'>
+        <div className='px-5 text-white/90 text-[15px] font-bold border-b border-b-border flex items-center'>
           Recent Usages
         </div>
         <div className='grid grid-rows-[1fr_1fr_1fr_1fr_1fr]'>
@@ -83,13 +83,9 @@ const PerformanceChart = () => {
               </div>
             )
           })}
-          {/* <div className='border-t border-border px-5 grid grid-rows-[1fr_1fr] gap-0'>
-             <div className='text-[10px] text-text-muted font-bold'>Traffic source</div>
-             <div></div>
-          </div> */}
         </div>
       </div>
-      <div className='bg-surface-2'>3</div>
+      <div className='bg-surface'>3</div>
 
     </div>
   )

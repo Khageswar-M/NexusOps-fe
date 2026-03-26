@@ -17,7 +17,7 @@ import NotificationPanel from '../Notification/NotificationPanel';
 
 const HeroScreen = () => {
     return (
-        <div className="bg-surface rounded-md h-full overflow-y-auto border border-border">
+        <div className="rounded-md h-full overflow-y-auto">
             <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/dashboard" element={<Dashboard />} />
