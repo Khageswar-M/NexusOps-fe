@@ -28,3 +28,20 @@
     --color-purple: #b794f4; /* Admin role, API, security, 2FA */
     --color-cyan: #76e4f7; /* Operator role, logo, performance */
 }
+
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 5px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f100;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #3939397d;
+    border-radius: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    cursor: grabbing
+  }
+}   

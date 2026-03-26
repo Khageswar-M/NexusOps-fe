@@ -1,5 +1,5 @@
 
-const OnlineTag = ({ diameter, bgColor, shadow = false }) => {
+const OnlineTag = ({ diameter, bgColor, shadow = false, circle = false, box = false }) => {
     const colorMap = {
         red: {
             bg: "bg-red-500",
@@ -19,7 +19,15 @@ const OnlineTag = ({ diameter, bgColor, shadow = false }) => {
         },
         orange: {
             bg: "bg-orange-500",
-            shadow: "shadow-[orange]",
+            shadow: "shadow-[0_0_6px_orange]",
+        },
+        purple: {
+            bg: "bg-purple-500",
+            shadow: "shadow-[0_0_6px_purple]",
+        },
+        cyan: {
+            bg: "bg-cyan-500",
+            shadow: "shadow-[0_0_6px_cyan]",
         },
     };
     const color = colorMap[bgColor] || colorMap.green;
@@ -27,7 +35,7 @@ const OnlineTag = ({ diameter, bgColor, shadow = false }) => {
     return (
         <div className={`
             ${color.bg} 
-            rounded-full 
+            rounded-full
             ${shadow && color.shadow}`
         } 
         style={{width: `${diameter}px`, height: `${diameter}px`}}

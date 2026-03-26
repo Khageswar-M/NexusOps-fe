@@ -16,18 +16,20 @@ const AreaChartNoGrid = ({data, strokeCol, fillCol}) => {
     )
 }
 
-const CustomTooltip = ({ active, payload }) => {
-    if (active && payload && payload.length) {
+const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload) {
         return (
-            <div className="p-2 bg-slate-900 rounded-md text-[10px]">
-                <p className="text-blue-400">
-                    Value:
-                    <span className="ml-2">{payload[0].value}</span>
-                </p>
+            <div className="bg-slate-900 p-3 rounded-lg border border-slate-700 shadow-lg">
+                <p className="text-xs text-gray-400">{label}</p>
+
+                {payload.map((item, index) => (
+                    <p key={index} className="text-xs" style={{ color: item.color }}>
+                        {item.name}: <span className="ml-2 font-semibold">{item.value}</span>
+                    </p>
+                ))}
             </div>
         );
     }
-    return null;
 };
 
 export default AreaChartNoGrid;
