@@ -10,6 +10,10 @@ const AreaChartNoGrid = ({data, strokeCol, fillCol}) => {
                     dataKey="value"
                     stroke={strokeCol}
                     fill={fillCol}
+
+                    isAnimationActive={true}
+                    animationDuration={1000}
+                    animationEasing="ease-in-out"
                 />
             </AreaChart>
         </ResponsiveContainer>

@@ -60,6 +60,10 @@ const AreaChartComponent = () => {
                     strokeWidth={3}
                     fill="url(#blueGradient)"
                     dot={{ r: 4 }}
+
+                    isAnimationActive={true}
+                    animationDuration={1000}
+                    animationEasing="ease-in-out"
                 />
 
                 {/* Active Users */}
@@ -70,6 +74,10 @@ const AreaChartComponent = () => {
                     strokeWidth={2}
                     fill="url(#greenGradient)"
                     dot={{ r: 3 }}
+
+                    isAnimationActive={true}
+                    animationDuration={1000}
+                    animationEasing="ease-in-out"
                 />
 
                 {/* Sessions (Dashed Line) */}
@@ -81,6 +89,10 @@ const AreaChartComponent = () => {
                     strokeDasharray="5 5"
                     fill="none"
                     dot={false}
+
+                    isAnimationActive={true}
+                    animationDuration={1000}
+                    animationEasing="ease-in-out"
                 />
 
                 {/* Conversions (Dotted Line) */}
@@ -92,6 +104,10 @@ const AreaChartComponent = () => {
                     strokeDasharray="2 4"
                     fill="none"
                     dot={false}
+
+                    isAnimationActive={true}
+                    animationDuration={1000}
+                    animationEasing="ease-in-out"
                 />
 
             </AreaChart>
