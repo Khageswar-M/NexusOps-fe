@@ -6,6 +6,10 @@ import { RiFileList3Line, RiFileList3Fill } from "react-icons/ri";
 import { IoSettingsOutline, IoSettingsSharp } from "react-icons/io5";
 import { HiOutlineDocumentReport, HiDocumentReport } from "react-icons/hi";
 import OnlineTag from '../../components/OnlineTag';
+import { useState, useContext } from 'react';
+import { AppContext } from '../../context/TitleContext';
+
+
 
 const AsideScreen = ({ isLocation }) => {
 
@@ -57,6 +61,9 @@ const AsideScreen = ({ isLocation }) => {
     },
   ]
 
+  const { title } = useContext(AppContext);
+
+
   return (
     <div className={`${isLocation ? "row-span-3" : "row-span-2"} bg-surface rounded-md overflow-y-auto relative border border-border`}>
       <div className=''>
@@ -68,7 +75,7 @@ const AsideScreen = ({ isLocation }) => {
             Smart Operations Management Dashboard
           </p>
 
-          <div className='w-30 h-30 bg-cyan-300/20 absolute left-0 top-0 rounded-full blur-3xl'/>
+          <div className='w-30 h-30 bg-cyan-300/20 absolute left-0 top-0 rounded-full blur-3xl' />
         </div>
 
         <div className='py-2'>
@@ -82,31 +89,24 @@ const AsideScreen = ({ isLocation }) => {
                   {sideBarTab.title}
                 </div>
                 {sideBarTab.tabs.map((tab, i) => {
-
+                  const currentTitle = title.length === 0 ? "Dashboard" : title[0];
+                  const isActive = currentTitle === tab.tabTitle;
+                  const Icon = isActive ? tab.tabIcon[1] : tab.tabIcon[0];
                   return (
                     <NavLink
                       key={i}
-                      className={({ isActive }) =>
-                        `gap-3 flex flex-row items-center rounded-md mt-0 mb-1 py-2 px-3 border transition-all duration-200
-                        ${isActive
+                      className={`gap-3 flex flex-row items-center rounded-md mt-0 mb-1 py-2 px-3 border transition-all duration-200
+                          ${isActive
                           ? "border-border-hover bg-surface-2 shadow-md text-cyan"
                           : "border-transparent hover:border-border hover:bg-surface-2/50 text-text-muted"
-                        }`
-                      }
+                        }`}
                       to={tab.to}
                     >
-                      {({ isActive }) => {
-                        const Icon = isActive ? tab.tabIcon[1] : tab.tabIcon[0];
-                        return (
-                          <>
-                            <Icon
-                              color={isActive ? '#22d3ee' : '#64748b'}
-                              size={19}
-                            />
-                            <h3 className='text-[15px]'>{tab.tabTitle}</h3>
-                          </>
-                        )
-                      }}
+                      <Icon
+                        color={isActive ? '#22d3ee' : '#64748b'}
+                        size={19}
+                      />
+                      <h3 className='text-[15px]'>{tab.tabTitle}</h3>
                     </NavLink>
                   )
                 })}
@@ -128,10 +128,10 @@ const AsideScreen = ({ isLocation }) => {
               </div>
             </div>
             <div className='relative right-0 '>
-              <OnlineTag 
-                diameter={10} 
-                bgColor={"green"} 
-                shadow 
+              <OnlineTag
+                diameter={10}
+                bgColor={"green"}
+                shadow
               />
             </div>
           </div>

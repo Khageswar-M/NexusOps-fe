@@ -45,3 +45,25 @@
     cursor: grabbing
   }
 }   
+
+@layer utilities {
+  @keyframes blinkGray {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  .animate-blink-gray{
+    background: linear-gradient(
+      60deg,
+      hsl(215, 14%, 15%) 25%,
+      hsl(215, 14%, 25%) 50%,
+      hsl(215, 14%, 15%) 75%
+    );
+    background-size: 200% 100%;
+    animation: blinkGray 2s ease-in-out infinite;
+  }
+}

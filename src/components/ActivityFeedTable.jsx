@@ -2,14 +2,92 @@ import { useState } from "react";
 import { HiSquare3Stack3D } from "react-icons/hi2";
 
 const allItems = [
-    { initials: "JD", av: 1, name: "John Doe", action: "Created a new account", type: "User", meta: "46 followers", time: "2h ago", category: "Users" },
-    { initials: "SR", av: 2, name: "Sara Reeves", action: "Made a payment", type: "Payment", meta: "$149.00", time: "3h ago", category: "Payments", pos: true },
-    { initials: "MK", av: 3, name: "Mike Kang", action: "Updated profile picture", type: "User", meta: "112 followers", time: "4h ago", category: "Users" },
-    { initials: "AL", av: 4, name: "Anna Lin", action: "Refund requested", type: "Payment", meta: "-$39.99", time: "5h ago", category: "Payments", pos: false },
-    { initials: "TW", av: 5, name: "Tom Walsh", action: "Joined via referral", type: "User", meta: "8 followers", time: "6h ago", category: "Users" },
-    { initials: "PD", av: 1, name: "Priya Das", action: "Subscription renewed", type: "Payment", meta: "$29.00", time: "8h ago", category: "Payments", pos: true },
-    { initials: "OB", av: 2, name: "Oliver Brown", action: "Changed email address", type: "User", meta: "22 followers", time: "10h ago", category: "Users" },
-    { initials: "NR", av: 3, name: "Nina Ruiz", action: "Upgraded to Pro plan", type: "Payment", meta: "$99.00", time: "12h ago", category: "Payments", pos: true },
+    {
+        initials: "JD",
+        av: 1,
+        name: "John Doe",
+        action: "Created a new account",
+        type: "User",
+        meta: "46 followers",
+        time: "2h ago",
+        category: "Users"
+    },
+    {
+        initials: "SR",
+        av: 2,
+        name: "Sara Reeves",
+        action: "Made a payment",
+        type: "Payment",
+        meta: "₹149.00",
+        time: "3h ago",
+        category: "Payments",
+        pos: true
+
+    },
+    { 
+        initials: "MK", 
+        av: 3, 
+        name: "Mike Kang", 
+        action: "Updated profile picture", 
+        type: "User", 
+        meta: "112 followers", 
+        time: "4h ago", 
+        category: "Users" 
+
+    },
+    { 
+        initials: "AL",
+        av: 4, 
+        name: "Anna Lin", 
+        action: "Refund requested", 
+        type: "Payment", 
+        meta: "-₹39.99", 
+        time: "5h ago", 
+        category: "Payments", 
+        pos: false 
+    },
+    { 
+        initials: "TW", 
+        av: 5, 
+        name: "Tom Walsh", 
+        action: "Joined via referral", 
+        type: "User", 
+        meta: "8 followers",
+        time: "6h ago", 
+        category: "Users" 
+    },
+    { 
+        initials: "PD", 
+        av: 1, 
+        name: "Priya Das", 
+        action: "Subscription renewed", 
+        type: "Payment", 
+        meta: "₹29.00", 
+        time: "8h ago", 
+        category: "Payments", 
+        pos: true 
+    },
+    { 
+        initials: "OB", 
+        av: 2, 
+        name: "Oliver Brown", 
+        action: "Changed email address", 
+        type: "User", 
+        meta: "22 followers", 
+        time: "10h ago", 
+        category: "Users" 
+    },
+    { 
+        initials: "NR", 
+        av: 3, 
+        name: "Nina Ruiz", 
+        action: "Upgraded to Pro plan", 
+        type: "Payment", 
+        meta: "₹99.00", 
+        time: "12h ago", 
+        category: "Payments", 
+        pos: true 
+    },
 ];
 
 const avatarStyles = [
@@ -46,7 +124,7 @@ export default function ActivityFeedTable() {
                             key={tab}
                             onClick={() => setActive(tab)}
                             className={`px-3 py-1 rounded-md text-[12px] font-bold transition-all duration-150 cursor-pointer
-                ${active === tab
+                            ${active === tab
                                     ? "border border-cyan-500 bg-white/5 text-white"
                                     : "border border-transparent text-white/50 hover:border-white/8"
                                 }`}
@@ -89,7 +167,7 @@ export default function ActivityFeedTable() {
                                 <div className="flex items-center gap-2">
                                     <span
                                         className={`text-[10px] font-bold px-2 py-0.5 rounded
-                      ${item.type === "User"
+                                            ${item.type === "User"
                                                 ? "text-cyan-400 bg-cyan-400/10"
                                                 : "text-violet-400 bg-violet-400/10"
                                             }`}

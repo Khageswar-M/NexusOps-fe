@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { IoIosNotifications } from "react-icons/io";
 import { IoSearch } from "react-icons/io5";
 import OnlineTag from "../../components/OnlineTag";
+import CustomToolTip from "../../components/CustomToolTip";
 
 const HeaderScreen = () => {
 
@@ -55,6 +56,7 @@ const HeaderScreen = () => {
                 </div>
 
                 {/* For live session*/}
+                <CustomToolTip title={"Status"}> 
                 <div className="flex flex-row items-center gap-2">
 
                     <OnlineTag
@@ -68,23 +70,26 @@ const HeaderScreen = () => {
                         <h5>2s ago</h5>
                     </div>
                 </div>
+                </CustomToolTip>
 
                 {/* For Notification */}
-                <button
-                    className="relative bg-surface-2 border border-border rounded-md p-2 cursor-pointer"
-                    onClick={() => setIsNotificationOpen(true)}
-                >
-                    <div className="absolute right-1.25 top-2">
-                        <OnlineTag
-                            diameter={7}
-                            bgColor={"red"}
+                <CustomToolTip title={"Notification"}>
+                    <button
+                        className="relative bg-surface-2 border border-border rounded-md p-2 cursor-pointer"
+                        onClick={() => setIsNotificationOpen(true)}
+                    >
+                        <div className="absolute right-1.25 top-2">
+                            <OnlineTag
+                                diameter={7}
+                                bgColor={"red"}
+                            />
+                        </div>
+                        <IoIosNotifications
+                            className="text-text-muted"
+                            size={20}
                         />
-                    </div>
-                    <IoIosNotifications
-                        className="text-text-muted"
-                        size={20}
-                    />
-                </button>
+                    </button>
+                </CustomToolTip>
             </div>
         </div>
     )
