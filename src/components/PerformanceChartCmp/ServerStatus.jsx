@@ -48,7 +48,7 @@ const ServerStatus = () => {
         <div className='relative bg-surface grid grid-rows-[1fr_5fr] overflow-hidden'>
 
             {/* Header */}
-            <div className='px-5 text-white/90 text-[15px] font-bold border-b border-b-border flex items-center justify-between'>
+            <div className='px-5 text-white/90 text-[12px] font-bold border-b border-b-border flex items-center justify-between'>
                 <div>Server Status</div>
                 <div className='text-green-500 text-[12px]'>3/4 Healthy</div>
             </div>

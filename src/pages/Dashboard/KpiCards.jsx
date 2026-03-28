@@ -143,7 +143,7 @@ const KpiCards = () => {
         )
     }
 
-    const HandleKpiIcons = ({iconBg, Icon, iconCol }) => {
+    const HandleKpiIcons = ({ iconBg, Icon, iconCol }) => {
         return (
             <div className={`flex items-center justify-center ${iconBg} rounded-md  h-7 w-7`}>
                 <Icon size={17} className={iconCol} />
@@ -155,17 +155,17 @@ const KpiCards = () => {
 
             {kpiCards.map((kpi, index) => {
                 const Icon = kpi.icon ?? (<HandleKpiIcons
-                                        iconBg={"text-red-500/10"}
-                                        Icon={FaHeartBroken}
-                                        iconCol={"text-red-500"}
-                                    />);
+                    iconBg={"text-red-500/10"}
+                    Icon={FaHeartBroken}
+                    iconCol={"text-red-500"}
+                />);
                 return (
                     <div key={index} className='relative font-bold border border-border overflow-hidden'>
                         <div className={`relative left-0 right-0 top-0 h-1 ${kpi.gradient}`} />
                         <div className="h-full w-full grid grid-cols-[2fr_1fr] gap-1">
                             <div className=" grid grid-rows-[1fr_2fr] gap-1">
                                 <div className="flex items-center px-5 text-text-muted text-[14px]">{kpi.title.toUpperCase()}</div>
-                                <div className="grid grid-rows-[1fr_1fr] gap-1 [&>div]:px-5">
+                                <div className="flex flex-col gap-0 [&>div]:px-5 py-2">
                                     <div className={`flex items-center text-2xl font-bold ${kpi.iconColor}`}>
                                         {kpi.title === "Revenue" ? (
                                             <span>{`₹ ${kpi.value.toLocaleString("en-IN")}`}</span>

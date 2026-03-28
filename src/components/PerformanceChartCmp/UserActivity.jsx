@@ -8,7 +8,7 @@ const UserActivity = () => {
   const tags = [
     {
       title: "New Users",
-      col: "blue"
+      col: "cyan"
     },
     {
       title: "Active Users",
@@ -24,13 +24,13 @@ const UserActivity = () => {
     },
   ]
   return (
-    <div className='relative bg-surface grid grid-rows-[1fr_20px_5fr] overflow-hidden'>
-      <div className='px-5  text-[15px] font-bold border-b border-b-border flex items-center justify-between'>
+    <div className='relative bg-surface grid grid-rows-[1fr_5fr] overflow-hidden'>
+      <div className='px-5 py-1 text-[12px] font-bold border-b border-b-border flex items-center justify-between'>
         <div className="text-white/90 flex flex-row items-center gap-3">
           <OnlineTag bgColor={"blue"} diameter={10} shadow />
-          <div>Resource Usages</div>
+          <div>User Activity Over Time</div>
         </div>
-        <div className="flex flex-row gap-5 text-[12px] text-white/50">
+        <div className="flex flex-row gap-5 text-[10px] text-white/50">
           {["7", "30", "90"].map((day) => (
             <div
               key={day}
@@ -38,7 +38,7 @@ const UserActivity = () => {
               className={`px-2 py-1 rounded-md cursor-pointer
         ${active === day
                   ? "border border-cyan-500 bg-surface-3 text-white"
-                  : "border border-transparent hover:border-cyan-500/50"
+                  : "border border-transparent hover:border-gray-500/20"
                 }`}
             >
               {day} Days
@@ -47,21 +47,22 @@ const UserActivity = () => {
         </div>
       </div>
 
-      <div className="w-full flex flex-row items-center gap-5 px-5">
+      
+
+      <div className="relative">
+        <div className="w-full flex flex-row items-center gap-5 px-5">
         {tags.map((tag, idx) => {
           return (
             <div
               key={idx}
               className="flex flex-row gap-1 items-center"
             >
-              <OnlineTag bgColor={tag.col} diameter={8} shadow/>
+              <OnlineTag bgColor={tag.col} diameter={8} />
               <div className="text-[11px] font-bold text-text-muted">{tag.title}</div>
             </div>
           )
         })}
       </div>
-
-      <div className=" ">
         <AreaChartComponent/>
       </div>
 

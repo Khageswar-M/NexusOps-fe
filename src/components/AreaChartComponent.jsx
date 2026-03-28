@@ -19,7 +19,7 @@ const data = [
 
 const AreaChartComponent = () => {
     return (
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" height="100%" className={"absolute -left-3 p-2"}>
             <AreaChart data={data}>
 
                 {/* Gradients */}
