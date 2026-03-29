@@ -56,20 +56,20 @@ const HeaderScreen = () => {
                 </div>
 
                 {/* For live session*/}
-                <CustomToolTip title={"Status"}> 
-                <div className="flex flex-row items-center gap-2">
+                <CustomToolTip title={"Status"}>
+                    <div className="flex flex-row items-center gap-2">
 
-                    <OnlineTag
-                        diameter={7}
-                        bgColor={"green"}
-                    />
+                        <OnlineTag
+                            diameter={7}
+                            bgColor={"green"}
+                        />
 
-                    <div className="flex flex-row items-center gap-3 text-text-muted text-[14px]">
-                        <h5>Live</h5>
-                        <div className="w-1 h-1 rounded-full bg-text-muted" />
-                        <h5>2s ago</h5>
+                        <div className="flex flex-row items-center gap-3 text-text-muted text-[14px]">
+                            <h5>Live</h5>
+                            <div className="w-1 h-1 rounded-full bg-text-muted" />
+                            <h5>2s ago</h5>
+                        </div>
                     </div>
-                </div>
                 </CustomToolTip>
 
                 {/* For Notification */}
@@ -84,10 +84,11 @@ const HeaderScreen = () => {
                                 bgColor={"red"}
                             />
                         </div>
-                        <IoIosNotifications
-                            className="text-text-muted"
-                            size={20}
-                        />
+                        
+                            <IoIosNotifications
+                                className="text-text-muted"
+                                size={20}
+                            />
                     </button>
                 </CustomToolTip>
             </div>

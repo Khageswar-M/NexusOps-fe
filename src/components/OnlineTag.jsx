@@ -29,6 +29,10 @@ const OnlineTag = ({ diameter, bgColor, shadow = false, circle = false, box = fa
             bg: "bg-cyan-500",
             shadow: "shadow-[0_0_6px_cyan]",
         },
+        gray:{
+            bg: "bg-gray-500",
+            shadow: "shadow-[0_0_6px_gray]",
+        }
     };
     const color = colorMap[bgColor] || colorMap.green;
 
@@ -43,4 +47,4 @@ const OnlineTag = ({ diameter, bgColor, shadow = false, circle = false, box = fa
     )
 }
 
-export default OnlineTag
+export default OnlineTag;

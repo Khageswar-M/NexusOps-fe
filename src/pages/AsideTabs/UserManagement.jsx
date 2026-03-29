@@ -4,7 +4,7 @@ const UserManagement = () => {
   
   return (
     <div className="h-full w-full">
-      <Outlet/>
+      <Outlet/> 
     </div>
   )
 }
