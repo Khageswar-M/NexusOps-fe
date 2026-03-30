@@ -29,9 +29,25 @@ const OnlineTag = ({ diameter, bgColor, shadow = false, circle = false, box = fa
             bg: "bg-cyan-500",
             shadow: "shadow-[0_0_6px_cyan]",
         },
-        gray:{
+        gray: {
             bg: "bg-gray-500",
             shadow: "shadow-[0_0_6px_gray]",
+        },
+        emerald: {
+            bg: "bg-emerald-500",
+            shadow: "shadow-[0_0_6px_#10b981]",
+        },
+        indigo: {
+            bg: "bg-indigo-500",
+            shadow: "shadow-[0_0_6px_#6366f1]",
+        },
+        pink: {
+            bg: "bg-pink-500",
+            shadow: "shadow-[0_0_6px_pink]",
+        },
+        amber: {
+            bg: "bg-amber-500",
+            shadow: "shadow-[0_0_6px_amber]",
         }
     };
     const color = colorMap[bgColor] || colorMap.green;
@@ -41,8 +57,8 @@ const OnlineTag = ({ diameter, bgColor, shadow = false, circle = false, box = fa
             ${color.bg} 
             rounded-full
             ${shadow && color.shadow}`
-        } 
-        style={{width: `${diameter}px`, height: `${diameter}px`}}
+        }
+            style={{ width: `${diameter}px`, height: `${diameter}px` }}
         />
     )
 }

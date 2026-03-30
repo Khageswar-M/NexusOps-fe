@@ -51,6 +51,15 @@ const StyledMenu = styled((props) => (
     },
 }));
 
+const HandleActivity = ({ item }) => {
+    return (
+        <div className={`py-0.5 flex items-center gap-2 px-3 rounded-full border ${item.borderCol} ${item.textCol} ${item.bgCol}`}>
+            <OnlineTag diameter={8} bgColor={item.color} />
+            <h4 className='text-[10px]'>{item.title}</h4>
+        </div>
+    )
+}
+
 const CustomizedMenu = ({ items, handleClick, anchorEl, open, handleClose, setIsRole }) => {
     const [activeItem, setActiveItem] = useState(items[0]);
 
@@ -62,13 +71,10 @@ const CustomizedMenu = ({ items, handleClick, anchorEl, open, handleClose, setIs
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
                 variant="contained"
-                disableElevation
                 onClick={handleClick}
-                endIcon={<Up />}
                 className='text-text-muted flex items-center gap-2 w-full'
             >
-                <OnlineTag diameter={8} bgColor={activeItem.color} />
-                <h4 className='text-[12px]'>{activeItem.title}</h4>
+                <HandleActivity item={activeItem}/>
             </div>
 
             <StyledMenu
@@ -103,8 +109,7 @@ const CustomizedMenu = ({ items, handleClick, anchorEl, open, handleClose, setIs
                         key={i}
                         sx={{ gap: 2, }}
                     >
-                        <OnlineTag diameter={8} bgColor={item.color} />
-                        <h4 className='text-[14px]'>{item.title}</h4>
+                        <HandleActivity item={item}/>
                     </MenuItem>
                 ))}
 
