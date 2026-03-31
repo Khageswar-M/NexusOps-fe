@@ -65,7 +65,7 @@ const AsideScreen = ({ isLocation }) => {
 
 
   return (
-    <div className={`${isLocation ? "row-span-3" : "row-span-2"} bg-surface rounded-md overflow-y-auto relative border border-border`}>
+    <div className={`${isLocation ? "row-span-3" : "row-span-2"} bg-surface rounded-md overflow-hidden relative border border-border`}>
       <div className=''>
         <div className='relative flex items-center justify-center flex-col border-b border-border px-0 py-5'>
           <h1 className='font-poppins text-cyan font-bold text-center text-[clamp(10px,3vw,40px)] cursor-pointer'>

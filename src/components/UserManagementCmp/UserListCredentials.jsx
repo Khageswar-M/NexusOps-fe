@@ -7,100 +7,100 @@ import CustomToolTip from '../CustomToolTip.jsx';
 import CustomModal from '../CustomModal.jsx';
 
 export const rolesItem = [
-        {
-            title: "All Roles",
-            color: "gray",
-            textCol: "text-gray-500",
-            bgCol: "bg-gray-500/10",
-            borderCol: "border-gray-500"
-        },
-        {
-            title: "Admin",
-            color: "blue",
-            textCol: "text-blue-500",
-            bgCol: "bg-blue-500/10",
-            borderCol: "border-blue-500"
-        },
-        {
-            title: "Manager",
-            color: "orange",
-            textCol: "text-orange-500",
-            bgCol: "bg-orange-500/10",
-            borderCol: "border-orange-500"
-        },
-        {
-            title: "Viewer",
-            color: "purple",
-            textCol: "text-purple-500",
-            bgCol: "bg-purple-500/10",
-            borderCol: "border-purple-500"
-        },
-        {
-            title: "Developer",
-            color: "cyan",
-            textCol: "text-cyan-500",
-            bgCol: "bg-cyan-500/10",
-            borderCol: "border-cyan-500"
-        },
-        {
-            title: "QA Tester",
-            color: "emerald",
-            textCol: "text-emerald-500",
-            bgCol: "bg-emerald-500/10",
-            borderCol: "border-emerald-500"
-        },
-        {
-            title: "DevOps",
-            color: "indigo",
-            textCol: "text-indigo-500",
-            bgCol: "bg-indigo-500/10",
-            borderCol: "border-indigo-500"
-        },
-        {
-            title: "Tester",
-            color: "pink",
-            textCol: "text-pink-500",
-            bgCol: "bg-pink-500/10",
-            borderCol: "border-pink-500"
-        },
-        {
-            title: "UI/UX",
-            color: "amber",
-            textCol: "text-amber-500",
-            bgCol: "bg-amber-500/10",
-            borderCol: "border-amber-500"
-        },
-    ]; 
+    {
+        title: "All Roles",
+        color: "gray",
+        textCol: "text-gray-500",
+        bgCol: "bg-gray-500/10",
+        borderCol: "border-gray-500"
+    },
+    {
+        title: "Admin",
+        color: "blue",
+        textCol: "text-blue-500",
+        bgCol: "bg-blue-500/10",
+        borderCol: "border-blue-500"
+    },
+    {
+        title: "Manager",
+        color: "orange",
+        textCol: "text-orange-500",
+        bgCol: "bg-orange-500/10",
+        borderCol: "border-orange-500"
+    },
+    {
+        title: "Viewer",
+        color: "purple",
+        textCol: "text-purple-500",
+        bgCol: "bg-purple-500/10",
+        borderCol: "border-purple-500"
+    },
+    {
+        title: "Developer",
+        color: "cyan",
+        textCol: "text-cyan-500",
+        bgCol: "bg-cyan-500/10",
+        borderCol: "border-cyan-500"
+    },
+    {
+        title: "QA Tester",
+        color: "emerald",
+        textCol: "text-emerald-500",
+        bgCol: "bg-emerald-500/10",
+        borderCol: "border-emerald-500"
+    },
+    {
+        title: "DevOps",
+        color: "indigo",
+        textCol: "text-indigo-500",
+        bgCol: "bg-indigo-500/10",
+        borderCol: "border-indigo-500"
+    },
+    {
+        title: "Tester",
+        color: "pink",
+        textCol: "text-pink-500",
+        bgCol: "bg-pink-500/10",
+        borderCol: "border-pink-500"
+    },
+    {
+        title: "UI/UX",
+        color: "amber",
+        textCol: "text-amber-500",
+        bgCol: "bg-amber-500/10",
+        borderCol: "border-amber-500"
+    },
+];
 export const statusItem = [
-        {
-            title: "All Status",
-            color: "cyan",
-            textCol: "text-cyan-500",
-            bgCol: "bg-cyan-500/10",
-            borderCol: "border-cyan-500"
-        },
-        {
-            title: "Active",
-            color: "green",
-            textCol: "text-emerald-500",
-            bgCol: "bg-emerald-500/10",
-            borderCol: "border-emerald-500"
-        },
-        {
-            title: "Inactive",
-            color: "gray",
-            textCol: "text-gray-500",
-            bgCol: "bg-gray-500/10",
-            borderCol: "border-gray-500"
-        },
-        {
-            title: "Suspended",
-            color: "red",
-            textCol: "text-red-500",
-            bgCol: "bg-red-500/10",
-            borderCol: "border-red-500"
-        },
-    ]
+    {
+        title: "All Status",
+        color: "cyan",
+        textCol: "text-cyan-500",
+        bgCol: "bg-cyan-500/10",
+        borderCol: "border-cyan-500"
+    },
+    {
+        title: "Active",
+        color: "green",
+        textCol: "text-emerald-500",
+        bgCol: "bg-emerald-500/10",
+        borderCol: "border-emerald-500"
+    },
+    {
+        title: "Inactive",
+        color: "gray",
+        textCol: "text-gray-500",
+        bgCol: "bg-gray-500/10",
+        borderCol: "border-gray-500"
+    },
+    {
+        title: "Suspended",
+        color: "red",
+        textCol: "text-red-500",
+        bgCol: "bg-red-500/10",
+        borderCol: "border-red-500"
+    },
+]
 
 const UserListCredentials = () => {
     const [isRoles, setIsRoles] = useState(false);
@@ -136,67 +136,63 @@ const UserListCredentials = () => {
             <div className=' w-full h-full  grid grid-cols-[2fr_2fr_1.5fr_1fr] gap-2  [&>div]:rounded-md'>
 
                 {/* All Roles */}
-                <CustomToolTip title={"Sort by role"}>
-                    <div
-                        id='all-roles'
-                        className="flex flex-row items-center justify-between px-2 h-7 bg-surface-2 border border-border"
-                        onClick={(e) => {
-                            setIsRoles(prev => !prev);
-                            handleRolesClick(e)
-                        }}
-                    >
-                        <div className='relative w-full flex items-center text-center'>
-                            <CustomizedMenu
-                                items={rolesItem}
-                                handleClick={handleRolesClick}
-                                anchorEl={rolesAnchorEl}
-                                open={rolesOpen}
-                                handleClose={handleRolesClose}
-                                setIsRole={setIsRoles}
-                            />
-                        </div>
-
-                        <div className='text-white text-[12px] right-3  relative flex items-center'>
-                            <div className='absolute'>
-                                {
-                                    isRoles ? (<Down />) : (<Up />)
-                                }
-                            </div>
-                        </div>
-
+                <div
+                    id='all-roles'
+                    className="flex flex-row items-center justify-between px-2 h-7 bg-surface-2 border border-border"
+                    onClick={(e) => {
+                        setIsRoles(prev => !prev);
+                        handleRolesClick(e)
+                    }}
+                >
+                    <div className='relative w-full flex items-center text-center'>
+                        <CustomizedMenu
+                            items={rolesItem}
+                            handleClick={handleRolesClick}
+                            anchorEl={rolesAnchorEl}
+                            open={rolesOpen}
+                            handleClose={handleRolesClose}
+                            setIsRole={setIsRoles}
+                        />
                     </div>
-                </CustomToolTip>
+
+                    <div className='text-white text-[12px] right-3  relative flex items-center'>
+                        <div className='absolute'>
+                            {
+                                isRoles ? (<Down />) : (<Up />)
+                            }
+                        </div>
+                    </div>
+
+                </div>
 
                 {/* All Status */}
-                <CustomToolTip title={"Sort by status"}>
-                    <div
-                        id='all-status'
-                        className="flex flex-row items-center bg-surface-2 border border-border px-2"
-                        onClick={(e) => {
-                            setIsStatus(prev => !prev);
-                            handleStatusClick(e)
-                        }}
-                    >
+                <div
+                    id='all-status'
+                    className="flex flex-row items-center bg-surface-2 border border-border px-2"
+                    onClick={(e) => {
+                        setIsStatus(prev => !prev);
+                        handleStatusClick(e)
+                    }}
+                >
 
-                        <div className='relative w-full'>
-                            <CustomizedMenu
-                                items={statusItem}
-                                handleClick={handleStatusClick}
-                                anchorEl={statusAnchorEl}
-                                open={statusOpen}
-                                handleClose={handleStatusClose}
-                                setIsRole={setIsStatus}
-                            />
-                        </div>
-                        <div className='text-white text-[12px] right-3  relative flex items-center'>
-                            <div className='absolute'>
-                                {
-                                    isStatus ? (<Down />) : (<Up />)
-                                }
-                            </div>
+                    <div className='relative w-full'>
+                        <CustomizedMenu
+                            items={statusItem}
+                            handleClick={handleStatusClick}
+                            anchorEl={statusAnchorEl}
+                            open={statusOpen}
+                            handleClose={handleStatusClose}
+                            setIsRole={setIsStatus}
+                        />
+                    </div>
+                    <div className='text-white text-[12px] right-3  relative flex items-center'>
+                        <div className='absolute'>
+                            {
+                                isStatus ? (<Down />) : (<Up />)
+                            }
                         </div>
                     </div>
-                </CustomToolTip>
+                </div>
 
                 {/* Search by name */}
                 <CustomToolTip title={"Search by name"}>
