@@ -20,12 +20,12 @@ const App = () => {
     return () => clearTimeout(timer);
   }, [])
 
-  if(isLoading){
+  if (isLoading) {
     return (
       <div className="flex-1 h-full w-full absolute bg-surface">
-        <ApplicationLoader/>
+        <ApplicationLoader />
       </div>
-      )
+    )
   }
 
   return (
@@ -38,7 +38,7 @@ const App = () => {
       <HeaderScreen />
       {isLocation && <OperationsSubTabs />}
       <HeroScreen />
-          </main>
+    </main>
   );
 };
 

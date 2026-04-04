@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../../context/TitleContext';
 import OnlineTag from '../../components/OnlineTag.jsx';
 import { FaCheck as Check } from "react-icons/fa";
-import { rolesItem, statusItem } from '../../components/UserManagementCmp/UserListCredentials.jsx';
 import { FaEye as Eye } from "react-icons/fa";
 import { RiPencilFill as Pen } from "react-icons/ri";
 import { BsFillTrash3Fill as Trash } from "react-icons/bs";
 import { MdOutlinePlaylistRemove as EmptyList } from "react-icons/md";
+import { rolesItem, statusItem } from '../../config/RawData.js';
 
 const UserList = () => {
 

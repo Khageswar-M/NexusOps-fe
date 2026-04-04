@@ -22,7 +22,6 @@ import ErrorBoundary from '../../components/ErrorBoundary';
 const HeroScreen = () => {
     return (
         <div className="rounded-md h-full overflow-y-auto">
-            <ErrorBoundary>
                 <Suspense fallback={<Loading />}>
                     <Routes>
                         <Route path="/" element={<Dashboard />} />
@@ -43,7 +42,6 @@ const HeroScreen = () => {
                         <Route path="/system-settings" element={<SystemSettings />} />
                     </Routes>
                 </Suspense>
-            </ErrorBoundary>
 
             {/* Global Modal */}
             <NotificationPanel />

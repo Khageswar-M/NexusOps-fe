@@ -5,102 +5,10 @@ import { IoIosSearch as SearchIcon } from "react-icons/io";
 import { MdOutlineFileDownload as Download } from "react-icons/md";
 import CustomToolTip from '../CustomToolTip.jsx';
 import CustomModal from '../CustomModal.jsx';
+import { rolesItem, statusItem } from '../../config/RawData.js';
 
-export const rolesItem = [
-    {
-        title: "All Roles",
-        color: "gray",
-        textCol: "text-gray-500",
-        bgCol: "bg-gray-500/10",
-        borderCol: "border-gray-500"
-    },
-    {
-        title: "Admin",
-        color: "blue",
-        textCol: "text-blue-500",
-        bgCol: "bg-blue-500/10",
-        borderCol: "border-blue-500"
-    },
-    {
-        title: "Manager",
-        color: "orange",
-        textCol: "text-orange-500",
-        bgCol: "bg-orange-500/10",
-        borderCol: "border-orange-500"
-    },
-    {
-        title: "Viewer",
-        color: "purple",
-        textCol: "text-purple-500",
-        bgCol: "bg-purple-500/10",
-        borderCol: "border-purple-500"
-    },
-    {
-        title: "Developer",
-        color: "cyan",
-        textCol: "text-cyan-500",
-        bgCol: "bg-cyan-500/10",
-        borderCol: "border-cyan-500"
-    },
-    {
-        title: "QA Tester",
-        color: "emerald",
-        textCol: "text-emerald-500",
-        bgCol: "bg-emerald-500/10",
-        borderCol: "border-emerald-500"
-    },
-    {
-        title: "DevOps",
-        color: "indigo",
-        textCol: "text-indigo-500",
-        bgCol: "bg-indigo-500/10",
-        borderCol: "border-indigo-500"
-    },
-    {
-        title: "Tester",
-        color: "pink",
-        textCol: "text-pink-500",
-        bgCol: "bg-pink-500/10",
-        borderCol: "border-pink-500"
-    },
-    {
-        title: "UI/UX",
-        color: "amber",
-        textCol: "text-amber-500",
-        bgCol: "bg-amber-500/10",
-        borderCol: "border-amber-500"
-    },
-];
-export const statusItem = [
-    {
-        title: "All Status",
-        color: "cyan",
-        textCol: "text-cyan-500",
-        bgCol: "bg-cyan-500/10",
-        borderCol: "border-cyan-500"
-    },
-    {
-        title: "Active",
-        color: "green",
-        textCol: "text-emerald-500",
-        bgCol: "bg-emerald-500/10",
-        borderCol: "border-emerald-500"
-    },
-    {
-        title: "Inactive",
-        color: "gray",
-        textCol: "text-gray-500",
-        bgCol: "bg-gray-500/10",
-        borderCol: "border-gray-500"
-    },
-    {
-        title: "Suspended",
-        color: "red",
-        textCol: "text-red-500",
-        bgCol: "bg-red-500/10",
-        borderCol: "border-red-500"
-    },
-]
+
+
 
 const UserListCredentials = () => {
     const [isRoles, setIsRoles] = useState(false);
