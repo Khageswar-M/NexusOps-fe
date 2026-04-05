@@ -17,7 +17,7 @@ const AddUser = () => {
       <div className="bg-surface rounded-md border border-border relative overflow-y-auto custom-scrollbar">
         <AddUserForm />
       </div>
-      <div className="[&>div]:bg-surface [&>div]:rounded-md [&>div]:border [&>div]:border-border grid grid-rows-[1fr_1fr_1fr] gap-2">
+      <div className="[&>div]:bg-surface [&>div]:rounded-md [&>div]:border [&>div]:border-border grid grid-rows-[1fr_1fr_1fr] gap-2 overflow-hidden relative">
         <RoleDetails/>
         <QuickTips/>
         <RecentlyAdded/>
