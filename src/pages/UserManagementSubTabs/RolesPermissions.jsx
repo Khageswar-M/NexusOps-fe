@@ -59,6 +59,8 @@ const RolesPermissions = () => {
             </div>
             <RoleDistribution/>
           </div>
+
+          {/* Permission Matrix */}
           <div className='bg-surface'>
             <div className='px-2 p-1 flex flex-row items-center justify-between border-b border-border'>
               <HandleHeader

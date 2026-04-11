@@ -3,8 +3,21 @@ import { IoIosArrowDown as Down, IoIosArrowUp  as Up } from "react-icons/io";
 import { rolesItem as Roles } from "../../config/RawData";
 import { HiPencil as Pencil } from "react-icons/hi2";
 import { FaTrashAlt as Delete } from "react-icons/fa";
+import { useState } from "react";
+import CustomizedMenu from '../../components/UserManagementCmp/CustomizedMenu.jsx';
 
 const RoleDistribution = () => {
+
+    const[department, setDepartment] = useState(false);
+    const [rolesAnchor, setRolesAnchor] = useState(null);
+    const rolesOpen = Boolean(rolesAnchor);
+    
+    const handleRolesClick = (event) => {
+        setRolesAnchor(event.currentTarget);
+    }
+    const handleRolesClose = () => {
+        setRolesAnchor(null);
+    }
     return (
         <div className='h-full w-full overflow-hidden'>
             {/* Search Departments */}
@@ -18,9 +31,29 @@ const RoleDistribution = () => {
                             placeholder='Enter role'
                         />
                     </div>
-                    <div className="bg-surface-2 p-1 text-text-muted text-center border border-border px-3 rounded-md flex flex-row items-center gap-1">
-                        <div>All departments</div>
-                        <Up size={20}/>
+                    <div className="bg-surface-2 p-1 text-text-muted text-center border border-border px-3 rounded-md flex flex-row items-center gap-1"
+                        onClick={(e) => {
+                            setDepartment(prev => !prev);
+                            handleRolesClick(e);
+                        }}
+                    >
+                        <div
+                            className="relative w-full flex items-center text-center"
+                        >
+                            <CustomizedMenu
+                                items={Roles}
+                                handleClick={handleRolesClick}
+                                anchorEl={rolesAnchor}
+                                open={department}
+                                handleClose={handleRolesClose}
+                                setIsRole={setDepartment}
+                                icons
+                            />
+                        </div>
+                        {
+                            department ? (<Up size={20}/>) : (<Down size={20}/>)
+                        }
+                        
                     </div>
                 </div>
             </div>
@@ -30,7 +63,7 @@ const RoleDistribution = () => {
                     Roles.map((role, idx) => (
                         <div
                             key={idx}
-                            className="flex flex-row items-center justify-between border border-border rounded-md p-2"
+                            className="flex flex-row items-center justify-between border border-border rounded-md p-2 hover:cursor-pointer hover:bg-surface-2"
                         >
                             <div className="flex flex-row items-center gap-2">
                                 <div className={`${role.textCol} ${role.bgCol} h-15 w-15 rounded-full flex items-center justify-center`}>

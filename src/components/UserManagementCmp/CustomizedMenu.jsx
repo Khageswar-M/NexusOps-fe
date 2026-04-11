@@ -51,18 +51,32 @@ const StyledMenu = styled((props) => (
     },
 }));
 
-const HandleActivity = ({ item }) => {
-    return (
-        <div className={`py-0.5 flex items-center gap-2 px-3 rounded-full border ${item.borderCol} ${item.textCol} ${item.bgCol}`}>
-            <OnlineTag diameter={8} bgColor={item.color} />
-            <h4 className='text-[10px]'>{item.title}</h4>
-        </div>
-    )
-}
 
-const CustomizedMenu = ({ items, handleClick, anchorEl, open, handleClose, setIsRole }) => {
+
+
+const CustomizedMenu = ({ items, handleClick, anchorEl, open, handleClose, setIsRole, icons = false }) => {
     const [activeItem, setActiveItem] = useState(items[0]);
 
+    const HandleActivity = ({ item }) => {
+        return (
+            <div className={` flex items-center gap-2 px-3  ${item.textCol}
+            
+            ${icons ? `` : `py-0.5 rounded-full border ${item.borderCol}  ${item.bgCol}`}}
+            `}>
+                {
+                    icons ? 
+                    (
+                        <item.Icon size={20}  />
+                    ) : 
+                    (
+                        <OnlineTag diameter={8} bgColor={item.color} />
+                    )
+                }
+                
+                <h4 className={`text-[10px]`}>{item.title}</h4>
+            </div>
+        )
+    }
     return (
         <div className=' h-full w-full absolute flex items-center'>
             <div
@@ -74,7 +88,7 @@ const CustomizedMenu = ({ items, handleClick, anchorEl, open, handleClose, setIs
                 onClick={handleClick}
                 className='text-text-muted flex items-center gap-2 w-full'
             >
-                <HandleActivity item={activeItem}/>
+                <HandleActivity item={activeItem} />
             </div>
 
             <StyledMenu
@@ -109,7 +123,7 @@ const CustomizedMenu = ({ items, handleClick, anchorEl, open, handleClose, setIs
                         key={i}
                         sx={{ gap: 2, }}
                     >
-                        <HandleActivity item={item}/>
+                        <HandleActivity item={item} />
                     </MenuItem>
                 ))}
 
