@@ -11,25 +11,11 @@ import { rolesItem, statusItem } from '../../config/RawData.js';
 
 
 const UserListCredentials = () => {
-    const [isRoles, setIsRoles] = useState(false);
-    const [isStatus, setIsStatus] = useState(false);
-    const [rolesAnchorEl, setRolesAnchorEl] = useState(null);
-    const [statusAnchorEl, setStatusAnchorEl] = useState(null);
-    const rolesOpen = Boolean(rolesAnchorEl);
-    const statusOpen = Boolean(statusAnchorEl);
+    const [rolesAnchorE1, setRolesAnchorE1] = useState(null);
+    const rolesOpen = Boolean(rolesAnchorE1);
 
-    const handleRolesClick = (event) => {
-        setRolesAnchorEl(event.currentTarget);
-    };
-    const handleRolesClose = () => {
-        setRolesAnchorEl(null);
-    };
-    const handleStatusClick = (event) => {
-        setStatusAnchorEl(event.currentTarget);
-    };
-    const handleStatusClose = () => {
-        setStatusAnchorEl(null);
-    };
+    const [statusAnchorE1, setStatusAnchorE1] = useState(null);
+    const statusOpen = Boolean(statusAnchorE1);
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => {
@@ -48,25 +34,26 @@ const UserListCredentials = () => {
                     id='all-roles'
                     className="flex flex-row items-center justify-between px-2 h-7 bg-surface-2 border border-border"
                     onClick={(e) => {
-                        setIsRoles(prev => !prev);
-                        handleRolesClick(e)
+                        if(rolesAnchorE1){
+                            setRolesAnchorE1(null)
+                        }else{
+                            setRolesAnchorE1(e.currentTarget)
+                        }
                     }}
                 >
                     <div className='relative w-full flex items-center text-center'>
                         <CustomizedMenu
                             items={rolesItem}
-                            handleClick={handleRolesClick}
-                            anchorEl={rolesAnchorEl}
+                            anchorEl={rolesAnchorE1}
                             open={rolesOpen}
-                            handleClose={handleRolesClose}
-                            setIsRole={setIsRoles}
+                            handleClose={() => setRolesAnchorE1(null)}
                         />
                     </div>
 
                     <div className='text-white text-[12px] right-3  relative flex items-center'>
                         <div className='absolute'>
                             {
-                                isRoles ? (<Down />) : (<Up />)
+                                rolesOpen ? (<Down />) : (<Up />)
                             }
                         </div>
                     </div>
@@ -78,25 +65,26 @@ const UserListCredentials = () => {
                     id='all-status'
                     className="flex flex-row items-center bg-surface-2 border border-border px-2"
                     onClick={(e) => {
-                        setIsStatus(prev => !prev);
-                        handleStatusClick(e)
+                        if(statusAnchorE1){
+                            setStatusAnchorE1(null)
+                        }else{
+                            setStatusAnchorE1(e.currentTarget)
+                        }
                     }}
                 >
 
                     <div className='relative w-full'>
                         <CustomizedMenu
-                            items={statusItem}
-                            handleClick={handleStatusClick}
-                            anchorEl={statusAnchorEl}
+                            items={statusItem} 
+                            anchorEl={statusAnchorE1}
                             open={statusOpen}
-                            handleClose={handleStatusClose}
-                            setIsRole={setIsStatus}
-                        />
+                            handleClose={() => setStatusAnchorE1(null)}
+                        />          
                     </div>
                     <div className='text-white text-[12px] right-3  relative flex items-center'>
                         <div className='absolute'>
                             {
-                                isStatus ? (<Down />) : (<Up />)
+                                statusOpen ? (<Down />) : (<Up />)
                             }
                         </div>
                     </div>

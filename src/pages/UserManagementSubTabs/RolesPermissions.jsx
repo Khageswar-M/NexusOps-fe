@@ -39,7 +39,7 @@ const RolesPermissions = () => {
 
   return (
     <div className='grid grid-cols-[5fr_1.5fr] gap-2 w-full h-full'>
-        <div className='grid grid-rows-[1fr_1fr] gap-2 [&>div]:rounded-md'>
+        <div className='grid grid-rows-[1fr] [&>div]:rounded-md'>
 
           {/* Role Distribution Header */}
           <div className='bg-surface overflow-hidden'>
@@ -61,7 +61,7 @@ const RolesPermissions = () => {
           </div>
 
           {/* Permission Matrix */}
-          <div className='bg-surface'>
+          {/* <div className='bg-surface'>
             <div className='px-2 p-1 flex flex-row items-center justify-between border-b border-border'>
               <HandleHeader
                 Logo={<OnlineTag diameter={8} bgColor="green"/>}
@@ -69,7 +69,7 @@ const RolesPermissions = () => {
               />
             </div>
             <PermissionMatrix/>
-          </div>
+          </div> */}
         </div>
         <div className='grid grid-rows-[1.5fr_1fr] gap-2 [&>div]:rounded-md'>
           <div className='bg-surface'>

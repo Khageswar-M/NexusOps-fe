@@ -66,14 +66,14 @@ const CustomizedMenu = ({ items, handleClick, anchorEl, open, handleClose, setIs
                 {
                     icons ? 
                     (
-                        <item.Icon size={20}  />
+                        <item.Icon size={25}  />
                     ) : 
                     (
                         <OnlineTag diameter={8} bgColor={item.color} />
                     )
                 }
                 
-                <h4 className={`text-[10px]`}>{item.title}</h4>
+                <h4 className={`${icons ? 'text-[18px]' : 'text-[10px]'}`}>{item.title}</h4>
             </div>
         )
     }
