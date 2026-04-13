@@ -77,7 +77,7 @@ const RolesPermissions = () => {
           </div>
         </div>
 
-        <div className='bg-surface'>
+        <div className='bg-surface overflow-hidden'>
           {/* Header for Permission Activity */}
           <div className='px-2 p-1 flex flex-row items-center justify-between border-b border-border'>
             <HandleHeader

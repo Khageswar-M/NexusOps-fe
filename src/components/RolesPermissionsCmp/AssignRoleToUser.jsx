@@ -1,13 +1,19 @@
 import React, { useState } from 'react'
 import MagnifyingGlass from '../../assets/MagnifyingGlass.svg?react';
-import Arrow from '../../assets/ArrowRight.svg?react'
+import Arrow from '../../assets/ArrowRight.svg?react';
+import { rolesItem as Roles } from '../../config/RawData';
+import OnlineTag from '../../components/OnlineTag.jsx';
+import UserLogo from '../../assets/User.svg?react';
+import EmptyRole from '../../assets/empty_role.png';
 
 const AssignRoleToUser = () => {
-  const [isUserSearch, setIsUserSearch] = useState(true);
+  const [isUserSearch, setIsUserSearch] = useState(false);
   const [search, setSearch] = useState('John');
   console.log(search);
 
   const [currentUser, setCurrentUser] = useState([]);
+  const [checkRole, setCheckRole] = useState(-1);
+  const roleSize = Roles.length;
 
   const users = [
     {
@@ -112,19 +118,22 @@ const AssignRoleToUser = () => {
 
           </div>
         ) : (
-          <div className='p-1'>
-            <div 
-              className='flex flex-row items-center cursor-pointer'
+          <div className='h-full grid grid-rows-[1fr_5fr_1fr] gap-1'>
+
+            <div
+              className='flex flex-col cursor-pointer border-b border-border pb-1'
               onClick={() => {
                 setIsUserSearch(true);
                 setSearch(currentUser.username);
               }}
             >
+              {/* SELECT USER COMPONENT */}
+              <div className='text-[12px] text-text-muted font-bold'>SELECT USER</div>
               {
                 !currentUser ? (
                   <div>Search user</div>
                 ) : (
-                  <div className="text-white flex flex-row items-center justify-between gap-2 p-2 border border-border w-full rounded-md bg-surface-3">
+                  <div className="text-white flex flex-row items-center  gap-2 p-2 border border-border w-full rounded-md bg-surface-2">
                     <div className='flex flex-row items-center gap-2'>
                       <div className='h-10 w-10 bg-linear-to-br from-green-500 to-cyan-500 rounded-full flex items-center justify-center text-xl font-bold'>
                         {
@@ -135,11 +144,64 @@ const AssignRoleToUser = () => {
                         <div>{currentUser.username}</div>
                         <div className='text-[12px] text-text-muted'>Current: {currentUser.role}</div>
                       </div>
+                      <Arrow className="h-5 w-5 text-text-muted" />
                     </div>
-                    <Arrow className="h-5 w-5 text-text-muted" />
                   </div>
                 )
               }
+            </div>
+
+            {/* Roles List */}
+            <div className='overflow-hidden'>
+              <div className='text-[12px] text-text-muted font-bold'>ASSIGN ROLE</div>
+              <div className='h-full flex flex-col gap-1 overflow-y-auto custom-scrollbar pb-10'>
+                {roleSize > 0 ? (
+                  Roles.map((role, idx) => {
+                    return (
+                      <div className='px-2 py-1 rounded-md bg-surface-2 flex flex-row items-center justify-between border border-border cursor-pointer hover:bg-surface active:border-cyan-400'
+                        onClick={() => setCheckRole(idx)}
+                      >
+                        <div className='flex flex-row gap-2 items-center'>
+                          <OnlineTag diameter={8} bgColor={role.color} />
+                          <div className={`text-[14px] ${role.textCol}`}>{role.title}</div>
+                        </div>
+
+                        <div className='flex flex-row items-center gap-2'>
+                          <div className='text-[12px] text-text-muted'>0 users</div>
+                          <div id='check' className={`border flex items-center justify-center cursor-pointer ${checkRole === idx ? "border-cyan-400" : "border-border"}  p-1 rounded-full`}>
+                            {
+                              checkRole === idx ? (
+                                <OnlineTag diameter={8} bgColor="cyan" />
+                              ) : (
+                                <div className='p-1' />
+                              )
+                            }
+
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  })
+                ) : (
+                  <div className='h-full w-full flex items-center justify-center '>
+                    <img 
+                      src={EmptyRole} 
+                      alt="empty role" 
+                      className='h-30 w-30'
+                    />
+                  </div>
+                )
+
+                }
+              </div>
+            </div>
+
+            {/* Assign Role Button */}
+            <div className='flex items-center justify-center'>
+              <div className='bg-cyan-400 w-full rounded-md flex items-center justify-center gap-1 text-[15px] font-bold text-gray-900 p-1 cursor-pointer'>
+                <UserLogo className="h-5 w-5" />
+                <div>Assign Role</div>
+              </div>
             </div>
           </div>
         )
