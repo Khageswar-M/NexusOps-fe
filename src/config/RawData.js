@@ -12,6 +12,14 @@ import { IoBalloonSharp as AllStatus } from "react-icons/io5";
 import { MdAirplanemodeActive as Active, MdAirplanemodeInactive as Inactive } from "react-icons/md";
 import { TbLockCog as Suspend } from "react-icons/tb";
 
+// Log Types
+import AllEventIcon from '../assets/AllEventsIcon.svg?react';
+import LoginIcon from '../assets/LoginIcon.svg?react';
+import LogoutIcon from '../assets/LogoutIcon.svg?react';
+import UpdateIcon from '../assets/UpdateIcon.svg?react';
+import SecurityIcon from '../assets/SecurityIcon.svg?react';
+
+
 export const rolesItem = [
     {
         title: "All Roles",
@@ -133,5 +141,43 @@ export const statusItem = [
         bgCol: "bg-red-500/10",
         borderCol: "border-red-500",
         Icon: Suspend
+    },
+];
+
+export const logTypes = [
+    {
+        title: "All Actions",
+        textCol: "text-gray-500",
+        bgCol: "bg-yellow-500/20",
+        Icon: AllEventIcon,
+        counts: 1700,
+    },
+    {
+        title: "Logins",
+        textCol: "text-green-500",
+        bgCol: "bg-green-500/20",
+        Icon: LoginIcon,
+        counts: 700
+    },
+    {
+        title: "Logouts",
+        textCol: "text-red-500",
+        bgCol: "bg-red-500/20",
+        Icon: LogoutIcon,
+        counts: 400
+    },
+    {
+        title: "Updates",
+        textCol: "text-orange-500",
+        bgCol: "bg-orange-500/20",
+        Icon: UpdateIcon,
+        counts: 300
+    },
+    {
+        title: "Security Alerts",
+        textCol: "text-yellow-500",
+        bgCol: "bg-yellow-500/20",
+        Icon: SecurityIcon,
+        counts: 400
     },
 ]

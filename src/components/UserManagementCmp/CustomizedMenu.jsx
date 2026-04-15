@@ -1,13 +1,9 @@
 import { styled, alpha } from '@mui/material/styles';
-import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
-// import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { LiaAngleDownSolid as Down, LiaAngleUpSolid as Up } from "react-icons/lia";
 import OnlineTag from '../OnlineTag';
 import { useState } from 'react';
-import Paper from '@mui/material/Paper';
 
 const StyledMenu = styled((props) => (
     <Menu
@@ -54,7 +50,7 @@ const StyledMenu = styled((props) => (
 
 
 
-const CustomizedMenu = ({ items, handleClick, anchorEl, open, handleClose, setIsRole, icons = false }) => {
+const CustomizedMenu = ({ items, handleClick, anchorEl, open, handleClose, setIsRole, icons = false, actions = false }) => {
     const [activeItem, setActiveItem] = useState(items[0]);
 
     const HandleActivity = ({ item }) => {
@@ -64,19 +60,29 @@ const CustomizedMenu = ({ items, handleClick, anchorEl, open, handleClose, setIs
             ${icons ? `` : `py-0.5 rounded-full border ${item.borderCol}  ${item.bgCol}`}}
             `}>
                 {
-                    icons ? 
-                    (
-                        <item.Icon size={25}  />
-                    ) : 
-                    (
-                        <OnlineTag diameter={8} bgColor={item.color} />
-                    )
+                    icons ?
+                        (
+                            <item.Icon size={25} />
+                        ) :
+                        (
+                            <OnlineTag diameter={8} bgColor={item.color} />
+                        )
                 }
-                
+
                 <h4 className={`${icons ? 'text-[18px]' : 'text-[10px]'}`}>{item.title}</h4>
             </div>
         )
     }
+
+    const HandleAction = ({ item }) => {
+        return (
+                <div className={`cursor-pointer flex flex-row items-center  gap-2`}>
+                    <item.Icon size={20} />
+                    <div>{item.title}</div>
+                </div>
+        )
+    }
+
     return (
         <div className=' h-full w-full absolute flex items-center'>
             <div
@@ -88,7 +94,9 @@ const CustomizedMenu = ({ items, handleClick, anchorEl, open, handleClose, setIs
                 onClick={handleClick}
                 className='text-text-muted flex items-center gap-2 w-full'
             >
-                <HandleActivity item={activeItem} />
+                {
+                    actions ? (<HandleAction item={activeItem} />) : (<HandleActivity item={activeItem} />)
+                }
             </div>
 
             <StyledMenu
@@ -123,7 +131,10 @@ const CustomizedMenu = ({ items, handleClick, anchorEl, open, handleClose, setIs
                         key={i}
                         sx={{ gap: 2, }}
                     >
-                        <HandleActivity item={item} />
+                        {
+                            actions ? (<HandleAction item={item} />) : (<HandleActivity item={item} />)
+                        }
+
                     </MenuItem>
                 ))}
 
