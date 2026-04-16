@@ -14,6 +14,7 @@ import { TbLockCog as Suspend } from "react-icons/tb";
 
 // Log Types
 import AllEventIcon from '../assets/AllEventsIcon.svg?react';
+import AllActions from '../assets/AllActions.svg?react';
 import LoginIcon from '../assets/LoginIcon.svg?react';
 import LogoutIcon from '../assets/LogoutIcon.svg?react';
 import UpdateIcon from '../assets/UpdateIcon.svg?react';
@@ -149,7 +150,7 @@ export const logTypes = [
         title: "All Actions",
         textCol: "text-gray-500",
         bgCol: "bg-yellow-500/20",
-        Icon: AllEventIcon,
+        Icon: AllActions,
         counts: 1700,
     },
     {

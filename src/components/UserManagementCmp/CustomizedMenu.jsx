@@ -76,10 +76,12 @@ const CustomizedMenu = ({ items, handleClick, anchorEl, open, handleClose, setIs
 
     const HandleAction = ({ item }) => {
         return (
-                <div className={`cursor-pointer flex flex-row items-center  gap-2`}>
+            <div className="flex flex-col gap-3">
+                <div className={`flex flex-row items-center gap-2 ${item.textCol}`}>
                     <item.Icon size={20} />
-                    <div>{item.title}</div>
+                    <div className='text-sm'>{item.title}</div>
                 </div>
+            </div>
         )
     }
 
