@@ -5,6 +5,7 @@ import { rolesItem as Roles } from '../../config/RawData';
 import OnlineTag from '../../components/OnlineTag.jsx';
 import UserLogo from '../../assets/User.svg?react';
 import EmptyRole from '../../assets/empty_role.png';
+import useInitials from '../../hooks/useInitials.js';
 
 const AssignRoleToUser = () => {
   const [isUserSearch, setIsUserSearch] = useState(false);

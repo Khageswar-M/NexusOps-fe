@@ -152,33 +152,278 @@ export const logTypes = [
         bgCol: "bg-yellow-500/20",
         Icon: AllActions,
         counts: 1700,
+        col: "gray",
+        border: "border-gray-500"
     },
     {
         title: "Logins",
         textCol: "text-green-500",
         bgCol: "bg-green-500/20",
         Icon: LoginIcon,
-        counts: 700
+        counts: 700,
+        col: "green",
+        border: "border-green-500"
     },
     {
         title: "Logouts",
         textCol: "text-red-500",
         bgCol: "bg-red-500/20",
         Icon: LogoutIcon,
-        counts: 400
+        counts: 400,
+        col: "red",
+        border: "border-red-500"
+
     },
     {
         title: "Updates",
         textCol: "text-orange-500",
         bgCol: "bg-orange-500/20",
         Icon: UpdateIcon,
-        counts: 300
+        counts: 300,
+        col: "orange",
+        border: "border-orange-500"
     },
     {
         title: "Security Alerts",
         textCol: "text-yellow-500",
         bgCol: "bg-yellow-500/20",
         Icon: SecurityIcon,
-        counts: 400
+        counts: 400,
+        col: "yellow",
+        border: "border-yellow-500"
     },
 ]
+
+export const eventLogs = [
+    {
+        user:{
+            name: "User One",
+            role: "Operator"
+        },
+        email: "userone@gmail.com",
+        action: {
+            title: "Login",
+            bgCol: "bg-green-500/20",
+            textCol: "text-green-500",
+            border: "border-green-500",
+            col: "green"
+        },
+        description:{
+            desc: "Successful login via web",
+            subDesc: "Session #S-10456 Chrome 123"
+        },
+        ipaddress: "192.168.1.43",
+        timestamp:{
+            day: "Apr 23, 2024",
+            time: "10:45 AM"
+        }
+    },
+    {
+        user:{
+            name: "User Two",
+            role: "Manager"
+        },
+        email: "usertwo@gmail.com",
+        action: {
+            title: "Update",
+            bgCol: "bg-orange-500/20",
+            textCol: "text-orange-500",
+            border: "border-orange-500",
+            col: "orange"
+        },
+        description:{
+            desc: "Updated user permissions",
+            subDesc: "Target: User one Role changed"
+        },
+        ipaddress: "192.168.1.43",
+        timestamp:{
+            day: "Apr 23, 2024",
+            time: "10:45 AM"
+        }
+    },
+    {
+        user:{
+            name: "User Three",
+            role: "Admin"
+        },
+        email: "userthree@gmail.com",
+        action: {
+            title: "Logout",
+            bgCol: "bg-red-500/20",
+            textCol: "text-red-500",
+            border: "border-red-500",
+            col: "red"
+        },
+        description:{
+            desc: "Session ended - user logout",
+            subDesc: "Session duration: 3hr 42m"
+        },
+        ipaddress: "192.168.1.43",
+        timestamp:{
+            day: "Apr 23, 2024",
+            time: "10:45 AM"
+        }
+    },
+    {
+        user:{
+            name: "User Four",
+            role: "Manager"
+        },
+        email: "userfour@gmail.com",
+        action: {
+            title: "Login",
+            bgCol: "bg-green-500/20",
+            textCol: "text-green-500",
+            border: "border-green-500",
+            col: "green"
+        },
+        description:{
+            desc: "Successful login via mobile",
+            subDesc: "Session #s-34353 ios Safari"
+        },
+        ipaddress: "192.168.1.43",
+        timestamp:{
+            day: "Apr 23, 2024",
+            time: "10:45 AM"
+        }
+    },
+    {
+        user:{
+            name: "User Five",
+            role: "Viewer"
+        },
+        email: "userfive@gmail.com",
+        action: {
+            title: "Security",
+            bgCol: "bg-yellow-500/20",
+            textCol: "text-yellow-500",
+            border: "border-yellow-500",
+            col: "yellow"
+        },
+        description:{
+            desc: "Failed login - 3 attempts",
+            subDesc: "Account temporarily locked"
+        },
+        ipaddress: "192.168.1.43",
+        timestamp:{
+            day: "Apr 23, 2024",
+            time: "10:45 AM"
+        }
+    },
+    {
+        user:{
+            name: "User Five",
+            role: "Viewer"
+        },
+        email: "userfive@gmail.com",
+        action: {
+            title: "Security",
+            bgCol: "bg-yellow-500/20",
+            textCol: "text-yellow-500",
+            border: "border-yellow-500",
+            col: "yellow"
+        },
+        description:{
+            desc: "Failed login - 3 attempts",
+            subDesc: "Account temporarily locked"
+        },
+        ipaddress: "192.168.1.43",
+        timestamp:{
+            day: "Apr 23, 2024",
+            time: "10:45 AM"
+        }
+    },
+    {
+        user:{
+            name: "User Five",
+            role: "Viewer"
+        },
+        email: "userfive@gmail.com",
+        action: {
+            title: "Security",
+            bgCol: "bg-yellow-500/20",
+            textCol: "text-yellow-500",
+            border: "border-yellow-500",
+            col: "yellow"
+        },
+        description:{
+            desc: "Failed login - 3 attempts",
+            subDesc: "Account temporarily locked"
+        },
+        ipaddress: "192.168.1.43",
+        timestamp:{
+            day: "Apr 23, 2024",
+            time: "10:45 AM"
+        }
+    },
+    {
+        user:{
+            name: "User Five",
+            role: "Viewer"
+        },
+        email: "userfive@gmail.com",
+        action: {
+            title: "Security",
+            bgCol: "bg-yellow-500/20",
+            textCol: "text-yellow-500",
+            border: "border-yellow-500",
+            col: "yellow"
+        },
+        description:{
+            desc: "Failed login - 3 attempts",
+            subDesc: "Account temporarily locked"
+        },
+        ipaddress: "192.168.1.43",
+        timestamp:{
+            day: "Apr 23, 2024",
+            time: "10:45 AM"
+        }
+    },
+    {
+        user:{
+            name: "User Five",
+            role: "Viewer"
+        },
+        email: "userfive@gmail.com",
+        action: {
+            title: "Security",
+            bgCol: "bg-yellow-500/20",
+            textCol: "text-yellow-500",
+            border: "border-yellow-500",
+            col: "yellow"
+        },
+        description:{
+            desc: "Failed login - 3 attempts",
+            subDesc: "Account temporarily locked"
+        },
+        ipaddress: "192.168.1.43",
+        timestamp:{
+            day: "Apr 23, 2024",
+            time: "10:45 AM"
+        }
+    },
+
+]
+
+export const activeUsers = [
+  { id: 1, name: "John Smith", role: "Admin", score: 284 },
+  { id: 2, name: "Ashley Davis", role: "User", score: 213 },
+  { id: 3, name: "Michael Brown", role: "Operator", score: 198 },
+  { id: 4, name: "Emma Wilson", role: "Admin", score: 260 },
+  { id: 5, name: "Olivia Taylor", role: "User", score: 175 },
+  { id: 6, name: "James Anderson", role: "User", score: 240 },
+  { id: 7, name: "Sophia Thomas", role: "Operator", score: 190 },
+  { id: 8, name: "William Jackson", role: "Admin", score: 300 },
+  { id: 9, name: "Isabella White", role: "User", score: 210 },
+  { id: 10, name: "Daniel Harris", role: "User", score: 150 },
+  { id: 11, name: "Mia Martin", role: "Operator", score: 220 },
+  { id: 12, name: "Ethan Thompson", role: "Admin", score: 275 },
+  { id: 13, name: "Charlotte Garcia", role: "User", score: 165 },
+  { id: 14, name: "Benjamin Martinez", role: "User", score: 205 },
+  { id: 15, name: "Amelia Robinson", role: "Operator", score: 195 },
+  { id: 16, name: "Lucas Clark", role: "Admin", score: 285 },
+  { id: 17, name: "Harper Rodriguez", role: "User", score: 170 },
+  { id: 18, name: "Henry Lewis", role: "User", score: 225 },
+  { id: 19, name: "Evelyn Lee", role: "Operator", score: 200 },
+  { id: 20, name: "Alexander Walker", role: "Admin", score: 290 }
+];

@@ -78,7 +78,7 @@ const CustomizedMenu = ({ items, handleClick, anchorEl, open, handleClose, setIs
         return (
             <div className="flex flex-col gap-3">
                 <div className={`flex flex-row items-center gap-2 ${item.textCol}`}>
-                    <item.Icon size={20} />
+                    <item.Icon className="w-5 h-5" />
                     <div className='text-sm'>{item.title}</div>
                 </div>
             </div>
