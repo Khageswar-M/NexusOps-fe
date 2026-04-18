@@ -232,10 +232,10 @@ const ActivityLogs = () => {
       </div>
 
       {/* Most active Users */}
-      <div className=" rounded-xl border border-border  flex flex-col overflow-hidden">
+      <div className="border border-border flex flex-col overflow-hidden">
 
         {/* Header */}
-        <div className="flex p-2 border-b border-border justify-between items-center mb-3">
+        <div className="flex p-2 border-b border-border justify-between items-center ">
           <div className="flex flex-row items-center gap-2">
             <OnlineTag diameter={8} bgColor={"blue"} />
             <h2 className="text-white font-semibold">Most Active Users</h2>
@@ -244,15 +244,15 @@ const ActivityLogs = () => {
         </div>
 
         {/* Scrollable List */}
-        <div className="flex flex-col overflow-y-auto  custom-scrollbar ">
+        <div className="flex flex-col overflow-y-auto custom-scrollbar ">
 
           {activeUsers.map((user) => {
             const initial = useInitials(user.name)
             return (
-              <div key={user.id} className="flex items-center justify-between pb-2 border-b border-border px-2">
+              <div key={user.id} className="grid grid-cols-[1fr_1fr] gap-2 p-1 items-center  border-b border-border px-2">
 
                 {/* Left */}
-                <div className="grid grid-cols-[1fr_2fr] items-center gap-">
+                <div className="grid grid-cols-[1fr_2fr] items-center gap-1">
 
                   <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold bg-linear-to-br from-purple-500 to-cyan-400">
                     {initial}
@@ -265,7 +265,7 @@ const ActivityLogs = () => {
                 </div>
 
                 {/* Right */}
-                <div className="flex items-center gap-3 w-1/2">
+                <div className="grid grid-cols-[2fr_1fr] items-center gap-3">
 
                   {/* Progress */}
                   <div className="w-full h-1 bg-gray-700 rounded-full">
