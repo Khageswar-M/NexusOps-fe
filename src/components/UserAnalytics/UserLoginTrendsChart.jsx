@@ -21,9 +21,16 @@ export default function SimpleAreaChart() {
   return (
     <div className="w-full h-full">
       <ResponsiveContainer width="100%">
-        <AreaChart data={data}>
-          <XAxis dataKey="name" />
-          <YAxis />
+        <AreaChart data={data} 
+        >
+        
+          <XAxis 
+            dataKey="name" 
+            fontSize={12}
+          />
+          <YAxis 
+            fontSize={12}
+          />
           <Tooltip />
 
           {/* Blue */}
@@ -31,7 +38,11 @@ export default function SimpleAreaChart() {
             type="monotone"
             dataKey="blue"
             stroke="#3b82f6"
-            fill="none" 
+            fill="none"
+
+            isAnimationActive={true}
+            animationDuration={1000}
+            animationEasing="ease-in-out"
           />
 
           {/* Cyan */}
@@ -39,7 +50,11 @@ export default function SimpleAreaChart() {
             type="monotone"
             dataKey="cyan"
             stroke="#06b6d4"
-            fill="none" 
+            fill="none"
+
+            isAnimationActive={true}
+            animationDuration={1000}
+            animationEasing="ease-in-out"
           />
 
           {/* Orange */}
@@ -47,7 +62,11 @@ export default function SimpleAreaChart() {
             type="monotone"
             dataKey="orange"
             stroke="#f97316"
-            fill="none" 
+            fill="none"
+
+            isAnimationActive={true}
+            animationDuration={1000}
+            animationEasing="ease-in-out"
           />
 
           {/* Purple */}
@@ -55,7 +74,11 @@ export default function SimpleAreaChart() {
             type="monotone"
             dataKey="purple"
             stroke="#a855f7"
-            fill="none" 
+            fill="none"
+
+            isAnimationActive={true}
+            animationDuration={1000}
+            animationEasing="ease-in-out"
           />
         </AreaChart>
       </ResponsiveContainer>

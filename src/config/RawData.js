@@ -29,7 +29,8 @@ export const rolesItem = [
         textCol: "text-gray-500",
         bgCol: "bg-gray-500/10",
         borderCol: "border-gray-500",
-        Icon: CEO
+        Icon: CEO,
+        users: 13
     },
     {
         title: "Admin",
@@ -38,7 +39,8 @@ export const rolesItem = [
         textCol: "text-blue-500",
         bgCol: "bg-blue-500/10",
         borderCol: "border-blue-500",
-        Icon: Admin
+        Icon: Admin,
+        users: 30
     },
     {
         title: "Manager",
@@ -47,7 +49,8 @@ export const rolesItem = [
         textCol: "text-orange-500",
         bgCol: "bg-orange-500/10",
         borderCol: "border-orange-500",
-        Icon: Manager
+        Icon: Manager,
+        users: 40
     },
     {
         title: "Viewer",
@@ -56,7 +59,8 @@ export const rolesItem = [
         textCol: "text-purple-500",
         bgCol: "bg-purple-500/10",
         borderCol: "border-purple-500",
-        Icon: Viewer
+        Icon: Viewer,
+        users: 200
     },
     {
         title: "Developer",
@@ -65,7 +69,8 @@ export const rolesItem = [
         textCol: "text-cyan-500",
         bgCol: "bg-cyan-500/10",
         borderCol: "border-cyan-500",
-        Icon: Developer
+        Icon: Developer,
+        users: 4000
     },
     {
         title: "QA Tester",
@@ -74,7 +79,8 @@ export const rolesItem = [
         textCol: "text-emerald-500",
         bgCol: "bg-emerald-500/10",
         borderCol: "border-emerald-500",
-        Icon: QATester
+        Icon: QATester,
+        users: 7000
     },
     {
         title: "DevOps",
@@ -83,7 +89,8 @@ export const rolesItem = [
         textCol: "text-indigo-500",
         bgCol: "bg-indigo-500/10",
         borderCol: "border-indigo-500",
-        Icon: Devops
+        Icon: Devops,
+        users: 545
 
     },
     {
@@ -93,7 +100,8 @@ export const rolesItem = [
         textCol: "text-pink-500",
         bgCol: "bg-pink-500/10",
         borderCol: "border-pink-500",
-        Icon: Tester
+        Icon: Tester,
+        users: 8753
     },
     {
         title: "UI/UX",
@@ -102,7 +110,8 @@ export const rolesItem = [
         textCol: "text-amber-500",
         bgCol: "bg-amber-500/10",
         borderCol: "border-amber-500",
-        Icon: Designer
+        Icon: Designer,
+        users: 3465
     },
 ];
 
@@ -196,7 +205,7 @@ export const logTypes = [
 
 export const eventLogs = [
     {
-        user:{
+        user: {
             name: "User One",
             role: "Operator"
         },
@@ -208,18 +217,18 @@ export const eventLogs = [
             border: "border-green-500",
             col: "green"
         },
-        description:{
+        description: {
             desc: "Successful login via web",
             subDesc: "Session #S-10456 Chrome 123"
         },
         ipaddress: "192.168.1.43",
-        timestamp:{
+        timestamp: {
             day: "Apr 23, 2024",
             time: "10:45 AM"
         }
     },
     {
-        user:{
+        user: {
             name: "User Two",
             role: "Manager"
         },
@@ -231,18 +240,18 @@ export const eventLogs = [
             border: "border-orange-500",
             col: "orange"
         },
-        description:{
+        description: {
             desc: "Updated user permissions",
             subDesc: "Target: User one Role changed"
         },
         ipaddress: "192.168.1.43",
-        timestamp:{
+        timestamp: {
             day: "Apr 23, 2024",
             time: "10:45 AM"
         }
     },
     {
-        user:{
+        user: {
             name: "User Three",
             role: "Admin"
         },
@@ -254,18 +263,18 @@ export const eventLogs = [
             border: "border-red-500",
             col: "red"
         },
-        description:{
+        description: {
             desc: "Session ended - user logout",
             subDesc: "Session duration: 3hr 42m"
         },
         ipaddress: "192.168.1.43",
-        timestamp:{
+        timestamp: {
             day: "Apr 23, 2024",
             time: "10:45 AM"
         }
     },
     {
-        user:{
+        user: {
             name: "User Four",
             role: "Manager"
         },
@@ -277,18 +286,18 @@ export const eventLogs = [
             border: "border-green-500",
             col: "green"
         },
-        description:{
+        description: {
             desc: "Successful login via mobile",
             subDesc: "Session #s-34353 ios Safari"
         },
         ipaddress: "192.168.1.43",
-        timestamp:{
+        timestamp: {
             day: "Apr 23, 2024",
             time: "10:45 AM"
         }
     },
     {
-        user:{
+        user: {
             name: "User Five",
             role: "Viewer"
         },
@@ -300,18 +309,18 @@ export const eventLogs = [
             border: "border-yellow-500",
             col: "yellow"
         },
-        description:{
+        description: {
             desc: "Failed login - 3 attempts",
             subDesc: "Account temporarily locked"
         },
         ipaddress: "192.168.1.43",
-        timestamp:{
+        timestamp: {
             day: "Apr 23, 2024",
             time: "10:45 AM"
         }
     },
     {
-        user:{
+        user: {
             name: "User Five",
             role: "Viewer"
         },
@@ -323,18 +332,18 @@ export const eventLogs = [
             border: "border-yellow-500",
             col: "yellow"
         },
-        description:{
+        description: {
             desc: "Failed login - 3 attempts",
             subDesc: "Account temporarily locked"
         },
         ipaddress: "192.168.1.43",
-        timestamp:{
+        timestamp: {
             day: "Apr 23, 2024",
             time: "10:45 AM"
         }
     },
     {
-        user:{
+        user: {
             name: "User Five",
             role: "Viewer"
         },
@@ -346,18 +355,18 @@ export const eventLogs = [
             border: "border-yellow-500",
             col: "yellow"
         },
-        description:{
+        description: {
             desc: "Failed login - 3 attempts",
             subDesc: "Account temporarily locked"
         },
         ipaddress: "192.168.1.43",
-        timestamp:{
+        timestamp: {
             day: "Apr 23, 2024",
             time: "10:45 AM"
         }
     },
     {
-        user:{
+        user: {
             name: "User Five",
             role: "Viewer"
         },
@@ -369,18 +378,18 @@ export const eventLogs = [
             border: "border-yellow-500",
             col: "yellow"
         },
-        description:{
+        description: {
             desc: "Failed login - 3 attempts",
             subDesc: "Account temporarily locked"
         },
         ipaddress: "192.168.1.43",
-        timestamp:{
+        timestamp: {
             day: "Apr 23, 2024",
             time: "10:45 AM"
         }
     },
     {
-        user:{
+        user: {
             name: "User Five",
             role: "Viewer"
         },
@@ -392,12 +401,12 @@ export const eventLogs = [
             border: "border-yellow-500",
             col: "yellow"
         },
-        description:{
+        description: {
             desc: "Failed login - 3 attempts",
             subDesc: "Account temporarily locked"
         },
         ipaddress: "192.168.1.43",
-        timestamp:{
+        timestamp: {
             day: "Apr 23, 2024",
             time: "10:45 AM"
         }
@@ -406,24 +415,32 @@ export const eventLogs = [
 ]
 
 export const activeUsers = [
-  { id: 1, name: "John Smith", role: "Admin", score: 284 },
-  { id: 2, name: "Ashley Davis", role: "User", score: 213 },
-  { id: 3, name: "Michael Brown", role: "Operator", score: 198 },
-  { id: 4, name: "Emma Wilson", role: "Admin", score: 260 },
-  { id: 5, name: "Olivia Taylor", role: "User", score: 175 },
-  { id: 6, name: "James Anderson", role: "User", score: 240 },
-  { id: 7, name: "Sophia Thomas", role: "Operator", score: 190 },
-  { id: 8, name: "William Jackson", role: "Admin", score: 300 },
-  { id: 9, name: "Isabella White", role: "User", score: 210 },
-  { id: 10, name: "Daniel Harris", role: "User", score: 150 },
-  { id: 11, name: "Mia Martin", role: "Operator", score: 220 },
-  { id: 12, name: "Ethan Thompson", role: "Admin", score: 275 },
-  { id: 13, name: "Charlotte Garcia", role: "User", score: 165 },
-  { id: 14, name: "Benjamin Martinez", role: "User", score: 205 },
-  { id: 15, name: "Amelia Robinson", role: "Operator", score: 195 },
-  { id: 16, name: "Lucas Clark", role: "Admin", score: 285 },
-  { id: 17, name: "Harper Rodriguez", role: "User", score: 170 },
-  { id: 18, name: "Henry Lewis", role: "User", score: 225 },
-  { id: 19, name: "Evelyn Lee", role: "Operator", score: 200 },
-  { id: 20, name: "Alexander Walker", role: "Admin", score: 290 }
+    { id: 1, name: "John Smith", role: "Admin", score: 284 },
+    { id: 2, name: "Ashley Davis", role: "User", score: 213 },
+    { id: 3, name: "Michael Brown", role: "Operator", score: 198 },
+    { id: 4, name: "Emma Wilson", role: "Admin", score: 260 },
+    { id: 5, name: "Olivia Taylor", role: "User", score: 175 },
+    { id: 6, name: "James Anderson", role: "User", score: 240 },
+    { id: 7, name: "Sophia Thomas", role: "Operator", score: 190 },
+    { id: 8, name: "William Jackson", role: "Admin", score: 300 },
+    { id: 9, name: "Isabella White", role: "User", score: 210 },
+    { id: 10, name: "Daniel Harris", role: "User", score: 150 },
+    { id: 11, name: "Mia Martin", role: "Operator", score: 220 },
+    { id: 12, name: "Ethan Thompson", role: "Admin", score: 275 },
+    { id: 13, name: "Charlotte Garcia", role: "User", score: 165 },
+    { id: 14, name: "Benjamin Martinez", role: "User", score: 205 },
+    { id: 15, name: "Amelia Robinson", role: "Operator", score: 195 },
+    { id: 16, name: "Lucas Clark", role: "Admin", score: 285 },
+    { id: 17, name: "Harper Rodriguez", role: "User", score: 170 },
+    { id: 18, name: "Henry Lewis", role: "User", score: 225 },
+    { id: 19, name: "Evelyn Lee", role: "Operator", score: 200 },
+    { id: 20, name: "Alexander Walker", role: "Admin", score: 290 }
 ];
+
+
+// Raw data for UserManagement -> User Analytics
+export const roleDistribution = rolesItem.map((item) => ({
+    name: item.title,
+    value: item.users,
+    col: item.color
+}));
