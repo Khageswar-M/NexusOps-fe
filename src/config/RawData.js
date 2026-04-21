@@ -437,6 +437,17 @@ export const activeUsers = [
     { id: 20, name: "Alexander Walker", role: "Admin", score: 290 }
 ];
 
+export const COLOR_MAP = {
+  gray: "#6B7280",
+  blue: "#3B82F6",
+  orange: "#F97316",
+  purple: "#8B5CF6",
+  cyan: "#06B6D4",
+  emerald: "#10B981",
+  indigo: "#6366F1",
+  pink: "#EC4899",
+  amber: "#F59E0B",
+};
 
 // Raw data for UserManagement -> User Analytics
 export const roleDistribution = rolesItem.map((item) => ({
