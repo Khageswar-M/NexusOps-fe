@@ -20,6 +20,19 @@ import LogoutIcon from '../assets/LogoutIcon.svg?react';
 import UpdateIcon from '../assets/UpdateIcon.svg?react';
 import SecurityIcon from '../assets/SecurityIcon.svg?react';
 
+import { MdDashboard as Dashboard} from "react-icons/md";
+import { HiMiniUsers as UserMgmt} from "react-icons/hi2";
+import { MdInsertChart as DataAnalytics} from "react-icons/md";
+import { RiFileList3Fill as Reports} from "react-icons/ri";
+import { IoSettingsSharp as TaskAutomation} from "react-icons/io5";
+import { HiDocumentReport as Settings} from "react-icons/hi";
+
+import IndianFlag from '../assets/Indian_flag.png';
+import USAFlag from '../assets/USA_flag.png';
+import UKFlag from '../assets/UK_flag.png';
+import GermanyFlag from '../assets/Germany_flag.png';
+import CanadaFlag from '../assets/Canada_flag.png';
+
 
 export const rolesItem = [
     {
@@ -447,11 +460,140 @@ export const COLOR_MAP = {
   indigo: "#6366F1",
   pink: "#EC4899",
   amber: "#F59E0B",
+  red: "#DC143C",
+  green: "#00FF00"
 };
 
 // Raw data for UserManagement -> User Analytics
 export const roleDistribution = rolesItem.map((item) => ({
     name: item.title,
     value: item.users,
-    col: item.color
+    col: item.color,
+    text: item.textCol
 }));
+
+export const accountStatus = [
+    {
+        name: "Active",
+        value: 9502,
+        col: "green",
+        text: "text-green-500",
+    },
+    {
+        name: "Inactive",
+        value: 2824,
+        col: "orange",
+        text: "text-orange-500",
+    },
+    {
+        name: "Suspend",
+        value: 513,
+        col: "red",
+        text: "text-red-500"
+    }
+]
+
+export const loginPlatforms = [
+    {
+        name: "Mobile IOS",
+        value: 40,
+        col: "cyan",
+        text: "text-cyan-500"
+    },
+    {
+        name: "Mobile Android",
+        value: 50,
+        col: "orange",
+        text: "text-orange-500",
+    },
+    {
+        name: "Windows",
+        value: 1234,
+        col: "green",
+        text: "text-green-500"
+    },
+    {
+        name: "Mac",
+        value: 1109,
+        col: "pink",
+        text: "text-pink-500"
+    },
+    {
+        name: "Tablets",
+        value: 20,
+        col: "purple",
+        text: "text-purple-500"
+    }
+]
+
+export const topModulesUser = [
+    {
+        title: "Dashboard",
+        Icon: Dashboard,
+        value: 6234
+    },
+    {
+        title: "User Management",
+        Icon: UserMgmt,
+        value: 3324
+    },
+    {
+        title: "Data Analytics",
+        Icon: DataAnalytics,
+        value: 2346
+    },
+    {
+        title: "Reports",
+        Icon: Reports,
+        value: 3847
+    },
+    {
+        title: "Task Automation",
+        Icon: TaskAutomation,
+        value: 1234
+    },
+    {
+        title: "System Settings",
+        Icon: Settings,
+        value: 112
+    }
+]
+
+export const topCountries = [
+    {
+        title: "India",
+        src: IndianFlag,
+        value: 4542,
+        col: "text-[#FF9933]",
+        bgCol: "bg-[#FF9933]"
+    },
+    {
+        title: "United States",
+        src: USAFlag,
+        value: 5542,
+        col: "text-[#fff]",
+        bgCol: "bg-[#fff]"
+    },
+    {
+        title: "United Kingdom",
+        src: UKFlag,
+        value: 1242,
+        col: "text-[#56438E]",
+        bgCol: "bg-[#56438E]"
+    },
+    {
+        title: "Canada",
+        src: CanadaFlag,
+        value: 942,
+        col: "text-[#FF0000]",
+        bgCol: "bg-[#FF0000]"
+    },
+    {
+        title: "Germany",
+        src: GermanyFlag,
+        value: 300,
+        col: "text-[#FFCE00]",
+        bgCol: "bg-[#FFCE00]"
+    }
+
+]

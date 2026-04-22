@@ -21,7 +21,7 @@ const CustomPieChart = ({ data = [] }) => {
       const value = data[activeIndex].value;
       const role = data[activeIndex].name;
       const col = data[activeIndex].col;
-      const percent = ((value / total) * 100).toFixed(0);
+      const percent = ((value / total) * 100).toFixed(2);
 
       return (
         <text x="50%" y="50%" textAnchor="middle" dominantBaseline="middle">
@@ -37,41 +37,43 @@ const CustomPieChart = ({ data = [] }) => {
 
     return (
       <text x="50%" y="50%" textAnchor="middle" dominantBaseline="middle" fill="#fff">
-        Roles
+        --
       </text>
     );
   };
 
   return (
-    <PieChart
-      responsive
-      style={{
-        width: "100%",
-        height: "100%",
-      }}
-    >
-      <Pie
-        data={data}
-        dataKey="value"
-        nameKey="name"
-        innerRadius="60%"
-        outerRadius="80%"
-        isAnimationActive={true}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+    <div className="flex items-center justify-center w-full h-full">
+      <PieChart
+        responsive
+        style={{
+          width: "100%",
+          height: "100%",
+        }}
       >
-        {data.map((entry, index) => (
-          <Cell
-            key={`cell-${index}`}
-            fill={COLOR_MAP[entry.col] || "#ccc"}
-            opacity={activeIndex === null || activeIndex === index ? 1 : 0.4} // 🔥 fade others
-          />
-        ))}
-      </Pie>
+        <Pie
+          data={data}
+          dataKey="value"
+          nameKey="name"
+          innerRadius="60%"
+          outerRadius="85%"
+          isAnimationActive={true}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          {data.map((entry, index) => (
+            <Cell
+              key={`cell-${index}`}
+              fill={COLOR_MAP[entry.col] || "#ccc"}
+              opacity={activeIndex === null || activeIndex === index ? 1 : 0.4} // 🔥 fade others
+            />
+          ))}
+        </Pie>
 
-      {/* 🎯 Dynamic Center Label */}
-      <Label content={getCenterValue}/>
-    </PieChart>
+        {/* 🎯 Dynamic Center Label */}
+        <Label content={getCenterValue} />
+      </PieChart>
+    </div>
   );
 };
 
