@@ -60,7 +60,7 @@ const UserAnalytics = () => {
     )
   }
 
-  const RowTwoContent = ({
+ const RowTwoContent = ({
     barTitle,
     barTagCol,
     chartData,
@@ -95,7 +95,7 @@ const UserAnalytics = () => {
     barTitle,
     barTagCol,
     data
-   }) => {
+  }) => {
     return (
       <div className='grid grid-rows-[1fr_5fr]'>
         <div className='border-b border-border flex items-center px-2'>
@@ -120,7 +120,7 @@ const UserAnalytics = () => {
                     <div className="h-1 w-full bg-cyan-300/10 rounded-full overflow-hidden">
                       <div
                         className={`h-full ${module.bgCol ? module.bgCol : "bg-cyan-400"}  transition-all duration-500`}
-                        style={{ width: `${((module.value / totalModule) * 100 ).toFixed(2)}%` }}
+                        style={{ width: `${((module.value / totalModule) * 100).toFixed(2)}%` }}
                       />
                     </div>
                     <div className='flex flex-row items-center gap-2'>
@@ -220,16 +220,16 @@ const UserAnalytics = () => {
       {/* ROW 3 */}
       <div className='grid grid-rows-1 grid-cols-2 gap-2 [&>div]:rounded-md [&>div]:bg-surface'>
         {/* TOP MODULES USED */}
-        <RowThreeContent 
-        key={1}
+        <RowThreeContent
+          key={1}
           barTitle={"Top Modules Used"}
           barTagCol={"orange"}
           data={topModulesUser}
         />
 
         {/* TOP COUNTRIES */}
-        <RowThreeContent 
-        key={2}
+        <RowThreeContent
+          key={2}
           barTitle={"Top Countries"}
           barTagCol={"green"}
           data={topCountries}

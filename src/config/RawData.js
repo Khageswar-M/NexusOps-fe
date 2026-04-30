@@ -597,3 +597,113 @@ export const topCountries = [
     }
 
 ]
+
+// Raw data for Data Analytics
+export const recordProcessing = [
+    {
+        name: "Active",
+        value: 16632,
+        col: "blue",
+        text: "text-blue-500"
+    },
+    {
+        name: "Completed",
+        value: 11890,
+        col: "green",
+        text: "text-green-500"
+    },
+    {
+        name: "Archived",
+        value: 7190,
+        col: "orange",
+        text: "text-orange-500"
+    },
+    {
+        name: "Failed",
+        value: 11569,
+        col: "red",
+        text: "text-red-500"
+    },
+];
+
+export const alertTypes = [
+    {
+        name: "System",
+        value: 7,
+        col: "cyan",
+        text: "text-cyan-500"
+    },
+    {
+        name: "Error",
+        value: 6,
+        col: "orange",
+        text: "text-orange-500"
+    },
+    {
+        name: "Warning",
+        value: 5,
+        col: "purple",
+        text: "text-purple-500"
+    },
+]
+
+export const taskAutomation =[
+    { name: "T-1",title: "Data Sync", value: 5240, color: "#5DADE2" },
+  { name: "T-2",title: "Backups", value: 4820, color: "#A569BD" },
+  { name: "T-3",title: "Reporting", value: 3610, color: "#F5B041" },
+  { name: "T-4",title: "Cleanup", value: 2940, color: "#73C6B6" },
+  { name: "T-5",title: "Alerts", value: 1870, color: "#EC7063" }
+]
+
+export const recentReports = [
+    {
+        reports: "Q2 Sales Summary",
+        records: 12334,
+        status: "Complete",
+        generated: "Apr 12, 10:43",
+        col: "green",
+        txt: "text-green-500",
+        bgCol: "bg-green-500/10",
+        border: "border-green-500"
+    },
+    {
+        reports: "User Engagement",
+        records: 8204,
+        status: "Running",
+        generated: "Apr 23, 09:15",
+        col: "cyan",
+        txt: "text-cyan-500",
+        bgCol: "bg-cyan-500/10",
+        border: "border-cyan-500"
+    },
+    {
+        reports: "Infra Health Check",
+        records: 3512,
+        status: "Complete",
+        generated: "Apr 22, 18:32",
+        col: "green",
+        txt: "text-green-500",
+        bgCol: "bg-green-500/10",
+        border: "border-green-500"
+    },
+    {
+        reports: "Anomaly Detection",
+        records: 418,
+        status: "Failed",
+        generated: "Apr 22, 14:10",
+        col: "red",
+        txt: "text-red-500",
+        bgCol: "bg-red-500/10",
+        border: "border-red-500"
+    },
+    {
+        reports: "Revenue Forecast",
+        records: 6720,
+        status: "Pending",
+        generated: "Scheduled",
+        col: "orange",
+        txt: "text-orange-500",
+        bgCol: "bg-orange-500/10",
+        border: "border-orange-500"
+    },
+]
