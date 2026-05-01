@@ -707,3 +707,48 @@ export const recentReports = [
         border: "border-orange-500"
     },
 ]
+
+export const efficiency = [
+    {
+        icon: "🪈",
+        title: "ETL Pipeline",
+        val: 90.54
+    },
+    {
+        icon: "📈",
+        title: "Data Integration",
+        val: 91.2
+    },
+    {
+        icon: "📅",
+        title: "Aggregation",
+        val: 91.2
+    },
+    {
+        icon: "📤",
+        title: "Export Jobs",
+        val: 72.1
+    },
+
+]
+
+export const recentAlert = [
+    {
+        icon: "🔴",
+        bgCol: "bg-red-500/10",
+        title: "ETL Job failed - timeout",
+        time: "4m ago"
+    },
+    {
+        icon: "🟡",
+        bgCol: "bg-yellow-500/10",
+        title: "Record export queue at 89%",
+        time: "22m ago"
+    },
+    {
+        icon: "🟣",
+        bgCol: "bg-purple-500/10",
+        title: "Anomaly in dataset #A-4812",
+        time: "1h ago"
+    },
+]

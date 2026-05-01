@@ -2,7 +2,7 @@ import { AppContext } from "../../context/TitleContext";
 import { useContext, useEffect } from "react";
 import OnlineTag from "../../components/OnlineTag";
 import CustomPieChart from "../../components/UserAnalytics/CustomPiChart";
-import { recordProcessing, alertTypes, taskAutomation, recentReports } from "../../config/RawData";
+import { recordProcessing, alertTypes, taskAutomation, recentReports, efficiency, recentAlert } from "../../config/RawData";
 import TaskBarChart from "../../components/TaskBarChart";
 
 const DataAnalytics = () => {
@@ -198,9 +198,65 @@ const DataAnalytics = () => {
         </div>
 
         {/* PROCESSING EFFICIENCY */}
-        <div className="bg-surface border border-border grid grid-rows-[1fr_10fr] grid-cols-1">
-          <div className="border-b border-border">1</div>
-          <div>2</div>
+        <div className="grid grid-rows-[1fr_1fr] grid-cols-1 gap-2 [&>div]:bg-surface [&>div]:rounded-md [&>div]:border [&>div]:border-border overflow-hidden">
+          
+          {/* PROCESSING EFFICIENCY */}
+          <div className="grid grid-rows-[1fr_4.5fr] grid-cols-1 overflow-hidden">
+              <div className="border-b border-border flex flex-row items-center px-2">
+                <HeadBar color={"purple"} title={"Processing Efficiency"}/>
+              </div>
+
+              <div className="flex flex-col gap-2 overflow-y-auto custom-scrollbar">
+                {
+                  efficiency.map((item, i) => {
+                    return (
+                      <div key={i} className="flex flex-col gap-1 p-2">
+                        <div className="flex flex-row items-center justify-between ">
+                          <div className="flex flex-row items-center gap-2">
+                            <div className="bg-cyan-500/10 p-0.5 rounded-md">{item.icon}</div>
+                            <div className="text-white text-[0.8rem]">{item.title}</div>
+                          </div>
+                          <div className="text-white text-[0.8rem]">{item.val}%</div>
+                        </div>
+
+                        <div className="h-1.5 rounded-sm bg-cyan-500/10 overflow-hidden">
+                          <div 
+                            style={{width: `${item.val}%`, backgroundColor: "cyan"}}
+                            className="h-full"
+                          />
+                        </div>
+                      </div>
+                    )
+                  })
+                }
+              </div>
+          </div>
+
+          {/* RECENT ALERTS */}
+          <div className="grid grid-rows-[1fr_4.5fr] grid-cols-1 overflow-hidden">
+              <div className="border-b border-border flex flex-row items-center px-2">
+                <HeadBar color={"red"} title={"Recent Alerts"}/>
+              </div>
+              
+              <div className="flex flex-col overflow-y-auto custom-scrollbar">
+                {
+                  recentAlert.map((item, i) => {
+                    return(
+                      <div
+                        key={i}
+                        className="flex flex-row items-center justify-between py-2 border-b border-border px-2"
+                      >
+                        <div className="flex flex-row items-center gap-2">
+                          <div className={`${item.bgCol} p-1 rounded-md text-[1rem] flex items-center justify-center`}>{item.icon}</div>
+                          <div className="text-white font-bold text-[0.9rem]">{item.title}</div>
+                        </div>
+                        <div className="text-text-muted text-[0.7rem]">{item.time}</div>
+                      </div>
+                    )
+                  })
+                }
+              </div>
+          </div>
         </div>
       </div>
     </div>
