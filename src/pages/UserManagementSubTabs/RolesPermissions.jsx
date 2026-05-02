@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from 'react'
-import { AppContext } from '../../context/TitleContext';
 import RoleDistribution from '../../components/RolesPermissionsCmp/RoleDistribution';
 import AssignRoleToUser from '../../components/RolesPermissionsCmp/AssignRoleToUser';
 import PermissionsActivity from '../../components/RolesPermissionsCmp/PermissionsActivity';
@@ -8,12 +7,16 @@ import { rolesItem as Roles } from '../../config/RawData.js';
 import { FiPlus as Plus } from "react-icons/fi";
 import { LuClock3 as Clock } from "react-icons/lu";
 
+// redux
+import { useDispatch } from 'react-redux';
+import { setTitle } from '../../redux/appSlice.js';
+
 const RolesPermissions = () => {
 
-  const { setTitle } = useContext(AppContext);
+  const dispatch = useDispatch();
   useEffect(() => {
-    setTitle(["User Management", "Roles & Permissions"]);
-  }, []);
+    dispatch(setTitle(["User Management", "Roles & Permissions"]));
+  }, [dispatch]);
 
   const HandleHeader = ({ Logo, title }) => {
     return (

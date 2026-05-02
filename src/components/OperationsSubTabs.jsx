@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
 import { operation2tabs } from "../config/operation2tabs";
 import UserListCredentials from "./UserManagementCmp/UserListCredentials";
-import {AppContext} from '../context/TitleContext.jsx';
-import { useContext } from "react";
+
+import { useSelector } from "react-redux";
 
 const OperationsSubTabs = () => {
-  const { title } = useContext(AppContext);
+  const title = useSelector((state) => state.app.title);
   return (
     <div className="bg-surface rounded-md border border-border px-1 grid grid-cols-[1fr_1fr] items-center">
       <div className='flex flex-row items-center h-full gap-2 px-1'>

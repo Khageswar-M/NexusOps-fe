@@ -3,17 +3,15 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App.jsx';
-import AppContextProvider from './context/TitleContext.jsx';
-import { UIProvider } from './context/UIContext.jsx';
+import { Provider } from 'react-redux';
+import { store } from './redux/store.js';
 
 window.global = window;
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <AppContextProvider>
-      <UIProvider>
-        <App />
-      </UIProvider>
-    </AppContextProvider>
+    <Provider store={store}>
+      <App />
+    </Provider>
   </BrowserRouter>,
 )

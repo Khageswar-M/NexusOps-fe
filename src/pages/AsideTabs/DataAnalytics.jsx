@@ -1,16 +1,19 @@
-import { AppContext } from "../../context/TitleContext";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import OnlineTag from "../../components/OnlineTag";
 import CustomPieChart from "../../components/UserAnalytics/CustomPiChart";
 import { recordProcessing, alertTypes, taskAutomation, recentReports, efficiency, recentAlert } from "../../config/RawData";
 import TaskBarChart from "../../components/TaskBarChart";
 
+// redux
+import { useDispatch } from "react-redux";
+import { setTitle } from "../../redux/appSlice";
+
 const DataAnalytics = () => {
 
-  const { setTitle } = useContext(AppContext);
+  const dispatch = useDispatch();
   useEffect(() => {
-    setTitle(["Data Analytics"]);
-  }, []);
+    dispatch(setTitle(["Data Analytics"]));
+  }, [dispatch]);
 
   const totalRecords = recordProcessing.reduce((acc, curr) => acc + curr.value, 0);
   const totalAlert = alertTypes.reduce((acc, curr) => acc + curr.value, 0);

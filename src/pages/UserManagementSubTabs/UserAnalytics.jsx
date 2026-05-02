@@ -1,17 +1,19 @@
-import React, { useContext, useEffect } from 'react'
-import { AppContext } from '../../context/TitleContext';
+import React, { useEffect } from 'react'
 import OnlineTag from '../../components/OnlineTag.jsx';
 import UserLoginTrendsChart from '../../components/UserAnalytics/UserLoginTrendsChart.jsx'
 import CustomPieChart from '../../components/UserAnalytics/CustomPiChart.jsx';
 import { roleDistribution, accountStatus, loginPlatforms, topModulesUser, topCountries } from '../../config/RawData.js';
 
+// redux
+import { useDispatch } from 'react-redux';
+import { setTitle } from '../../redux/appSlice.js';
 
 
 const UserAnalytics = () => {
-  const { setTitle } = useContext(AppContext);
+  const dispatch = useDispatch();
   useEffect(() => {
-    setTitle(["User Management", "User Analytics"]);
-  }, []);
+    dispatch(setTitle(["User Management", "User Analytics"]));
+  }, [dispatch]);
 
   const totalRoles = roleDistribution.reduce((acc, curr) => acc + curr.value, 0);
   const totalAcc = accountStatus.reduce((acc, curr) => acc + curr.value, 0);

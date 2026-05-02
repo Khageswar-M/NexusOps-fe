@@ -1,15 +1,18 @@
 import KpiCards from "../Dashboard/KpiCards";
 import PerformanceChart from "../Dashboard/PerformanceChart";
 import ActivityFeed from "../Dashboard/ActivityFeed";
-import { AppContext } from "../../context/TitleContext";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
+
+// redux
+import { useDispatch } from "react-redux";
+import { setTitle } from "../../redux/appSlice";
 
 const Dashboard = () => {
 
-  const { setTitle } = useContext(AppContext);
+  const dispatch = useDispatch();
   useEffect(() => {
-    setTitle(["Dashboard"]);
-  }, []);
+    dispatch(setTitle(["Dashboard"]))
+  }, [dispatch]);
 
 
   return (

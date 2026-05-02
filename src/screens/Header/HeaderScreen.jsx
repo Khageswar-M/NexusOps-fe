@@ -1,16 +1,16 @@
-import { AppContext } from "../../context/TitleContext";
-import { UIContext } from "../../context/UIContext";
-import { useContext } from "react";
 import { IoIosNotifications } from "react-icons/io";
 import { IoSearch } from "react-icons/io5";
 import OnlineTag from "../../components/OnlineTag";
 import CustomToolTip from "../../components/CustomToolTip";
 
+// redux
+import { useSelector, useDispatch } from "react-redux";
+import { setNotification } from "../../redux/uiSlice";
+
 const HeaderScreen = () => {
 
-    const { title } = useContext(AppContext);
-
-    const { setIsNotificationOpen } = useContext(UIContext);
+    const dispatch = useDispatch();
+    const title = useSelector((state) => state.app.title);
 
 
     return (
@@ -76,7 +76,7 @@ const HeaderScreen = () => {
                 <CustomToolTip title={"Notification"}>
                     <button
                         className="relative bg-surface-2 border border-border rounded-md p-2 cursor-pointer"
-                        onClick={() => setIsNotificationOpen(true)}
+                        onClick={() => dispatch(setNotification(true))}
                     >
                         <div className="absolute right-1.25 top-2">
                             <OnlineTag

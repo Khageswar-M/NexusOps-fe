@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { AppContext } from '../../context/TitleContext';
+import React, {  useEffect, useState } from 'react'
 import OnlineTag from '../../components/OnlineTag.jsx';
 import { FaCheck as Check } from "react-icons/fa";
 import { FaEye as Eye } from "react-icons/fa";
@@ -8,12 +7,16 @@ import { BsFillTrash3Fill as Trash } from "react-icons/bs";
 import { MdOutlinePlaylistRemove as EmptyList } from "react-icons/md";
 import { rolesItem, statusItem } from '../../config/RawData.js';
 
+// redux
+import { useDispatch } from 'react-redux';
+import { setTitle } from '../../redux/appSlice.js';
+
 const UserList = () => {
 
-  const { setTitle } = useContext(AppContext);
+  const dispatch = useDispatch();
   useEffect(() => {
-    setTitle(["User Management", "User List"]);
-  }, []);
+    dispatch(setTitle(["User Management", "User List"]));
+  }, [dispatch]);
 
   const [checkedUser, setCheckedUser] = useState({});
   const totalChecked = Object.values(checkedUser).filter(Boolean).length;

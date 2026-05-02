@@ -1,12 +1,15 @@
-import { AppContext } from "../../context/TitleContext";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
+
+// redux
+import { useDispatch } from "react-redux";
+import { setTitle } from "../../redux/appSlice";
 
 const TaskAutomation = () => {
 
-  const { setTitle } = useContext(AppContext);
+  const dispatch = useDispatch();
   useEffect(() => {
-    setTitle(["Task Automation"]);
-  }, []);
+    dispatch(setTitle(["Task Automation"]));
+  }, [dispatch]);
   
   return (
     <div className="grid grid-rows-[2fr_7fr_1fr] gap-2 p-2 h-full">

@@ -6,9 +6,10 @@ import { RiFileList3Line, RiFileList3Fill } from "react-icons/ri";
 import { IoSettingsOutline, IoSettingsSharp } from "react-icons/io5";
 import { HiOutlineDocumentReport, HiDocumentReport } from "react-icons/hi";
 import OnlineTag from '../../components/OnlineTag';
-import { useState, useContext } from 'react';
-import { AppContext } from '../../context/TitleContext';
+import { useState } from 'react';
 
+// redux
+import { useSelector } from 'react-redux';
 
 
 const AsideScreen = ({ isLocation }) => {
@@ -61,7 +62,7 @@ const AsideScreen = ({ isLocation }) => {
     },
   ]
 
-  const { title } = useContext(AppContext);
+  const title = useSelector((state) => state.app.title);
 
 
   return (

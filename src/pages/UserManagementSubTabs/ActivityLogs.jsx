@@ -1,5 +1,4 @@
-import { AppContext } from "../../context/TitleContext";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import MagnifyGlass from '../../assets/MagnifyingGlass.svg?react';
 import CustomizedMenu from '../../components/UserManagementCmp/CustomizedMenu.jsx';
 import { logTypes, eventLogs, activeUsers } from "../../config/RawData";
@@ -10,12 +9,16 @@ import Download from '../../assets/Download.svg?react';
 import OnlineTag from "../../components/OnlineTag.jsx";
 import useInitials from "../../hooks/useInitials.js";
 
+// redux
+import { useDispatch } from "react-redux";
+import { setTitle } from "../../redux/appSlice.js";
+
 const ActivityLogs = () => {
 
-  const { setTitle } = useContext(AppContext);
+  const dispatch = useDispatch();
   useEffect(() => {
-    setTitle(["User Management", "Activity Logs"]);
-  }, []);
+    dispatch(setTitle(["User Management", "Activity Logs"]));
+  }, [dispatch]);
 
   const [rolesAnchorE1, setRolesAnchorE1] = useState(null);
   const rolesOpen = Boolean(rolesAnchorE1);

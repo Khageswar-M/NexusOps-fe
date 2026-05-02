@@ -1,9 +1,13 @@
-import { UIContext } from "../../context/UIContext";
-import { useContext } from "react";
+// redux
+import { useSelector, useDispatch } from "react-redux";
+import { setNotification } from "../../redux/uiSlice";
 
 const NotificationPanel = () => {
 
-    const {isNotificationOpen, setIsNotificationOpen} = useContext(UIContext);
+    const isNotificationOpen = useSelector(
+        (state) => state.ui.isNotificationOpen
+    );
+    const dispatch = useDispatch();
 
   return (
     <>
@@ -11,7 +15,7 @@ const NotificationPanel = () => {
         {isNotificationOpen && (
             <div
                 className="fixed inset-0 bg-black/40 z-40"
-                onClick={() => setIsNotificationOpen(false)}
+                onClick={() => dispatch(setNotification(false))}
             />
         )}
 
@@ -23,7 +27,7 @@ const NotificationPanel = () => {
                 className="p-4 flex justify-between items-center border-b border-border"
             >
                 <h2 className="text-white font-semibold">Notifications</h2>
-                <button onClick={() => setIsNotificationOpen(false)}>x</button>
+                <button onClick={() => dispatch(setNotification(false))}>x</button>
             </div>
 
             <div className="p-4">

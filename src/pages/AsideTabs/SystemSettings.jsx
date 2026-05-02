@@ -1,12 +1,15 @@
-import { AppContext } from "../../context/TitleContext";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
+
+// redux
+import { useDispatch } from "react-redux";
+import { setTitle } from "../../redux/appSlice";
 
 const SystemSettings = () => {
 
-  const { setTitle } = useContext(AppContext);
+  const dispatch = useDispatch();
   useEffect(() => {
-    setTitle(["System Settings"]);
-  }, []);
+    dispatch(setTitle(["System Settings"]));
+  }, [dispatch]);
   
   return (
     <div className="grid grid-rows-[5fr_3fr_3fr_2fr_1fr] h-full gap-2 p-2">
