@@ -752,3 +752,12 @@ export const recentAlert = [
         time: "1h ago"
     },
 ]
+
+// for Reports.jsx
+export const reportsData = [
+    {
+        title: "PDF",
+        textCol: "text-red-500",
+        bgCol: "bg-red-500/10",
+    }
+]
