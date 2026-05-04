@@ -73,7 +73,7 @@ const getBg = (type) => {
 
 const NotificationTable = () => {
   return (
-    <div className="h-full w-full grid grid-rows-[1fr_5fr]  overflow-hidden absolute">
+    <div className="h-70 bg-surface  w-full grid grid-rows-[1fr_5fr]  overflow-hidden">
       
       {/* Header */}
       <div className="border-b border-border flex items-center justify-between px-5">

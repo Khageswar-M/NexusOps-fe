@@ -45,7 +45,7 @@ const ServerStatus = () => {
     ]
 
     return (
-        <div className='relative bg-surface grid grid-rows-[1fr_5fr] overflow-hidden'>
+        <div className='relative h-70 bg-surface grid grid-rows-[1fr_5fr] overflow-hidden'>
 
             {/* Header */}
             <div className='px-5 text-white/90 text-[12px] font-bold border-b border-b-border flex items-center justify-between'>

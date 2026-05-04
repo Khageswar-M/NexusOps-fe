@@ -21,7 +21,7 @@ const NotificationPanel = () => {
 
         {/* Sliding panel */}
         <div
-            className={`fixed rounded-bl-md rounded-tl-md top-0 right-0 h-full w-[30%] bg-surface border-l border-border z-50 transform transition-transform duration-300 ${isNotificationOpen ? "translate-x-0" : "translate-x-full"}`}
+            className={`fixed rounded-bl-md rounded-tl-md top-0 right-0 h-full min-w-80 bg-surface border-l border-border z-50 transform transition-transform duration-300 ${isNotificationOpen ? "translate-x-0" : "translate-x-full"}`}
         >
             <div
                 className="p-4 flex justify-between items-center border-b border-border"

@@ -107,7 +107,7 @@ export default function ActivityFeedTable() {
         active === "All" ? allItems : allItems.filter((i) => i.category === active);
 
     return (
-        <div className="grid grid-rows-[1fr_5fr] h-full w-full overflow-hidden absolute">
+        <div className="grid grid-rows-[1fr_5fr] h-70 w-full">
 
             {/* Header */}
             <div className="flex items-center justify-between px-5 border-b border-white/8">

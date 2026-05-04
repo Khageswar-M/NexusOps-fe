@@ -29,7 +29,7 @@ const ResourceUsage = () => {
         red: "text-red-400"
     }
     return (
-        <div className='bg-surface grid grid-rows-[1fr_5fr] overflow-hidden'>
+        <div className='bg-surface grid grid-rows-[1fr_5fr] h-70 overflow-hidden'>
             <div className='px-5 text-white/90 text-[12px] font-bold border-b border-b-border flex items-center'>
                 Resource Usages
             </div>

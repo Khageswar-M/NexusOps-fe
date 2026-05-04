@@ -24,7 +24,7 @@ const UserActivity = () => {
     },
   ]
   return (
-    <div className='relative bg-surface grid grid-rows-[1fr_5fr] overflow-hidden'>
+    <div className='relative bg-surface grid grid-rows-[1fr_5fr] h-70 overflow-hidden'>
       <div className='px-5 py-1 text-[12px] font-bold border-b border-b-border flex items-center justify-between'>
         <div className="text-white/90 flex flex-row items-center gap-3">
           <OnlineTag bgColor={"blue"} diameter={10} shadow />

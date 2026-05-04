@@ -7,8 +7,8 @@ import { useSelector } from "react-redux";
 const OperationsSubTabs = () => {
   const title = useSelector((state) => state.app.title);
   return (
-    <div className="bg-surface rounded-md border border-border px-1 grid grid-cols-[1fr_1fr] items-center">
-      <div className='flex flex-row items-center h-full gap-2 px-1'>
+    <div className="bg-surface rounded-md border border-border p-1 px-1 grid grid-cols-[1fr_1fr] items-center">
+      <div className='flex flex-row items-center h-full gap-2 px-0'>
         {operation2tabs.map((tab, index) =>
           <NavLink
             key={index}

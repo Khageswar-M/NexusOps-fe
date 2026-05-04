@@ -13,35 +13,37 @@ const AddUser = lazy(() => import('../../pages/UserManagementSubTabs/AddUser'));
 const RolesPermissions = lazy(() => import('../../pages/UserManagementSubTabs/RolesPermissions'));
 const ActivityLogsAny = lazy(() => import('../../pages/UserManagementSubTabs/ActivityLogs'));
 const UserAnalytics = lazy(() => import('../../pages/UserManagementSubTabs/UserAnalytics'));
-
+import AsideScreen from '../Aside/AsideScreen';
 import NotificationPanel from '../Notification/NotificationPanel';
 import Loading from '../../components/Loading';
 import ErrorBoundary from '../../components/ErrorBoundary';
+import { useSelector } from 'react-redux';
 
 
 const HeroScreen = () => {
+    const width = useSelector((state) => state.app.width);
     return (
-        <div className="rounded-md h-full overflow-y-auto">
-                <Suspense fallback={<Loading />}>
-                    <Routes>
-                        <Route path="/" element={<Dashboard />} />
-                        <Route path="/dashboard" element={<Dashboard />} />
+        <div className="rounded-md h-full overflow-y-auto custom-scrollbar">
+            <Suspense fallback={<Loading />}>
+                <Routes>
+                    <Route path="/" element={<Dashboard />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
 
-                        <Route path="/user-management" element={<UserManagement />}>
-                            <Route index element={<Navigate to="user-list" replace />} />
-                            <Route path="user-list" element={<UserList />} />
-                            <Route path="add-user" element={<AddUser />} />
-                            <Route path="roles-permissions" element={<RolesPermissions />} />
-                            <Route path="activity-logs" element={<ActivityLogsAny />} />
-                            <Route path="user-analytics" element={<UserAnalytics />} />
-                        </Route>
+                    <Route path="/user-management" element={<UserManagement />}>
+                        <Route index element={<Navigate to="user-list" replace />} />
+                        <Route path="user-list" element={<UserList />} />
+                        <Route path="add-user" element={<AddUser />} />
+                        <Route path="roles-permissions" element={<RolesPermissions />} />
+                        <Route path="activity-logs" element={<ActivityLogsAny />} />
+                        <Route path="user-analytics" element={<UserAnalytics />} />
+                    </Route>
 
-                        <Route path="/data-analytics" element={<DataAnalytics />} />
-                        <Route path="/reports" element={<Reports />} />
-                        <Route path="/task-automation" element={<TaskAutomation />} />
-                        <Route path="/system-settings" element={<SystemSettings />} />
-                    </Routes>
-                </Suspense>
+                    <Route path="/data-analytics" element={<DataAnalytics />} />
+                    <Route path="/reports" element={<Reports />} />
+                    <Route path="/task-automation" element={<TaskAutomation />} />
+                    <Route path="/system-settings" element={<SystemSettings />} />
+                </Routes>
+            </Suspense>
 
             {/* Global Modal */}
             <NotificationPanel />

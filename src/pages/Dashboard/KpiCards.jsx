@@ -8,7 +8,12 @@ import { MdHealthAndSafety } from "react-icons/md";
 import { TiArrowUp, TiArrowDown } from "react-icons/ti";
 import { FaHeartBroken } from "react-icons/fa";
 
+import { useSelector } from "react-redux";
+
 const KpiCards = () => {
+
+    const width = useSelector((state) => state.app.width);
+
     const totalUser = [
         { value: 10 },
         { value: 20 },
@@ -151,7 +156,10 @@ const KpiCards = () => {
         )
     }
     return (
-        <div className='rounded-md grid grid-cols-[1fr_1fr_1fr_1fr] gap-2 [&>div]:bg-surface [&>div]:rounded-md'>
+        <div className={`rounded-md grid
+        ${width >= 1200 ? "grid-cols-4" : 
+            width >= 700 ? "grid-cols-2" : "grid-cols-1"
+        } gap-2 [&>div]:bg-surface [&>div]:rounded-md`}>
 
             {kpiCards.map((kpi, index) => {
                 const Icon = kpi.icon ?? (<HandleKpiIcons
