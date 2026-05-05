@@ -754,10 +754,76 @@ export const recentAlert = [
 ]
 
 // for Reports.jsx
-export const reportsData = [
+export const reportType = [
+    {
+        title: "All Types",
+        textCol: "text-gray-500",
+        bgCol: "bg-gray-500/10"
+    },
     {
         title: "PDF",
         textCol: "text-red-500",
         bgCol: "bg-red-500/10",
+    },
+    {
+        title: "XLS",
+        textCol: "text-green-500",
+        bgCol: "bg-green-500/10"
+    },
+    {
+        title: "CSV",
+        textCol: "text-cyan-500",
+        bgCol: "bg-cyan-500/10"
+    },
+    {
+        title: "JSON",
+        textCol: "text-purple-500",
+        bgCol: "bg-purple-500/10"
+    }
+]
+
+export const statusType = [
+    {
+        title: "All Status",
+        textCol: "text-gray-500",
+        bgCol: "bg-gray-500/10"
+    },
+    {
+        title: "Done",
+        textCol: "text-green-500",
+        bgCol: "bg-green-500/10"
+    },
+    {
+        title: "Running",
+        textCol: "text-cyan-500",
+        bgCol: "bg-cyan-500/10"
+    },
+    {
+        title: "Scheduled",
+        textCol: "text-purple-500",
+        bgCol: "bg-purple-500/10"
+    },
+    {
+        title: "Pending",
+        textCol: "text-orange-500",
+        bgCol: "bg-orange-500/10"
+    }
+]
+
+export const lastDay = [
+    {
+        title: "Last 30 days",
+        textCol: "text-gray-500",
+        bgCol: ""
+    },
+    {
+        title: "Last 15 days",
+        textCol: "text-cyan-500",
+        bgCol: ""
+    },
+    {
+        title: "Last 7 days",
+        textCol: "text-purple-500",
+        bgCol: ""
     }
 ]
