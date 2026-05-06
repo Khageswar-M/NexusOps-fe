@@ -4,8 +4,11 @@ import Arrow from '../../assets/ArrowUpDown.svg?react';
 import CustomizedMenu from "../../components/UserManagementCmp/CustomizedMenu";
 import DropDown from "../../components/DropDown";
 import { reportType, statusType, lastDay } from "../../config/RawData";
+import OnlineTag from "../../components/OnlineTag";
 import Download from '../../assets/Download.svg?react';
 import Plus from '../../assets/Plus.svg?react';
+import ArrowPrevNext from '../../assets/Arrow.svg?react';
+import CheckIcon from '../../assets/Check.svg?react';
 // redux
 import { useDispatch } from "react-redux";
 import { setTitle } from "../../redux/appSlice";
@@ -20,9 +23,11 @@ const Reports = () => {
   const [rolesAnchorE1, setRolesAnchorE1] = useState(null);
   const rolesOpen = Boolean(rolesAnchorE1);
 
+  const [checkAll, setCheckAll] = useState(true);
+
   return (
     <div
-      className="bg-surface h-full border border-border"
+      className="bg-surface h-full border border-border overflow-hidden"
     >
       {/* ROW ONE */}
       <div className="border-b border-border flex flex-row items-center p-2 w-full gap-2 overflow-y-auto">
@@ -71,10 +76,65 @@ const Reports = () => {
       </div>
 
       {/* ROW TWO */}
-      <div className="border-b border-border">2</div>
+      <div className="border-b border-border px-2 py-0.5 flex items-center justify-between">
+        <div className="flex flex-row items-center gap-2">
+          <OnlineTag diameter={8} bgColor={"cyan"}/>
+          <div className="text-text-muted">All Reports</div>
+        </div>
+
+        <div className="flex flex-row items-center gap-3">
+          <div className="text-sm text-red-500 bg-red-500/10 px-2 rounded-full font-bold">
+            32 failed
+          </div>
+          <div className="text-white text-sm">
+            Showing 8 of 435
+          </div>
+        </div>
+      </div>
 
       {/* ROW THREE */}
-      <div className="">3</div>
+      <div className="h-full flex flex-col">
+        {/* TABLE */}
+        <div className="h-[80%]">
+          {/* TABLE ROW */}
+          <div className="grid grid-rows-1 grid-cols-[0.5fr_2fr_1fr_1fr_1fr_1fr_1.5fr_1.5fr_2fr] border-b border-border p-1">
+            {
+              [
+                '', 
+                'REPORT NAME', 
+                'TYPE', 
+                'STATUS', 
+                'RECORDS', 
+                'SIZE', 
+                'OWNER', 
+                'GENERATED', 
+                'ACTIONS'
+              ].map((item, i) => (
+                  item === '' ? (
+                    <div className={`h-4 w-4  ${checkAll ? "bg-cyan-500" : "bg-gray-800"} m-auto rounded-sm cursor-pointer flex items-center justify-center`}
+                      onClick={() => setCheckAll(prev => !prev)}
+                    >
+                      {
+                        checkAll && <CheckIcon className="w-5 h-5 text-gray-800"/> 
+                      }
+                    </div>
+                  ) : (
+                    <div className={`text-sm text-text-muted px-2`}>{item}</div>
+                  )
+              ))
+            }
+          </div>
+          {/* TABLE COL */}
+        </div>
+
+        {/* INDEXING */}
+        <div className="flex flex-row items-center border-t border-border">
+          <div className="flex flex-row items-center gap-2 justify-end w-full text-text-muted [&>div]:bg-surface-2 [&>div]:px-2 [&>div]:rounded-md px-2 ">
+            <div className="flex flex-row"><ArrowPrevNext className="rotate-180"/>Prev</div>
+            <div className="flex flex-row">Next <ArrowPrevNext/></div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
