@@ -807,6 +807,11 @@ export const statusType = [
         title: "Pending",
         textCol: "text-orange-500",
         bgCol: "bg-orange-500/10"
+    },
+    {
+        title: "Failed",
+        textCol: "text-red-500",
+        bgCol: "bg-red-500/10"
     }
 ]
 
@@ -826,4 +831,87 @@ export const lastDay = [
         textCol: "text-purple-500",
         bgCol: ""
     }
+]
+
+export const allReportsData = [
+    {
+        title: "Q2 Sales Summary",
+        source: "sales.pdf",
+        type: "pdf",
+        status: "done",
+        records: 2342,
+        size: "4.3MB",
+        owner: "J. Smith",
+        generated: "Apr 23 10:42"
+    },
+    {
+        title: "User Engagement Apr",
+        source: "engagement.xls",
+        type: "xls",
+        status: "running",
+        records: 2342,
+        size: "-",
+        owner: "A. Davis",
+        generated: "Apr 23 10:42"
+    },
+    {
+        title: "Infra Health Check",
+        source: "infra.cvs",
+        type: "csv",
+        status: "done",
+        records: 2342,
+        size: "890 KB",
+        owner: "W. Wilson",
+        generated: "Apr 23 10:42"
+    },
+    {
+        title: "Anomaly Detection",
+        source: "anomaly.json",
+        type: "json",
+        status: "failed",
+        records: 2342,
+        size: "890 KB",
+        owner: "S. Green",
+        generated: "Apr 23 10:42"
+    },
+    {
+        title: "Revenue Forecast May",
+        source: "forecast.pdf",
+        type: "pdf",
+        status: "scheduled",
+        records: 2342,
+        size: "-",
+        owner: "K. White",
+        generated: "Apr 23 10:42"
+    },
+    {
+        title: "Monthly KPI dashboard",
+        source: "kpi.xls",
+        type: "xls",
+        status: "done",
+        records: 2342,
+        size: "6 MB",
+        owner: "M. Brown",
+        generated: "Apr 23 10:42"
+    },
+    {
+        title: "Security Audit Log",
+        source: "security.csv",
+        type: "csv",
+        status: "done",
+        records: 2342,
+        size: "6 MB",
+        owner: "J. Lewis",
+        generated: "Apr 23 10:42"
+    },
+    {
+        title: "Inventory Snapshot",
+        source: "inventory.csv",
+        type: "csv",
+        status: "pending",
+        records: 2342,
+        size: "6 MB",
+        owner: "J. Lewis",
+        generated: "Apr 23 10:42"
+    },
 ]
