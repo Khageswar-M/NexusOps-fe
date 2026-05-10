@@ -10,8 +10,10 @@ import Plus from '../../assets/Plus.svg?react';
 import ArrowPrevNext from '../../assets/Arrow.svg?react';
 import CheckIcon from '../../assets/Check.svg?react';
 import ViewBtn from "../../components/ViewBtn";
+import FilterIcon from '../../assets/Filter.svg?react';
+import CustomModal from "../../components/CustomModal";
 // redux
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setTitle } from "../../redux/appSlice";
 import RetryBtn from "../../components/RetryBtn";
 import DLBtn from "../../components/DLBtn";
@@ -25,6 +27,13 @@ const Reports = () => {
     dispatch(setTitle(["Reports"]));
   }, [dispatch]);
 
+  const width = useSelector((state) => state.app.width);
+  const [openFilter, setOpenFilter] = useState(false);
+  useEffect(() => {
+    if (width <= 1400) {
+      setOpenFilter(false);
+    }
+  }, [width]);
   const [rolesAnchorE1, setRolesAnchorE1] = useState(null);
   const rolesOpen = Boolean(rolesAnchorE1);
 
@@ -40,7 +49,7 @@ const Reports = () => {
 
   const Status = ({ item }) => {
     return (
-      <div className={`flex flex-row items-center gap-2 ${item.bgCol} px-2 w-fit rounded-full`}> 
+      <div className={`flex flex-row items-center gap-2 ${item.bgCol} px-2 w-fit rounded-full`}>
         <OnlineTag
           diameter={7}
           bgColor={
@@ -76,23 +85,35 @@ const Reports = () => {
           </div>
         </div>
 
-        <div className="flex flex-row items-center">
-          {/* ALL TYPES */}
-          <div className=" relative flex items-center">
-            <DropDown items={reportType} />
-          </div>
+        {
+          width >= 1400 ? (
+            <>
+              <div className="flex flex-row items-center">
+                {/* ALL TYPES */}
+                <div className=" relative flex items-center">
+                  <DropDown items={reportType} />
+                </div>
 
-          {/* ALL STATUS */}
-          <div className="w-fit relative flex items-center">
-            <DropDown items={statusType} />
-          </div>
+                {/* ALL STATUS */}
+                <div className="w-fit relative flex items-center">
+                  <DropDown items={statusType} />
+                </div>
 
-          {/* LAST DAYS */}
-          <div className="w-fit relative flex items-center">
-            <DropDown items={lastDay} />
-          </div>
-        </div>
-
+                {/* LAST DAYS */}
+                <div className="w-fit relative flex items-center">
+                  <DropDown items={lastDay} />
+                </div>
+              </div>
+            </>
+          ) : (
+            <div
+              className="text-text-muted hover:text-cyan-500 cursor-pointer bg-surface-2 p-1 rounded-md border border-border"
+              onClick={() => setOpenFilter(true)}
+            >
+              <FilterIcon className="h-5 w-5" />
+            </div>
+          )
+        }
 
         {/* EXPORT */}
         <div className="flex flex-row items-center gap-2 bg-surface-2 border border-border px-3 rounded-md py-0.5 text-white">
@@ -105,6 +126,7 @@ const Reports = () => {
           <Plus />
           <div className="text-[1rem] font-bold">New Report</div>
         </div>
+
 
       </div>
 
@@ -126,9 +148,19 @@ const Reports = () => {
       </div>
 
       {/* ROW THREE */}
-      <div className="h-full grid grid-rows-[5fr_1.5fr] grid-cols-1">
+      <div
+        className={`h-full grid grid-rows-[5fr_1.5fr] grid-cols-1 ${width <= 1200 ? "w-full overflow-auto" : ""
+          }`}
+      >
+
         {/* TABLE */}
-        <div className="grid grid-rows-[1fr_15fr] overflow-hidden">
+
+        <div
+          className={`grid grid-rows-[1fr_15fr] ${width <= 1200
+              ? "min-w-300 min-h-175"
+              : ""
+            }`}
+        >
           {/* TABLE ROW */}
           <div className="grid grid-rows-1 grid-cols-[0.5fr_2fr_1fr_1fr_1fr_1fr_1.5fr_1.5fr_2fr] border-b border-border p-1 items-center">
             {
@@ -243,13 +275,13 @@ const Reports = () => {
                       <DeleteBtn/> */}
                       {
                         report.status === "done" ? <>
-                          <ViewBtn/> <DLBtn/>
-                        </> : 
-                        report.status === "running" ? <><ViewBtn/></> : 
-                        report.status === "failed" ? <><RetryBtn/></> : 
-                        report.status === "pending" || "scheduled"? <><EditBtn/></> : ""
+                          <ViewBtn /> <DLBtn />
+                        </> :
+                          report.status === "running" ? <><ViewBtn /></> :
+                            report.status === "failed" ? <><RetryBtn /></> :
+                              report.status === "pending" || "scheduled" ? <><EditBtn /></> : "0"
                       }
-                      <DeleteBtn/>
+                      <DeleteBtn />
                     </div>
                   </div>
                 )
@@ -257,17 +289,53 @@ const Reports = () => {
             }
           </div>
         </div>
-
-        {/* INDEXING */}
-        <div className="flex flex-row items-center justify-center border-t border-border p-1 h-fit">
-          <div className="flex flex-row items-center gap-2 [&>div]:flex [&>div]:flex-row [&>div]:items-center [&>div]:bg-surface-2 [&>div]:px-2 [&>div]:rounded-md [&>div]:border [&>div]:border-border [&>div]:text-[0.7rem] [&>div]:text-text-muted">
-            <div className=""><ArrowPrevNext className="rotate-180" />Prev</div>
-            <div className="">Next <ArrowPrevNext /></div>
-          </div>
-        </div>
       </div>
+
+      {
+        openFilter &&
+        <CustomModal open={openFilter}>
+          <div
+            className="w-full h-full flex items-center justify-center text-white"
+          >
+            <div className="flex flex-col bg-surface-2 p-3 rounded-md border border-border">
+              {/* ALL TYPES */}
+              <div className=" relative flex flex-row items-center">
+                <div>Types: </div>
+                <DropDown items={reportType} />
+              </div>
+
+              {/* ALL STATUS */}
+              <div className=" relative flex flex-row items-center">
+                <div>Status: </div>
+                <DropDown items={statusType} />
+              </div>
+
+              {/* LAST DAYS */}
+              <div className=" relative flex flex-row items-center">
+                <div>Last Day: </div>
+                <DropDown items={lastDay} />
+              </div>
+
+              <div className="flex flex-row items-center justify-between [&>div]:text-sm [&>div]:font-bold [&>div]:border [&>div]:border-border [&>div]:px-2 [&>div]:py-1 [&>div]:rounded-md [&>div]:flex [&>div]:items-center [&>div]:justify-center [&>div]:text-white cursor-pointer">
+                <div
+                  className="bg-red-500"
+                  onClick={() => setOpenFilter(false)}
+                >
+                  Cancel
+                </div>
+                <div
+                  className="bg-green-500"
+                  onClick={() => setOpenFilter(false)}
+                >
+                  Done
+                </div>
+              </div>
+            </div>
+          </div>
+        </CustomModal>
+      }
     </div>
   )
 }
 
-export default Reports
+export default Reports;

@@ -19,7 +19,6 @@ export default function DropDown({ items }) {
     };
 
     const [currentItem, setCurrentItem] = useState(items[0]);
-    console.log(currentItem);
 
     return (
         <div className='w-fit'>
