@@ -915,3 +915,23 @@ export const allReportsData = [
         generated: "Apr 23 10:42"
     },
 ]
+
+// For TaskAutomation.jsx
+
+export const frequencyType = [
+    {
+        title: "All Frequency"
+    },
+    {
+        title: "Hourly"
+    },
+    {
+        title: "Daily"
+    },
+    {
+        title: "Weekly"
+    },
+    {
+        title: "Monthly"
+    }
+]

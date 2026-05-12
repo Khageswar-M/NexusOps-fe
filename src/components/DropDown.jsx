@@ -27,7 +27,7 @@ export default function DropDown({ items }) {
                 fullWidth
             >
                 <div className="flex items-center justify-between w-full bg-surface-2 px-2 rounded-md border border-border py-0.5">
-                    <div className={`${currentItem.textCol} px-3 text-[0.8rem] font-bold rounded-md w-full`}>
+                    <div className={`${currentItem.textCol ? currentItem.textCol : "text-gray-500"} px-3 text-[0.8rem] font-bold rounded-md w-full`}>
                         {currentItem.title}
                     </div>
 
@@ -60,7 +60,7 @@ export default function DropDown({ items }) {
                                 key={i}
                                 className='w-full'
                             >
-                                <div className={`${item.textCol} ${item.bgCol} w-it px-3 rounded-md font-bold text-[1rem]`}
+                                <div className={`${item.textCol ? item.textCol : "text-gray-500"} ${item.bgCol ? item.bgCol : "bg-gray-700"} w-it px-3 rounded-md font-bold text-[1rem]`}
                                     onClick={() => setCurrentItem(item)}
                                 >
                                     {item.title}
