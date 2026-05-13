@@ -4,6 +4,7 @@ import DropDown from "../../components/DropDown";
 import { statusType, frequencyType } from "../../config/RawData";
 import Download from '../../assets/Download.svg?react';
 import Plus from '../../assets/Plus.svg?react';
+import OnlineTag from '../../components/OnlineTag.jsx';
 
 // redux
 import { useDispatch } from "react-redux";
@@ -17,7 +18,7 @@ const TaskAutomation = () => {
   }, [dispatch]);
 
   return (
-    <div className="bg-surface h-full border border-border rounded-md grid grid-rows-[1fr_1fr_10fr]">
+    <div className="bg-surface h-full border border-border rounded-md grid grid-rows-[1fr_0.8fr_10fr]">
       {/* ROW ONE */}
       <div className="border-b border-border flex flex-row items-center px-2 gap-2">
         {/* SEARCH */}
@@ -54,7 +55,16 @@ const TaskAutomation = () => {
       </div>
 
       {/* ROW TWO */}
-      <div className="border-b border-border">2</div>
+      <div className="border-b border-border flex flex-row items-center justify-between px-2">
+        <div className="flex flex-row items-center gap-1">
+          <OnlineTag diameter={7} bgColor={"cyan"}/>
+          <div className="text-text-muted text-[1rem]">Task List</div>
+        </div>
+        <div className="flex flex-row items-center gap-2">
+          <div className="text-sm font-bold text-red-500 bg-red-500/10 px-3 rounded-full">8 failed</div>
+          <div className="text-sm text-text-muted">Showing <strong className="text-white">7</strong> of 128</div>
+        </div>
+      </div>
 
       {/* ROW THREE */}
       <div>3</div>
