@@ -54,7 +54,7 @@ const TaskAutomation = () => {
         </div>
       </div>
 
-      {/* ROW TWO */}
+      {/* ROW TWO */} 
       <div className="border-b border-border flex flex-row items-center justify-between px-2">
         <div className="flex flex-row items-center gap-1">
           <OnlineTag diameter={7} bgColor={"cyan"}/>
