@@ -5,6 +5,10 @@ import { statusType, frequencyType } from "../../config/RawData";
 import Download from '../../assets/Download.svg?react';
 import Plus from '../../assets/Plus.svg?react';
 import OnlineTag from '../../components/OnlineTag.jsx';
+import EditBtn from '../../components/EditBtn.jsx';
+import DeleteBtn from '../../components/DeleteBtn.jsx';
+import RetryBtn from '../../components/RetryBtn.jsx';
+import TaskTable from "../../components/TaskTable.jsx";
 
 // redux
 import { useDispatch } from "react-redux";
@@ -54,10 +58,10 @@ const TaskAutomation = () => {
         </div>
       </div>
 
-      {/* ROW TWO */} 
+      {/* ROW TWO */}
       <div className="border-b border-border flex flex-row items-center justify-between px-2">
         <div className="flex flex-row items-center gap-1">
-          <OnlineTag diameter={7} bgColor={"cyan"}/>
+          <OnlineTag diameter={7} bgColor={"cyan"} />
           <div className="text-text-muted text-[1rem]">Task List</div>
         </div>
         <div className="flex flex-row items-center gap-2">
@@ -67,7 +71,9 @@ const TaskAutomation = () => {
       </div>
 
       {/* ROW THREE */}
-      <div>3</div> 
+      <div className="overflow-hidden">
+        <TaskTable/>
+      </div>
     </div>
   )
 }
