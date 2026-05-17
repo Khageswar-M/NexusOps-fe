@@ -71,7 +71,7 @@ const TaskAutomation = () => {
       </div>
 
       {/* ROW THREE */}
-      <div className="overflow-hidden">
+      <div className="">
         <TaskTable/>
       </div>
     </div>

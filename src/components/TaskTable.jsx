@@ -114,7 +114,7 @@ export default function TaskTable({ tasks = SAMPLE_TASKS }) {
   };
 
   return (
-    <div className="w-full  border border-white/10  overflow-hidden">
+    <div className="w-full bg-surface  border border-white/10  overflow-hidden">
 
       {/* Horizontal scroll wrapper — kicks in below ~780px */}
       <div className="w-full overflow-x-auto">
