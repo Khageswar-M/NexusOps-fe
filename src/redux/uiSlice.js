@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     isNotificationOpen: false,
-    openSidebar: false
+    openSidebar: false,
+    openSettingsSubBar: false,
 };
 
 const uiSlice = createSlice({
@@ -17,6 +18,9 @@ const uiSlice = createSlice({
         },
         setOpenSidebar: (state, action) => {
             state.openSidebar = action.payload;
+        },
+        setOpenSettingsSubBar: (state, action) => {
+            state.openSettingsSubBar = action.payload;
         }
     }
 });
@@ -24,7 +28,8 @@ const uiSlice = createSlice({
 export const {
     toggleNotification,
     setNotification,
-    setOpenSidebar
+    setOpenSidebar,
+    setOpenSettingsSubBar
 } = uiSlice.actions;
 
 export default uiSlice.reducer;
