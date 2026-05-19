@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     title: ["Dashboard"],
-    width: window.innerWidth
+    width: window.innerWidth,
 };
 
 const appSlice = createSlice({
@@ -20,10 +20,10 @@ const appSlice = createSlice({
         },
         setScreenWidth: (state, action) => {
             state.width = action.payload;
-        }
+        },
     }
 });
 
-export const {setTitle, pushTitle, cleanTitle, setScreenWidth} = appSlice.actions;
+export const {setTitle, pushTitle, cleanTitle, setScreenWidth, toggleTheme} = appSlice.actions;
 
 export default appSlice.reducer;

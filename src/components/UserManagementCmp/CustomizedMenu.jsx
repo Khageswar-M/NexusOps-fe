@@ -86,7 +86,7 @@ const CustomizedMenu = ({ items, handleClick, anchorEl, open, handleClose, setIs
     }
 
     return (
-        <div className=' h-full w-full absolute flex items-center'>
+        <div className=' h-full w-full flex items-center'>
             <div
                 id="demo-customized-button"
                 aria-controls={open ? 'demo-customized-menu' : undefined}

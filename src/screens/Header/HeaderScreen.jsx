@@ -9,8 +9,9 @@ import AppLogo from '../../../public/nexus_ops_logo.png';
 
 // redux
 import { useSelector, useDispatch } from "react-redux";
-import { setNotification } from "../../redux/uiSlice";
 import { setOpenSidebar } from "../../redux/uiSlice";
+import { setNotification,  } from "../../redux/uiSlice";
+import { useEffect } from "react";
 
 const HeaderScreen = () => {
 
@@ -18,6 +19,8 @@ const HeaderScreen = () => {
     const title = useSelector((state) => state.app.title);
     const width = useSelector((state) => state.app.width);
     const sidebar = useSelector((state) => state.ui.openSidebar);
+
+    
 
     return (
         <div className={`bg-surface h-17 rounded-md flex flex-row items-center justify-between px-2 gap-2 border border-border w-full`}>
@@ -99,6 +102,7 @@ const HeaderScreen = () => {
                         <SearchIcon className="h-7 w-7 text-text-muted hover:text-cyan-500" />
                     </button>
                 </CustomToolTip>
+
 
                 {/* FOR GITHUB */}
                 <CustomToolTip title={"See code-base"}>

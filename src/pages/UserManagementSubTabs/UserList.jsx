@@ -1,6 +1,5 @@
-import React, {  useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import OnlineTag from '../../components/OnlineTag.jsx';
-import { FaCheck as Check } from "react-icons/fa";
 import { FaEye as Eye } from "react-icons/fa";
 import { RiPencilFill as Pen } from "react-icons/ri";
 import { BsFillTrash3Fill as Trash } from "react-icons/bs";
@@ -8,11 +7,19 @@ import { MdOutlinePlaylistRemove as EmptyList } from "react-icons/md";
 import { rolesItem, statusItem } from '../../config/RawData.js';
 
 // redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setTitle } from '../../redux/appSlice.js';
 
-const UserList = () => {
+const size = 10;
 
+const HandleActivity = ({ item }) => (
+  <div className={`py-0.5 inline-flex items-center gap-2 px-3 rounded-full border ${item.borderCol} ${item.textCol} ${item.bgCol} whitespace-nowrap`}>
+    <OnlineTag diameter={8} bgColor={item.color} />
+    <span className='text-[10px]'>{item.title}</span>
+  </div>
+);
+
+const UserList = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setTitle(["User Management", "User List"]));
@@ -20,171 +27,225 @@ const UserList = () => {
 
   const [checkedUser, setCheckedUser] = useState({});
   const totalChecked = Object.values(checkedUser).filter(Boolean).length;
-  const size = 10;
+  const allChecked = size > 0 && totalChecked === size;
+  const indeterminate = totalChecked > 0 && totalChecked < size;
+  const width = useSelector((state) => state.ui.width);
 
+  const handleCheckAll = (e) => {
+    if (e.target.checked) {
+      const all = {};
+      Array.from({ length: size }).forEach((_, i) => { all[i] = true; });
+      setCheckedUser(all);
+    } else {
+      setCheckedUser({});
+    }
+  };
 
-  const HandleActivity = ({ item }) => {
-    return (
-      <div className={`py-0.5 flex items-center gap-2 px-3 rounded-full border ${item.borderCol} ${item.textCol} ${item.bgCol}`}>
-        <OnlineTag diameter={8} bgColor={item.color} />
-        <span className='text-[10px]'>{item.title}</span>
-      </div>
-    )
-  }
+  const handleRowCheck = (index, e) => {
+    setCheckedUser(prev => ({ ...prev, [index]: e.target.checked }));
+  };
 
-  const CheckBox = ({ checked, onToggle }) => {
-    return (
-      <div
-        onClick={onToggle}
-        className={`${checked ? "bg-cyan-300" : "bg-surface-3"} border border-border h-3 w-3 rounded-xs cursor-pointer flex items-center justify-center font-bold  text-gray-800`}>
-        {
-          checked ? (<Check className='text-[12px] font-bold' />) : ("")
-        }
-      </div>
-    )
-  }
+  // Shared checkbox style injected once
+  const checkboxClass = `
+    appearance-none w-3.5 h-3.5 rounded-sm border border-border bg-surface-3
+    checked:bg-cyan-300 checked:border-cyan-300
+    indeterminate:bg-cyan-300/50 indeterminate:border-cyan-300
+    cursor-pointer relative flex-shrink-0
+    after:content-[''] after:absolute after:hidden
+    checked:after:block
+    after:left-[3px] after:top-[0px] after:w-[4px] after:h-[7px]
+    after:border-r-2 after:border-b-2 after:border-gray-900 after:rotate-45
+    focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-1 focus:ring-offset-surface
+    transition-colors duration-150
+  `.replace(/\s+/g, ' ').trim();
 
   return (
-    <div className='bg-surface h-full w-full'>
-      <div className='overflow-hidden grid grid-rows-[1fr_1fr_15fr] h-full border border-border'>
-        <div className='bg-surface-3 text-white flex flex-row items-center justify-between px-4 text-[14px] py-1' >
+    <div className='bg-surface h-full w-full overflow-hidden'>
+      <div className='h-full border border-border flex flex-col overflow-hidden'>
+
+        {/* ── Meta bar ── */}
+        <div className='bg-surface-3 text-white flex flex-row items-center justify-between px-4 text-[14px] py-1.5 shrink-0'>
           <div className='flex items-center gap-2'>
-            <OnlineTag diameter={8} bgColor={"blue"} />
-            <div>All Users</div>
+            <OnlineTag diameter={8} bgColor="blue" />
+            <span>All Users</span>
           </div>
-          <div className='flex flex-row items-center justify-between gap-3'>
-            {
-              totalChecked > 0 && (
-                <div className='text-orange-500 bg-orange-300/10 border border-orange-400 px-3 rounded-full'>
-                  <span className='font-bold'>{`${totalChecked} Selected`}</span>
-                </div>
-              )
-            }
-
-            <div className='flex flex-row items-center gap-2 font-bold'>
-              <div className='text-red-500 hover:bg-red-500/20 px-2 rounded-full cursor-pointer'>Delete</div>
-              <div className='text-cyan-500 hover:bg-cyan-500/20 px-2 rounded-full cursor-pointer'>Export</div>
+          <div className='flex flex-row items-center gap-3'>
+            {totalChecked > 0 && (
+              <span className='text-orange-500 bg-orange-300/10 border border-orange-400 px-3 rounded-full text-xs font-bold'>
+                {totalChecked} Selected
+              </span>
+            )}
+            <div className='flex flex-row items-center gap-2 font-bold text-sm'>
+              <button className='text-red-500 hover:bg-red-500/20 px-2 py-0.5 rounded-full cursor-pointer transition-colors'>
+                Delete
+              </button>
+              <button className='text-cyan-500 hover:bg-cyan-500/20 px-2 py-0.5 rounded-full cursor-pointer transition-colors'>
+                Export
+              </button>
             </div>
-            <div>
-              <span className='text-text-muted '>Showing</span> 7 <span className='text-text-muted'>of 1200 users</span>
+            <div className='text-sm'>
+              <span className='text-text-muted'>Showing</span> 7 <span className='text-text-muted'>of 1200 users</span>
             </div>
           </div>
         </div>
 
-        <div id='user-table-head' className=' grid grid-cols-[0.5fr_2fr_3fr_1fr_1fr_1fr_2fr] gap-1 text-white text-[11px] bg-surface-2 items-center py-1 font-bold'>
-          <div className='w-full h-full flex items-center justify-center'>
-            <CheckBox checked={totalChecked > 0 ? true : false} />
-          </div>
-          <div>User</div>
-          <div>EMAIL</div>
-          <div>ROLE</div>
-          <div>STATUS</div>
-          <div>LAST ACTIVE</div>
-          <div className='text-center'>ACTIONS</div>
-        </div>
+        {/* ── Table area ── */}
+        {size > 0 ? (
+          <div className={`
+      flex-1
+      overflow-x-auto
+      overflow-y-auto
+      custom-scrollbar
+      border
+      border-border
+      rounded-lg
+      
+    `}>
+            <table className="
+        border-collapse
+        text-white
+        min-w-250
+        w-full
+      "
+            >
 
-        {
-          size > 0 ?
-            (
-              <div className='overflow-hidden  relative h-full'>
-                <div className='overflow-y-auto custom-scrollbar absolute w-full h-full'>
-                  {
+              {/* thead */}
+              <thead className='sticky top-0 z-10 bg-surface-2'>
+                <tr>
+                  {/* Checkbox */}
+                  <th className='w-10 px-4 py-2 text-center'>
+                    <input
+                      type='checkbox'
+                      className={checkboxClass}
+                      checked={allChecked}
+                      ref={el => { if (el) el.indeterminate = indeterminate; }}
+                      onChange={handleCheckAll}
+                      aria-label='Select all users'
+                    />
+                  </th>
+                  {['USER', 'EMAIL', 'ROLE', 'STATUS', 'LAST ACTIVE', 'ACTIONS'].map(col => (
+                    <th
+                      key={col}
+                      className={`px-3 py-2 text-left text-[11px] font-bold text-text-muted tracking-wide uppercase whitespace-nowrap ${col === 'ACTIONS' ? 'text-center' : ''}`}
+                    >
+                      {col}
+                    </th>
+                  ))}
+                </tr>
+                {/* subtle bottom border line */}
+                <tr><td colSpan={8} className='h-px bg-border p-0' /></tr>
+              </thead>
 
-                    Array.from({ length: size }).map((_, index) => {
-                      return (
-                        <div key={index} id='user-table-body' className=' grid grid-cols-[0.5fr_2fr_3fr_1fr_1fr_1fr_2fr] gap-1 text-white text-[11px] bg-transparent py-3 items-center border-b border-border'>
+              {/* tbody */}
+              <tbody>
+                {Array.from({ length: size }).map((_, index) => {
+                  const isChecked = checkedUser[index] || false;
+                  return (
+                    <tr
+                      key={index}
+                      className={`border-b border-border transition-colors duration-100 ${isChecked ? 'bg-cyan-500/5' : 'hover:bg-surface-2/60'}`}
+                    >
+                      {/* Checkbox */}
+                      <td className='w-10 px-4 py-3 text-center'>
+                        <input
+                          type='checkbox'
+                          className={checkboxClass}
+                          checked={isChecked}
+                          onChange={(e) => handleRowCheck(index, e)}
+                          aria-label={`Select user ${index + 1}`}
+                        />
+                      </td>
 
-                          {/* CHECK BOX */}
-                          <div className='w-full h-full flex items-center justify-center'>
-                            <CheckBox
-                              checked={checkedUser[index] || false}
-                              onToggle={() => setCheckedUser(prev => ({
-                                ...prev,
-                                [index]: !prev[index]
-                              }))}
-                            />
+                      {/* User */}
+                      <td className='px-3 py-3 min-w-40'>
+                        <div className='flex flex-row items-center gap-2'>
+                          <div className='shrink-0 flex items-center justify-center bg-linear-to-br from-blue-400 to-orange-500 w-9 h-9 rounded-full text-[13px] font-bold'>
+                            JS
                           </div>
-
-                          {/* USER CREDENTIAL CONTAINER */}
-                          <div className='flex flex-row items-center gap-2'>
-
-                            {/* USER DP */}
-                            <div className='flex items-center justify-center bg-linear-to-br from-blue-400  to-orange-500  w-12 h-12 rounded-full text-[15px] font-bold'>
-                              JS
-                            </div>
-
-                            {/* USER NAME AND JOINED DATE */}
-                            <div className='flex flex-col'>
-                              <div className='text-[14px] font-bold'>John Smith</div>
-                              <div className='text-text-muted text-[10px] font-semibold'>Joined Jan 15, 2024</div>
-                            </div>
-
-                          </div>
-
-                          {/* EMAIL */}
-                          <div className='text-text-muted text-[12px]'>johnsmith@gmail.com</div>
-
-                          {/* ROLES STATUS */}
-                          <div className='relative flex items-center justify-self-start w-full'>
-                            <div className="absolute">
-                              <HandleActivity item={rolesItem?.[5]} />
-                            </div>
-                          </div>
-
-                          {/* ACTIVITY STATUS */}
-                          <div className='relative flex items-center justify-self-start w-full'>
-                            <div className="absolute">
-                              <HandleActivity item={statusItem?.[3]} />
-                            </div>
-                          </div>
-
-                          {/* ACTIVE TIME */}
-                          <div className='text-text-muted text-[11px] font-bold text-center'>
-                            1 hr ago
-                          </div>
-
-                          {/* ACTIONS CONTAINER */}
-                          <div className='flex flex-row items-center justify-center'>
-                            <div className='flex flex-row items-center gap-2 [&>div]:cursor-pointer'>
-
-                              {/* VIEW */}
-                              <div className='flex flex-row items-center gap-1 bg-cyan-300/20 px-2 rounded-full border border-cyan-400 py-0.5 active:bg-cyan-300/10'>
-                                <Eye className='text-cyan-300' /> <span className='text-cyan-300'>View</span>
-                              </div>
-
-                              {/* EDIT */}
-                              <div className='flex flex-row gap-1 items-center border border-border px-2 rounded-full py-0.5 active:bg-orange-500/10'>
-                                <Pen className='text-orange-500 text-[13px]' /> <span className='text-white text-[12px]'>Edit</span>
-                              </div>
-
-                              {/* DELETE/TRASH-BIN */}
-                              <div className='border border-border px-2 rounded-full py-0.5 active:bg-red-500/10'>
-                                <Trash className='text-[15px] text-red-600' />
-                              </div>
-
-                            </div>
+                          <div className='flex flex-col min-w-0'>
+                            <span className='text-[13px] font-bold leading-tight truncate'>John Smith</span>
+                            <span className='text-text-muted text-[10px] font-semibold'>Joined Jan 15, 2024</span>
                           </div>
                         </div>
-                      )
-                    })
-                  }
-                </div>
+                      </td>
 
-              </div>
-            ) :
-            (
-              <div className='w-full h-full flex flex-col items-center justify-center '>
-                <div className='text-cyan-700 text-9xl bg-cyan-700/20 px-20 flex items-center justify-center rounded-full border-5 border-cyan-700'>
-                  <EmptyList />
-                </div>
-              </div>
-            )
-        }
+                      {/* Email */}
+                      <td className='px-3 py-3 text-text-muted text-[12px] min-w-45'>
+                        johnsmith@gmail.com
+                      </td>
 
+                      {/* Role */}
+                      <td className='px-3 py-3 min-w-25'>
+                        <HandleActivity item={rolesItem?.[5]} />
+                      </td>
+
+                      {/* Status */}
+                      <td className='px-3 py-3 min-w-25'>
+                        <HandleActivity item={statusItem?.[3]} />
+                      </td>
+
+                      {/* Last Active */}
+                      <td className='px-3 py-3 text-text-muted text-[11px] font-bold whitespace-nowrap text-center min-w-25'>
+                        1 hr ago
+                      </td>
+
+                      {/* Actions */}
+                      <td className='px-3 py-3 min-w-40'>
+                        <div className='flex flex-row items-center justify-center gap-2'>
+                          {/* View */}
+                          <button className='flex flex-row items-center gap-1 bg-cyan-300/20 px-2 rounded-full border border-cyan-400 py-0.5 hover:bg-cyan-300/30 active:bg-cyan-300/10 transition-colors cursor-pointer'>
+                            <Eye className='text-cyan-300 text-[12px]' />
+                            <span className='text-cyan-300 text-[11px]'>View</span>
+                          </button>
+
+                          {/* Edit */}
+                          <button className='flex flex-row gap-1 items-center border border-border px-2 rounded-full py-0.5 hover:bg-orange-500/10 active:bg-orange-500/20 transition-colors cursor-pointer'>
+                            <Pen className='text-orange-500 text-[12px]' />
+                            <span className='text-white text-[11px]'>Edit</span>
+                          </button>
+
+                          {/* Delete */}
+                          <button className='border border-border px-2 rounded-full py-0.5 hover:bg-red-500/10 active:bg-red-500/20 transition-colors cursor-pointer'>
+                            <Trash className='text-[13px] text-red-600' />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div className='flex-1 w-full flex flex-col items-center justify-center'>
+            <div className='text-cyan-700 text-9xl bg-cyan-700/20 px-20 flex items-center justify-center rounded-full border-[5px] border-cyan-700'>
+              <EmptyList />
+            </div>
+          </div>
+        )}
+
+        {/* ── Pagination ── */}
+        {size > 0 && (
+          <div className='border-t border-border px-4 py-2 flex items-center justify-between shrink-0 bg-surface-3'>
+            <span className='text-text-muted text-xs'>Page 1 of 120</span>
+            <div className='flex items-center gap-1'>
+              {['«', '‹', '1', '2', '3', '›', '»'].map((p, i) => (
+                <button
+                  key={i}
+                  className={`text-xs px-2.5 py-1 rounded border transition-colors ${p === '1'
+                    ? 'bg-cyan-500 text-gray-900 font-bold border-cyan-500'
+                    : 'text-text-muted hover:text-white hover:border-cyan-500 border-border bg-transparent'}`}
+                >
+                  {p}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default UserList; 
+export default UserList;

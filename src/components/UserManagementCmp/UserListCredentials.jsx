@@ -32,7 +32,7 @@ const UserListCredentials = () => {
                 {/* All Roles */}
                 <div
                     id='all-roles'
-                    className="flex flex-row items-center justify-between px-2 h-7 bg-surface-2 border border-border"
+                    className="flex shrink-0  flex-row items-center justify-between px-2 h-7 bg-surface-2 border border-border"
                     onClick={(e) => {
                         if(rolesAnchorE1){
                             setRolesAnchorE1(null)
@@ -41,7 +41,7 @@ const UserListCredentials = () => {
                         }
                     }}
                 >
-                    <div className='relative w-full flex items-center text-center'>
+                    <div className='relative shrink-0  w-40 flex items-center text-center'>
                         <CustomizedMenu
                             items={rolesItem}
                             anchorEl={rolesAnchorE1}
@@ -63,7 +63,7 @@ const UserListCredentials = () => {
                 {/* All Status */}
                 <div
                     id='all-status'
-                    className="flex flex-row items-center bg-surface-2 border border-border px-2"
+                    className="flex flex-row items-center shrink-0 w-40 bg-surface-2 border border-border px-2"
                     onClick={(e) => {
                         if(statusAnchorE1){
                             setStatusAnchorE1(null)
@@ -92,7 +92,7 @@ const UserListCredentials = () => {
 
                 {/* Search by name */}
                 <CustomToolTip title={"Search by name"}>
-                    <div id='search-by-name' className='text-white px-1'>
+                    <div id='search-by-name' className='text-white px-1 w-40'>
                         <div className="w-full h-full relative flex flex-row items-center border        border-border focus-within:border-cyan-300 rounded-md transition-colors duration-400"
                         >
 
@@ -110,7 +110,7 @@ const UserListCredentials = () => {
 
                 {/* Export */}
                 <CustomToolTip title={"Export"}>
-                    <div id='export' className='flex items-center justify-center '>
+                    <div id='export' className='flex items-center justify-center w-20'>
 
                         <button
                             onClick={handleOpen}
