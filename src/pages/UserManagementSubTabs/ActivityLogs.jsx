@@ -10,7 +10,7 @@ import OnlineTag from "../../components/OnlineTag.jsx";
 import useInitials from "../../hooks/useInitials.js";
 
 // redux
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setTitle } from "../../redux/appSlice.js";
 
 const checkboxClass = [
@@ -32,6 +32,7 @@ const ActivityLogs = () => {
     dispatch(setTitle(["User Management", "Activity Logs"]));
   }, [dispatch]);
 
+  const width = useSelector((state) => state.app.width);
   const [rolesAnchorE1, setRolesAnchorE1] = useState(null);
   const rolesOpen = Boolean(rolesAnchorE1);
 
@@ -60,7 +61,7 @@ const ActivityLogs = () => {
       <div className="flex flex-col overflow-hidden border border-border">
 
         {/* Toolbar */}
-        <div className="grid p-2 grid-cols-[2fr_1.5fr_2fr_1fr_1fr] gap-1 border-b border-border flex-shrink-0">
+        <div className="grid p-2 grid-cols-[2fr_1.5fr_2fr_1fr_1fr] gap-1 border-b border-border shrink-0">
 
           {/* Search input */}
           <div className="flex items-center">
@@ -128,7 +129,7 @@ const ActivityLogs = () => {
         </div>
 
         {/* Meta bar */}
-        <div className="border-b border-border flex flex-row items-center px-2 py-1.5 justify-between flex-shrink-0">
+        <div className="border-b border-border flex flex-row items-center px-2 py-1.5 justify-between shrink-0">
           <div className="flex flex-row items-center gap-2">
             <OnlineTag diameter={8} bgColor="cyan" />
             <span className="text-white text-[16px] font-bold">Event Logs</span>
@@ -237,7 +238,7 @@ const ActivityLogs = () => {
         </div>
 
         {/* Pagination */}
-        <div className="border-t border-border px-4 py-2 flex items-center justify-between flex-shrink-0">
+        <div className="border-t border-border px-4 py-2 flex items-center justify-between shrink-0">
           <span className="text-text-muted text-xs">Page 1 of 174</span>
           <div className="flex items-center gap-1">
             {["«", "‹", "1", "2", "3", "›", "»"].map((p, i) => (
@@ -258,7 +259,7 @@ const ActivityLogs = () => {
       <div className="border border-border flex flex-col overflow-hidden">
 
         {/* Header */}
-        <div className="flex p-2 border-b border-border justify-between items-center flex-shrink-0">
+        <div className="flex p-2 border-b border-border justify-between items-center shrink-0">
           <div className="flex flex-row items-center gap-2">
             <OnlineTag diameter={8} bgColor="blue" />
             <h2 className="text-white font-semibold">Most Active Users</h2>
@@ -279,7 +280,7 @@ const ActivityLogs = () => {
               >
                 {/* Left: avatar + name */}
                 <div className="flex items-center gap-2 min-w-0">
-                  <div className="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold bg-gradient-to-br from-purple-500 to-cyan-400 flex-shrink-0 text-sm">
+                  <div className="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold bg-linear-to-br from-purple-500 to-cyan-400 shrink-0 text-sm">
                     {initial}
                   </div>
                   <div className="min-w-0">
@@ -296,7 +297,7 @@ const ActivityLogs = () => {
                       style={{ width: `${(user.score / 300) * 100}%` }}
                     />
                   </div>
-                  <span className="text-sm text-white w-8 text-right flex-shrink-0">
+                  <span className="text-sm text-white w-8 text-right shrink-0">
                     {user.score}
                   </span>
                 </div>

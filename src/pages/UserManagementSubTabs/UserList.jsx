@@ -29,7 +29,7 @@ const UserList = () => {
   const totalChecked = Object.values(checkedUser).filter(Boolean).length;
   const allChecked = size > 0 && totalChecked === size;
   const indeterminate = totalChecked > 0 && totalChecked < size;
-  const width = useSelector((state) => state.ui.width);
+  const width = useSelector((state) => state.app.width);
 
   const handleCheckAll = (e) => {
     if (e.target.checked) {
@@ -61,10 +61,18 @@ const UserList = () => {
 
   return (
     <div className='bg-surface h-full w-full overflow-hidden'>
-      <div className='h-full border border-border flex flex-col overflow-hidden'>
+      <div className='
+        h-full
+        border
+        border-border
+        rounded-md
+        grid
+        grid-rows-[auto_1fr_auto]
+        overflow-hidden
+    '>
 
         {/* ── Meta bar ── */}
-        <div className='bg-surface-3 text-white flex flex-row items-center justify-between px-4 text-[14px] py-1.5 shrink-0'>
+        <div className='bg-surface-3 text-white flex flex-row items-center justify-between px-4 text-[14px] py-1.5 '>
           <div className='flex items-center gap-2'>
             <OnlineTag diameter={8} bgColor="blue" />
             <span>All Users</span>
@@ -91,130 +99,138 @@ const UserList = () => {
 
         {/* ── Table area ── */}
         {size > 0 ? (
-          <div className={`
-      flex-1
-      overflow-x-auto
-      overflow-y-auto
-      custom-scrollbar
-      border
-      border-border
-      rounded-lg
-      
-    `}>
-            <table className="
-        border-collapse
-        text-white
-        min-w-250
-        w-full
-      "
+          <div className='overflow-hidden min-h-0'>
+            <div
+              className={`
+            h-full
+            custom-scrollbar
+            border
+            border-border
+            rounded-lg
+            
+            ${width <= 1300
+                  ? "overflow-x-auto overflow-y-auto"
+                  : "overflow-y-auto overflow-x-auto"}
+        `}
             >
+              <table
+                className={`
+text-white
+border-collapse
 
-              {/* thead */}
-              <thead className='sticky top-0 z-10 bg-surface-2'>
-                <tr>
-                  {/* Checkbox */}
-                  <th className='w-10 px-4 py-2 text-center'>
-                    <input
-                      type='checkbox'
-                      className={checkboxClass}
-                      checked={allChecked}
-                      ref={el => { if (el) el.indeterminate = indeterminate; }}
-                      onChange={handleCheckAll}
-                      aria-label='Select all users'
-                    />
-                  </th>
-                  {['USER', 'EMAIL', 'ROLE', 'STATUS', 'LAST ACTIVE', 'ACTIONS'].map(col => (
-                    <th
-                      key={col}
-                      className={`px-3 py-2 text-left text-[11px] font-bold text-text-muted tracking-wide uppercase whitespace-nowrap ${col === 'ACTIONS' ? 'text-center' : ''}`}
-                    >
-                      {col}
+${width <= 1300
+                    ? "min-w-325"
+                    : "w-full"}
+`}
+              >
+
+                {/* thead */}
+                <thead className='sticky top-0 z-10 bg-surface-2'>
+                  <tr>
+                    {/* Checkbox */}
+                    <th className='w-10 px-4 py-2 text-center'>
+                      <input
+                        type='checkbox'
+                        className={checkboxClass}
+                        checked={allChecked}
+                        ref={el => { if (el) el.indeterminate = indeterminate; }}
+                        onChange={handleCheckAll}
+                        aria-label='Select all users'
+                      />
                     </th>
-                  ))}
-                </tr>
-                {/* subtle bottom border line */}
-                <tr><td colSpan={8} className='h-px bg-border p-0' /></tr>
-              </thead>
+                    {['USER', 'EMAIL', 'ROLE', 'STATUS', 'LAST ACTIVE', 'ACTIONS'].map(col => (
+                      <th
+                        key={col}
+                        className={`px-3 py-2 text-left text-[11px] font-bold text-text-muted  uppercase whitespace-nowrap ${col === 'ACTIONS' ? 'text-center' : ''}`}
+                      >
+                        {col}
+                      </th>
+                    ))}
+                  </tr>
+                  {/* subtle bottom border line */}
+                  <tr><td colSpan={8} className='h-px bg-border p-0' /></tr>
+                </thead>
 
-              {/* tbody */}
-              <tbody>
-                {Array.from({ length: size }).map((_, index) => {
-                  const isChecked = checkedUser[index] || false;
-                  return (
-                    <tr
-                      key={index}
-                      className={`border-b border-border transition-colors duration-100 ${isChecked ? 'bg-cyan-500/5' : 'hover:bg-surface-2/60'}`}
-                    >
-                      {/* Checkbox */}
-                      <td className='w-10 px-4 py-3 text-center'>
-                        <input
-                          type='checkbox'
-                          className={checkboxClass}
-                          checked={isChecked}
-                          onChange={(e) => handleRowCheck(index, e)}
-                          aria-label={`Select user ${index + 1}`}
-                        />
-                      </td>
+                {/* tbody */}
+                <tbody>
+                  {Array.from({ length: size }).map((_, index) => {
+                    const isChecked = checkedUser[index] || false;
+                    return (
+                      <tr
+                        key={index}
+                        className={`border-b border-border transition-colors duration-100 ${isChecked ? 'bg-cyan-500/5' : 'hover:bg-surface-2/60'}`}
+                      >
+                        {/* Checkbox */}
+                        <td className='w-10 px-4 py-3 text-center'>
+                          <input
+                            type='checkbox'
+                            className={checkboxClass}
+                            checked={isChecked}
+                            onChange={(e) => handleRowCheck(index, e)}
+                            aria-label={`Select user ${index + 1}`}
+                          />
+                        </td>
 
-                      {/* User */}
-                      <td className='px-3 py-3 min-w-40'>
-                        <div className='flex flex-row items-center gap-2'>
-                          <div className='shrink-0 flex items-center justify-center bg-linear-to-br from-blue-400 to-orange-500 w-9 h-9 rounded-full text-[13px] font-bold'>
-                            JS
+                        {/* User */}
+                        <td className='px-3 py-3 min-w-40'>
+                          <div className='flex flex-row items-center gap-2'>
+                            <div className='shrink-0 flex items-center justify-center bg-linear-to-br from-blue-400 to-orange-500 w-9 h-9 rounded-full text-[13px] font-bold'>
+                              JS
+                            </div>
+                            <div className='flex flex-col min-w-0'>
+                              <span className='text-[13px] font-bold leading-tight truncate'>John Smith</span>
+                              <span className='text-text-muted text-[10px] font-semibold'>Joined Jan 15, 2024</span>
+                            </div>
                           </div>
-                          <div className='flex flex-col min-w-0'>
-                            <span className='text-[13px] font-bold leading-tight truncate'>John Smith</span>
-                            <span className='text-text-muted text-[10px] font-semibold'>Joined Jan 15, 2024</span>
+                        </td>
+
+                        {/* Email */}
+                        <td className='px-3 py-3 text-text-muted text-[12px] min-w-45'>
+                          johnsmith@gmail.com
+                        </td>
+
+                        {/* Role */}
+                        <td className='px-3 py-3 min-w-25'>
+                          <HandleActivity item={rolesItem?.[5]} />
+                        </td>
+
+                        {/* Status */}
+                        <td className='px-3 py-3 min-w-25'>
+                          <HandleActivity item={statusItem?.[3]} />
+                        </td>
+
+                        {/* Last Active */}
+                        <td className='px-3 py-3 text-text-muted text-[11px] font-bold whitespace-nowrap text-center min-w-25'>
+                          1 hr ago
+                        </td>
+
+                        {/* Actions */}
+                        <td className='px-3 py-3 min-w-40'>
+                          <div className='flex flex-row items-center justify-center gap-2'>
+                            {/* View */}
+                            <button className='flex flex-row items-center gap-1 bg-cyan-300/20 px-2 rounded-full border border-cyan-400 py-0.5 hover:bg-cyan-300/30 active:bg-cyan-300/10 transition-colors cursor-pointer'>
+                              <Eye className='text-cyan-300 text-[12px]' />
+                              <span className='text-cyan-300 text-[11px]'>View</span>
+                            </button>
+
+                            {/* Edit */}
+                            <button className='flex flex-row gap-1 items-center border border-border px-2 rounded-full py-0.5 hover:bg-orange-500/10 active:bg-orange-500/20 transition-colors cursor-pointer'>
+                              <Pen className='text-orange-500 text-[12px]' />
+                              <span className='text-white text-[11px]'>Edit</span>
+                            </button>
+
+                            {/* Delete */}
+                            <button className='border border-border px-2 rounded-full py-0.5 hover:bg-red-500/10 active:bg-red-500/20 transition-colors cursor-pointer'>
+                              <Trash className='text-[13px] text-red-600' />
+                            </button>
                           </div>
-                        </div>
-                      </td>
-
-                      {/* Email */}
-                      <td className='px-3 py-3 text-text-muted text-[12px] min-w-45'>
-                        johnsmith@gmail.com
-                      </td>
-
-                      {/* Role */}
-                      <td className='px-3 py-3 min-w-25'>
-                        <HandleActivity item={rolesItem?.[5]} />
-                      </td>
-
-                      {/* Status */}
-                      <td className='px-3 py-3 min-w-25'>
-                        <HandleActivity item={statusItem?.[3]} />
-                      </td>
-
-                      {/* Last Active */}
-                      <td className='px-3 py-3 text-text-muted text-[11px] font-bold whitespace-nowrap text-center min-w-25'>
-                        1 hr ago
-                      </td>
-
-                      {/* Actions */}
-                      <td className='px-3 py-3 min-w-40'>
-                        <div className='flex flex-row items-center justify-center gap-2'>
-                          {/* View */}
-                          <button className='flex flex-row items-center gap-1 bg-cyan-300/20 px-2 rounded-full border border-cyan-400 py-0.5 hover:bg-cyan-300/30 active:bg-cyan-300/10 transition-colors cursor-pointer'>
-                            <Eye className='text-cyan-300 text-[12px]' />
-                            <span className='text-cyan-300 text-[11px]'>View</span>
-                          </button>
-
-                          {/* Edit */}
-                          <button className='flex flex-row gap-1 items-center border border-border px-2 rounded-full py-0.5 hover:bg-orange-500/10 active:bg-orange-500/20 transition-colors cursor-pointer'>
-                            <Pen className='text-orange-500 text-[12px]' />
-                            <span className='text-white text-[11px]'>Edit</span>
-                          </button>
-
-                          {/* Delete */}
-                          <button className='border border-border px-2 rounded-full py-0.5 hover:bg-red-500/10 active:bg-red-500/20 transition-colors cursor-pointer'>
-                            <Trash className='text-[13px] text-red-600' />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
         ) : (
           <div className='flex-1 w-full flex flex-col items-center justify-center'>

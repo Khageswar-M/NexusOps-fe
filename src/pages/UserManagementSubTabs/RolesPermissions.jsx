@@ -8,12 +8,13 @@ import { FiPlus as Plus } from "react-icons/fi";
 import { LuClock3 as Clock } from "react-icons/lu";
 
 // redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setTitle } from '../../redux/appSlice.js';
 
 const RolesPermissions = () => {
 
   const dispatch = useDispatch();
+  const width = useSelector((state) => state.app.width);
   useEffect(() => {
     dispatch(setTitle(["User Management", "Roles & Permissions"]));
   }, [dispatch]);
@@ -40,11 +41,11 @@ const RolesPermissions = () => {
   }
 
   return (
-    <div className='grid grid-cols-[5fr_1.5fr] gap-2 w-full h-full'>
-      <div className='grid grid-rows-[1fr] [&>div]:rounded-md overflow-hidden'>
+    <div className={`grid ${width > 1100 ? "grid-cols-[5fr_250px]" : width > 650 ? "grid-cols-1 grid-rows-[1fr_1fr]" : " grid-cols-1 custom-scrollbar  overflow-y-auto"}  gap-2 w-full h-full `}>
 
+      <div className={`grid w-full grid-rows-1 [&>div]:rounded-md overflow-hidden`}>
         {/* Role Distribution Header */}
-        <div className='bg-surface h-full grid grid-rows-[0.5fr_7fr] overflow-hidden'>
+        <div className={`bg-surface h-full w-full grid grid-rows-[0.5fr_7fr] overflow-hidden`}>
           <div className='px-2 p-1 flex flex-row items-center justify-between border-b border-border'>
             <HandleHeader
               Logo={<OnlineTag diameter={8} bgColor={"purple"} />}
@@ -65,11 +66,11 @@ const RolesPermissions = () => {
         </div>
       </div>
 
-      <div className='grid grid-rows-[1.5fr_1fr] gap-2 [&>div]:rounded-md overflow-hidden'>
+      <div className={`grid ${width > 1100 ? "grid-rows-[1.5fr_1fr]" : width > 650 ? "grid-rows-1 grid-cols-2" : "grid-cols-1"}  gap-2 [&>div]:rounded-md overflow-hidden w-full h-full`}>
 
-        <div className='bg-surface grid grid-rows-[0.5fr_4fr] overflow-hidden'>
+        <div className={`${width <= 650 && "h-50"} w-full bg-surface grid grid-rows-[0.5fr_4fr] overflow-hidden`}>
           {/* Header for Assign Role To User */}
-          <div className='px-2 p-1 flex flex-row items-center justify-between border-b border-border'>
+          <div className='h-full px-2 p-1 flex flex-row items-center justify-between border-b border-border'>
             <HandleHeader
               Logo={<OnlineTag diameter={8} bgColor="orange" />}
               title={"Assign Role to User"}
@@ -80,7 +81,7 @@ const RolesPermissions = () => {
           </div>
         </div>
 
-        <div className='bg-surface overflow-hidden'>
+        <div className={`${width <= 650 && "h-50"} w-full bg-surface overflow-hidden`}>
           {/* Header for Permission Activity */}
           <div className='px-2 p-1 flex flex-row items-center justify-between border-b border-border'>
             <HandleHeader
@@ -90,6 +91,7 @@ const RolesPermissions = () => {
           </div>
           <PermissionsActivity />
         </div>
+
       </div>
     </div>
   )

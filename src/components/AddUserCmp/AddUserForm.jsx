@@ -7,6 +7,7 @@ import { FaBuilding as Department } from "react-icons/fa";
 import { rolesItem as roles, statusItem as status } from '../../config/RawData.js';
 import { GiCheckMark as Check } from "react-icons/gi";
 import CustomModal from "../CustomModal.jsx";
+import { useSelector } from 'react-redux';
 
 const AddUserForm = () => {
 
@@ -16,6 +17,7 @@ const AddUserForm = () => {
     const [phoneNumber, setPhoneNumber] = useState(null);
     const [department, setDepartment] = useState(null);
     const [isModal, setIsModal] = useState(false);
+    const width = useSelector((state) => state.app.width);
 
     const handleClear = () => {
         setFirstName(null);
@@ -67,7 +69,7 @@ const AddUserForm = () => {
 
     const MainTainRoles = () => {
         return (
-            <div className="grid grid-cols-2 gap-2">
+            <div className={`grid ${width > 600 ? "grid-cols-2" : "grid-cols-1"} gap-2`}>
                 {roles.map((role, index) => (
                     <div
                         key={index}
@@ -111,7 +113,7 @@ const AddUserForm = () => {
     }
     const ActivityStatus = () => {
         return (
-            <div className="grid grid-cols-2 gap-2">
+            <div className={`grid ${width > 600 ? "grid-cols-2" : "grid-cols-1"} gap-2`}>
                 {
                     status.map((sts, index) => {
                         return (
@@ -185,7 +187,7 @@ const AddUserForm = () => {
                     <div className='flex flex-col gap-2'>
 
                         {/* First and Last name */}
-                        <div className='grid grid-cols-2 gap-5'>
+                        <div className={`grid ${width > 600 ? "grid-cols-2" : "grid-cols-1"} gap-2`}>
                             <CustomInputField
                                 label={"First name"}
                                 placeholder={"e.g John"}
@@ -207,7 +209,7 @@ const AddUserForm = () => {
                         </div>
 
                         {/* Phone number and Department */}
-                        <div className='grid grid-cols-2 gap-5'>
+                        <div className={`grid ${width > 600 ? "grid-cols-2" : "grid-cols-1"} gap-2`}>
                             <CustomInputField
                                 label={"Phone Number"}
                                 Logo={<Phone size={20} className='text-text-muted' />}

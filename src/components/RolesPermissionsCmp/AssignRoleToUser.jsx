@@ -73,7 +73,7 @@ const AssignRoleToUser = () => {
   }
 
   return (
-    <div className='p-1 h-full flex flex-col'>
+    <div className='p-1 h-full w-full flex flex-col'>
       {
         isUserSearch ? (
           <div id='search-user' className='flex flex-col h-full'>
