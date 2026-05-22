@@ -5,7 +5,7 @@ import CustomPieChart from '../../components/UserAnalytics/CustomPiChart.jsx';
 import { roleDistribution, accountStatus, loginPlatforms, topModulesUser, topCountries } from '../../config/RawData.js';
 
 // redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setTitle } from '../../redux/appSlice.js';
 
 
@@ -20,6 +20,7 @@ const UserAnalytics = () => {
   const totalPlatforms = loginPlatforms.reduce((acc, curr) => acc + curr.value, 0);
   const totalModule = topModulesUser.reduce((acc, curr) => acc + curr.value, 0);
   const totalCountries = topCountries.reduce((acc, curr) => acc + curr.value, 0);
+  const width = useSelector((state) => state.app.width);
 
   const HeadBar = ({ title, color }) => {
     return (
@@ -62,7 +63,7 @@ const UserAnalytics = () => {
     )
   }
 
- const RowTwoContent = ({
+  const RowTwoContent = ({
     barTitle,
     barTagCol,
     chartData,
@@ -142,64 +143,84 @@ const UserAnalytics = () => {
 
 
   return (
-    <div className='grid grid-rows-3 grid-cols-1 gap-2 h-full [&>div]:rounded-md'>
+    <div className={`grid ${width > 656 ? "grid-rows-3" : ""}  grid-cols-1 gap-2 h-full [&>div]:rounded-md overflow-y-auto`}>
       {/* ROW 1 */}
-      <div className='grid grid-rows-[1fr_5fr] grid-cols-1 bg-surface'>
-        {/* Header */}
-        <div className='border-b border-border flex flex-row items-center px-2'>
-          <HeadBar color={"blue"} title={"User Login Trends"} />
-        </div>
-
-        {/* Content */}
-        <div className='grid grid-cols-1 grid-rows-1 overflow-hidden relative'>
-          <div className='absolute flex flex-row items-center gap-2 text-[10px] text-text-muted top-0 left-1/2 -translate-x-1/2'>
-            {
-              [
-                {
-                  title: "Total Logins",
-                  col: "bg-blue-500"
-                },
-                {
-                  title: "Unique Users",
-                  col: "bg-cyan-500"
-                },
-                {
-                  title: "New Users",
-                  col: "bg-orange-500"
-                },
-                {
-                  title: "Returning",
-                  col: "bg-purple-500"
-                },
-              ].map((item) => {
-                return (
-                  <div className='flex flex-row items-center gap-1'>
-                    <div className={`${item.col} px-1 py-0.5 rounded-full`} />
-                    <div>{item.title}</div>
-                  </div>
-                )
-              })
-            }
+      <div className={`h-full w-full gap-2 [&>div]:rounded-md grid ${width > 1277 ? "grid-cols-1" : width > 656 ? "grid-cols-2 grid-rows-1" : "grid-cols-1"}`}>
+        <div className={`grid grid-rows-[1fr_5fr] grid-cols-1 bg-surface ${width > 656 ? "h-full" : "h-50"}`}>
+          {/* Header */}
+          <div className='border-b border-border flex flex-row items-center px-2'>
+            <HeadBar color={"blue"} title={"User Login Trends"} />
           </div>
-          {/* Chart Content */}
-          <div className='grid grid-cols-1 grid-rows-1 '>
-            <div className='-translate-x-5 translate-y-3'>
-              <UserLoginTrendsChart />
+
+          {/* Content */}
+          <div className='grid grid-cols-1 grid-rows-1 overflow-hidden relative'>
+            <div className='absolute flex flex-row items-center gap-2 text-[10px] text-text-muted top-0 left-1/2 -translate-x-1/2'>
+              {
+                [
+                  {
+                    title: "Total Logins",
+                    col: "bg-blue-500"
+                  },
+                  {
+                    title: "Unique Users",
+                    col: "bg-cyan-500"
+                  },
+                  {
+                    title: "New Users",
+                    col: "bg-orange-500"
+                  },
+                  {
+                    title: "Returning",
+                    col: "bg-purple-500"
+                  },
+                ].map((item) => {
+                  return (
+                    <div className='flex flex-row items-center gap-1'>
+                      <div className={`${item.col} px-1 py-0.5 rounded-full`} />
+                      <div>{item.title}</div>
+                    </div>
+                  )
+                })
+              }
+            </div>
+            {/* Chart Content */}
+            <div className='grid grid-cols-1 grid-rows-1 '>
+              <div className='-translate-x-5 translate-y-3'>
+                <UserLoginTrendsChart />
+              </div>
             </div>
           </div>
+
         </div>
+
+        {
+          width <= 1277 &&
+          <div className={`${width > 656 ? "" : "h-50"} flex flex-row bg-surface`}>
+            <RowTwoContent
+              barTitle={"Role Distribution"}
+              barTagCol={"purple"}
+              chartData={roleDistribution}
+              totalCount={totalRoles}
+            />
+          </div>
+        }
       </div>
 
       {/* ROW 2 */}
-      <div className='grid grid-cols-3 grid-rows-1 gap-2 [&>div]:rounded-md [&>div]:bg-surface'>
+      <div className={`grid ${width > 1277 ? "grid-cols-3" : width > 656 ? "grid-cols-2" : "grid-cols-1 [&>div]:h-50"} grid-rows-1 gap-2 [&>div]:rounded-md [&>div]:bg-surface`}>
 
         {/* ROLE DISTRIBUTION */}
-        <RowTwoContent
-          barTitle={"Role Distribution"}
-          barTagCol={"purple"}
-          chartData={roleDistribution}
-          totalCount={totalRoles}
-        />
+        {
+          width > 1277 &&
+          <>
+            <RowTwoContent
+              barTitle={"Role Distribution"}
+              barTagCol={"purple"}
+              chartData={roleDistribution}
+              totalCount={totalRoles}
+            />
+          </>
+        }
 
         {/* ACCOUNT STATUS */}
         <RowTwoContent
@@ -220,7 +241,7 @@ const UserAnalytics = () => {
       </div>
 
       {/* ROW 3 */}
-      <div className='grid grid-rows-1 grid-cols-2 gap-2 [&>div]:rounded-md [&>div]:bg-surface'>
+      <div className={`grid ${width > 656 ? "grid-rows-1 grid-cols-2" : "grid-cols-1"}  gap-2 [&>div]:rounded-md [&>div]:bg-surface`}>
         {/* TOP MODULES USED */}
         <RowThreeContent
           key={1}

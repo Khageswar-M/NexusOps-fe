@@ -32,8 +32,8 @@ const TaskAutomation = () => {
     <div className="bg-surface h-full border border-border rounded-md grid grid-rows-[1fr_0.8fr_10fr_auto]">
 
       {/* ROW ONE */}
-      <div className="border-b border-border flex flex-row items-center px-2 gap-2">
-        <div className="w-[30%]">
+      <div className="border-b border-border flex flex-row items-center px-2 gap-2 overflow-y-auto">
+        <div className="w-[30%] shrink-0">
           <div className="flex flex-row items-center relative bg-surface-2 rounded-md">
             <Glass className="absolute text-text-muted ml-1" />
             <input
@@ -44,19 +44,19 @@ const TaskAutomation = () => {
           </div>
         </div>
 
-        <div className="w-fit relative flex items-center">
+        <div className="w-fit relative flex items-center shrink-0">
           <DropDown items={statusType} />
         </div>
-        <div className="w-fit relative flex items-center">
+        <div className="w-fit relative flex items-center shrink-0">
           <DropDown items={frequencyType} />
         </div>
 
-        <button className="flex flex-row items-center gap-2 bg-surface-2 border border-border px-3 rounded-md py-0.5 text-white hover:border-cyan-500 transition-colors">
+        <button className="flex flex-row items-center gap-2 bg-surface-2 border border-border px-3 rounded-md py-0.5 text-white hover:border-cyan-500 transition-colors shrink-0">
           <span className="text-[1rem] font-bold">Export</span>
           <Download className="h-5 w-5" />
         </button>
 
-        <button className="flex flex-row items-center gap-1 text-gray-900 bg-cyan-500 hover:bg-cyan-400 px-2 py-0.5 rounded-md transition-colors">
+        <button className="flex flex-row items-center gap-1 text-gray-900 bg-cyan-500 hover:bg-cyan-400 px-2 py-0.5 rounded-md transition-colors shrink-0">
           <Plus />
           <span className="text-[1rem] font-bold">Create Task</span>
         </button>
@@ -82,7 +82,7 @@ const TaskAutomation = () => {
       </div>
 
       {/* ROW FOUR — Pagination */}
-      <div className="border-t border-border px-4 py-2 flex items-center justify-between flex-shrink-0">
+      <div className="border-t border-border px-4 py-2 flex items-center justify-between shrink-0">
         <span className="text-text-muted text-xs">
           Page <span className="text-white font-semibold">{currentPage}</span> of {TOTAL_PAGES}
         </span>

@@ -121,10 +121,10 @@ const Reports = () => {
     <div className="bg-surface h-full border border-border flex flex-col overflow-hidden">
 
       {/* ── ROW ONE: Toolbar ── */}
-      <div className="border-b border-border flex flex-row flex-wrap items-center gap-2 p-2 w-full">
+      <div className="border-b border-border flex flex-row overflow-auto items-center gap-2 p-2 w-full">
 
         {/* Search */}
-        <div className="flex-1 min-w-[180px] max-w-xs">
+        <div className="flex-1 min-w-45 max-w-xs shrink-0">
           <div className="flex flex-row items-center relative bg-surface-2 rounded-md">
             <Glass className="absolute text-text-muted ml-2 w-4 h-4 pointer-events-none" />
             <input
@@ -154,13 +154,13 @@ const Reports = () => {
 
         <div className="flex flex-row items-center gap-2 ml-auto">
           {/* Export */}
-          <button className="flex flex-row items-center gap-2 bg-surface-2 border border-border px-3 rounded-md py-1 text-white hover:border-cyan-500 transition-colors">
+          <button className="flex shrink-0 flex-row items-center gap-2 bg-surface-2 border border-border px-3 rounded-md py-1 text-white hover:border-cyan-500 transition-colors">
             <span className="text-[0.85rem] font-bold">Export</span>
             <Download className="h-4 w-4" />
           </button>
 
           {/* New Report */}
-          <button className="flex flex-row items-center gap-1 text-gray-900 bg-cyan-500 hover:bg-cyan-400 px-3 py-1 rounded-md transition-colors">
+          <button className="flex shrink-0 flex-row items-center gap-1 text-gray-900 bg-cyan-500 hover:bg-cyan-400 px-3 py-1 rounded-md transition-colors">
             <Plus className="h-4 w-4" />
             <span className="text-[0.85rem] font-bold">New Report</span>
           </button>

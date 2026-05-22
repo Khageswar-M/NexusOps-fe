@@ -23,7 +23,7 @@ import { useSelector } from 'react-redux';
 const HeroScreen = () => {
     const width = useSelector((state) => state.app.width);
     return (
-        <div className="rounded-md h-full overflow-y-auto custom-scrollbar">
+        <div className="rounded-md h-full overflow-hidden">
             <Suspense fallback={<Loading />}>
                 <Routes>
                     <Route path="/" element={<Dashboard />} />

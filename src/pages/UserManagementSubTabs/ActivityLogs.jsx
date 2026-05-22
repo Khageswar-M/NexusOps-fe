@@ -55,16 +55,16 @@ const ActivityLogs = () => {
   };
 
   return (
-    <div className="grid grid-cols-[6fr_2fr] h-full gap-2 [&>div]:bg-surface [&>div]:rounded-md">
+    <div className={`grid ${width > 600 ? "grid-rows-1 grid-cols-[6fr_250px]" : "grid-cols-1"}  h-full gap-2 [&>div]:bg-surface [&>div]:rounded-md overflow-y-auto`}>
 
       {/* ── Logs list ── */}
-      <div className="flex flex-col overflow-hidden border border-border">
+      <div className={`flex flex-col overflow-hidden border border-border ${width > 600 ? "" : "h-100"}`}>
 
         {/* Toolbar */}
-        <div className="grid p-2 grid-cols-[2fr_1.5fr_2fr_1fr_1fr] gap-1 border-b border-border shrink-0">
+        <div className="p-2 flex flex-row gap-3 border-b border-border shrink-0 overflow-y-auto">
 
           {/* Search input */}
-          <div className="flex items-center">
+          <div className="flex items-center shrink-0">
             <div className="flex flex-row items-center relative w-full">
               <MagnifyGlass className="w-5 h-5 text-gray-500 absolute ml-1 pointer-events-none" />
               <input
@@ -76,7 +76,7 @@ const ActivityLogs = () => {
           </div>
 
           {/* Actions dropdown */}
-          <div className="flex items-center p-0.5">
+          <div className="flex items-center p-0.5 shrink-0">
             <div
               className="relative bg-surface-2 flex flex-row items-center justify-between w-full px-2 border border-border h-full rounded-md cursor-pointer"
               onClick={(e) => setRolesAnchorE1(rolesAnchorE1 ? null : e.currentTarget)}
@@ -100,7 +100,7 @@ const ActivityLogs = () => {
           </div>
 
           {/* Date range */}
-          <div className="flex items-center">
+          <div className="flex items-center shrink-0">
             <div className="text-text-muted w-full flex flex-row items-center border border-border justify-center py-0.5 rounded-md bg-surface-2">
               <Calendar size={20} />
               <div className="flex flex-row items-center text-sm">
@@ -112,7 +112,7 @@ const ActivityLogs = () => {
           </div>
 
           {/* Export */}
-          <div className="flex items-center">
+          <div className="flex items-center shrink-0">
             <button className="text-white font-bold w-full rounded-md py-0.5 flex flex-row items-center justify-center gap-1 bg-surface-2 border border-border cursor-pointer hover:border-cyan-400 transition-colors">
               <Download className="w-5 h-5" />
               <span>Export</span>
@@ -120,12 +120,13 @@ const ActivityLogs = () => {
           </div>
 
           {/* Search button */}
-          <div className="flex items-center">
+          <div className="flex items-center shrink-0">
             <button className="flex items-center justify-center bg-cyan-400 hover:bg-cyan-300 transition-colors w-full rounded-md font-bold py-0.5 cursor-pointer">
               <MagnifyGlass className="w-5 h-5" />
               <span>Search</span>
             </button>
           </div>
+
         </div>
 
         {/* Meta bar */}
@@ -256,7 +257,7 @@ const ActivityLogs = () => {
       </div>
 
       {/* ── Most Active Users sidebar ── */}
-      <div className="border border-border flex flex-col overflow-hidden">
+      <div className={`border border-border flex flex-col overflow-hidden ${width > 600 ? "" : "h-100"}`}>
 
         {/* Header */}
         <div className="flex p-2 border-b border-border justify-between items-center shrink-0">

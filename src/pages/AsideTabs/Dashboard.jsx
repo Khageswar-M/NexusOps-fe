@@ -16,7 +16,7 @@ const Dashboard = () => {
 
 
   return (
-    <div className='grid grid-cols-1 gap-2 h-full'>
+    <div className='grid grid-cols-1 gap-2 h-full overflow-y-auto'>
       <KpiCards />
       <PerformanceChart />
       <ActivityFeed />

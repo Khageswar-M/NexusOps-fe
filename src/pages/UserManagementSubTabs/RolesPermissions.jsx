@@ -41,9 +41,9 @@ const RolesPermissions = () => {
   }
 
   return (
-    <div className={`grid ${width > 1100 ? "grid-cols-[5fr_250px]" : width > 650 ? "grid-cols-1 grid-rows-[1fr_1fr]" : " grid-cols-1 custom-scrollbar  overflow-y-auto"}  gap-2 w-full h-full `}>
+    <div className={`grid ${width > 1100 ? "grid-cols-[5fr_250px]" : width > 650 ? "grid-cols-1 grid-rows-[1fr_1fr]" : " grid-cols-1 "}  gap-2 w-full h-full overflow-y-auto`}>
 
-      <div className={`grid w-full grid-rows-1 [&>div]:rounded-md overflow-hidden`}>
+      <div className={` grid  w-full grid-rows-1 [&>div]:rounded-md overflow-hidden`}>
         {/* Role Distribution Header */}
         <div className={`bg-surface h-full w-full grid grid-rows-[0.5fr_7fr] overflow-hidden`}>
           <div className='px-2 p-1 flex flex-row items-center justify-between border-b border-border'>
@@ -76,7 +76,7 @@ const RolesPermissions = () => {
               title={"Assign Role to User"}
             />
           </div>
-          <div className='relative overflow-y-auto'>
+          <div className=' relative overflow-y-auto'>
             <AssignRoleToUser />
           </div>
         </div>
