@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IoIosNotifications } from "react-icons/io";
-import { IoClose } from "react-icons/io5";
+
 import OnlineTag from "../../components/OnlineTag";
 import CustomToolTip from "../../components/CustomToolTip";
 import Hamburger from '../../assets/Hamburger.svg?react';
@@ -8,6 +8,7 @@ import SearchIcon from '../../assets/MagnifyingGlass.svg?react';
 import Github from '../../assets/Github.svg?react';
 import NotificationPanel from "../Notification/NotificationPanel";
 import CustomModal from "../../components/CustomModal";
+import SearchTab from "../../pages/Header/SearchTab";
 
 // redux
 import { useSelector, useDispatch } from "react-redux";
@@ -124,48 +125,27 @@ const HeaderScreen = () => {
 
             {/* ── SEARCH MODAL ── */}
             <CustomModal open={isSearchOpen} onClose={() => setIsSearchOpen(false)}>
-                <div className="flex flex-col gap-4">
-                    {/* Header */}
-                    <div className="flex items-center justify-between">
-                        <h2 className="text-white font-semibold text-lg">Search</h2>
-                        <button
-                            onClick={() => setIsSearchOpen(false)}
-                            className="text-text-muted hover:text-white transition-colors cursor-pointer"
-                        >
-                            <IoClose size={24} />
-                        </button>
-                    </div>
 
-                    {/* Search Input */}
-                    <div className="relative">
-                        <SearchIcon className="w-5 h-5 text-text-muted absolute left-3 top-1/2 -translate-y-1/2
-  pointer-events-none" />
-                        <input
-                            type="text"
-                            autoFocus
-                            className="w-full bg-surface-2 border border-border rounded-md py-2.5 pl-10 pr-4
-  text-white text-sm placeholder:text-text-muted focus:border-cyan-500 focus:outline-none transition-colors"
-                            placeholder="Search anything..."
-                        />
-                    </div>
+                <div className="flex relative items-center justify-center h-full w-full ">
+                     <div
+        className="
+            absolute inset-0
+            bg-white/5
+            backdrop-blur-xs
+            border border-white/10
+            shadow-lg
+            z-0
 
-                    {/* Recent / Results area */}
-                    <div className="flex flex-col gap-2">
-                        <span className="text-text-muted text-xs font-semibold uppercase
-  tracking-wider">Recent</span>
-                        <div className="flex flex-col gap-1">
-                            {["Users", "Reports", "Dashboard settings", "Server status"].map((item) => (
-                                <button
-                                    key={item}
-                                    className="text-left text-sm text-text-muted hover:text-white
-  hover:bg-surface-2 px-3 py-2 rounded-md transition-colors cursor-pointer"
-                                >
-                                    {item}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
+            opacity-0
+            animate-glassFade
+
+            will-change-transform
+            transform-gpu
+        "
+    />
+                    <SearchTab setIsSearchOpen={setIsSearchOpen} />
                 </div>
+
             </CustomModal>
 
         </>
