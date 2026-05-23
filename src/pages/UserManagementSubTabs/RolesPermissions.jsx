@@ -40,12 +40,44 @@ const RolesPermissions = () => {
     )
   }
 
-  return (
-    <div className={`grid ${width > 1100 ? "grid-cols-[5fr_250px]" : width > 650 ? "grid-cols-1 grid-rows-[1fr_1fr]" : " grid-cols-1 "}  gap-2 w-full h-full overflow-y-auto`}>
+  const AssignRole = () => {
+    return (
+      <div className={` w-full bg-surface grid grid-rows-[0.5fr_4fr] overflow-hidden border border-border`}>
+        {/* Header for Assign Role To User */}
+        <div className='h-full px-2 p-1 flex flex-row items-center justify-between border-b border-border'>
+          <HandleHeader
+            Logo={<OnlineTag diameter={8} bgColor="orange" />}
+            title={"Assign Role to User"}
+          />
+        </div>
+        <div className=' relative overflow-y-auto'>
+          <AssignRoleToUser />
+        </div>
+      </div>
+    )
+  }
 
-      <div className={` grid  w-full grid-rows-1 [&>div]:rounded-md overflow-hidden`}>
+  const Permission = () => {
+    return (
+      <div className={` w-full bg-surface overflow-hidden border border-border`}>
+        {/* Header for Permission Activity */}
+        <div className='px-2 p-1 flex flex-row items-center justify-between border-b border-border'>
+          <HandleHeader
+            Logo={<Clock color='green' size={20} />}
+            title={"Permission Activity"}
+          />
+        </div>
+        <PermissionsActivity />
+      </div>
+    )
+  }
+
+  return (
+    <div className={`grid ${width >= 1050 ? "grid-cols-[5fr_250px]" : width >= 600 ? "grid-rows-2" : "grid-cols-1"}   gap-2 w-full h-full overflow-y-auto custom-scrollbar`}>
+
+      <div className={`grid ${width < 600 && "h-80"}  w-full grid-rows-1 [&>div]:rounded-md overflow-hidden`}>
         {/* Role Distribution Header */}
-        <div className={`bg-surface h-full w-full grid grid-rows-[0.5fr_7fr] overflow-hidden`}>
+        <div className={`bg-surface h-full w-full grid grid-rows-[0.5fr_7fr] overflow-hidden border border-border`}>
           <div className='px-2 p-1 flex flex-row items-center justify-between border-b border-border'>
             <HandleHeader
               Logo={<OnlineTag diameter={8} bgColor={"purple"} />}
@@ -66,33 +98,25 @@ const RolesPermissions = () => {
         </div>
       </div>
 
-      <div className={`grid ${width > 1100 ? "grid-rows-[1.5fr_1fr]" : width > 650 ? "grid-rows-1 grid-cols-2" : "grid-cols-1"}  gap-2 [&>div]:rounded-md overflow-hidden w-full h-full`}>
+      {
+        width >= 600 ? (
+          <div className={`grid ${width >= 1050 ? "grid-rows-[1.5fr_1fr]" : "grid-cols-2"}   gap-2 [&>div]:rounded-md overflow-hidden w-full h-full`}>
 
-        <div className={`${width <= 650 && "h-50"} w-full bg-surface grid grid-rows-[0.5fr_4fr] overflow-hidden`}>
-          {/* Header for Assign Role To User */}
-          <div className='h-full px-2 p-1 flex flex-row items-center justify-between border-b border-border'>
-            <HandleHeader
-              Logo={<OnlineTag diameter={8} bgColor="orange" />}
-              title={"Assign Role to User"}
-            />
-          </div>
-          <div className=' relative overflow-y-auto'>
-            <AssignRoleToUser />
-          </div>
-        </div>
+            <AssignRole />
 
-        <div className={`${width <= 650 && "h-50"} w-full bg-surface overflow-hidden`}>
-          {/* Header for Permission Activity */}
-          <div className='px-2 p-1 flex flex-row items-center justify-between border-b border-border'>
-            <HandleHeader
-              Logo={<Clock color='green' size={20} />}
-              title={"Permission Activity"}
-            />
-          </div>
-          <PermissionsActivity />
-        </div>
+            <Permission />
 
-      </div>
+          </div>
+        ) : (
+          <div className='[&>div]:h-80 flex flex-col gap-2 [&>div]:rounded-md [&>div]:border [&>div]:border-border'>
+            <AssignRole />
+
+            <Permission />
+          </div>
+        )
+      }
+
+
     </div>
   )
 }

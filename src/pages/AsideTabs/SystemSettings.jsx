@@ -265,7 +265,7 @@ const SystemSettings = () => {
   const dispatch = useDispatch();
   const width = useSelector((state) => state.app.width);
   const settingsSubBarOpen = useSelector((state) => state.ui.openSettingsSubBar);
-  const [active, setActive] = useState("storage");
+  const [active, setActive] = useState("general");
 
   useEffect(() => {
     dispatch(setTitle(["System Settings"]));

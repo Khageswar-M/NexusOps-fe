@@ -46,7 +46,7 @@ const HeroScreen = () => {
             </Suspense>
 
             {/* Global Modal */}
-            <NotificationPanel />
+            {/* <NotificationPanel /> */}
 
         </div>
     )

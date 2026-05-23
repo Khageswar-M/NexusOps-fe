@@ -1,6 +1,7 @@
+import { lazy } from "react";
 import { useState } from "react";
 import OnlineTag from "../OnlineTag";
-import AreaChartComponent from "../AreaChartComponent";
+const AreaChartComponent = lazy(() => import('../AreaChartComponent.jsx'));
 
 const UserActivity = () => {
   const [active, setActive] = useState("7");
@@ -24,18 +25,19 @@ const UserActivity = () => {
     },
   ]
   return (
-    <div className='relative bg-surface grid grid-rows-[1fr_5fr] h-70 overflow-hidden'>
+    <div className='relative bg-surface grid grid-rows-[1fr_5fr] h-full overflow-hidden'>
+      
       <div className='px-5 py-1 text-[12px] font-bold border-b border-b-border flex items-center justify-between'>
         <div className="text-white/90 flex flex-row items-center gap-3">
           <OnlineTag bgColor={"blue"} diameter={10} shadow />
           <div>User Activity Over Time</div>
         </div>
-        <div className="flex flex-row gap-5 text-[10px] text-white/50">
+        <div className="flex flex-row gap-5 text-[10px] text-white/50 overflow-auto">
           {["7", "30", "90"].map((day) => (
             <div
               key={day}
               onClick={() => setActive(day)}
-              className={`px-2 py-1 rounded-md cursor-pointer
+              className={`px-2 py-1 rounded-md cursor-pointer shrink-0
         ${active === day
                   ? "border border-cyan-500 bg-surface-3 text-white"
                   : "border border-transparent hover:border-gray-500/20"
@@ -46,8 +48,6 @@ const UserActivity = () => {
           ))}
         </div>
       </div>
-
-      
 
       <div className="relative">
         <div className="w-full flex flex-row items-center gap-5 px-5">

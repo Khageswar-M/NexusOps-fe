@@ -13,15 +13,11 @@ const ActivityFeed = () => {
 
     return (
         <div className={`rounded-md grid 
-        ${width <= 750 ? "grid-cols-1" : "grid-cols-[3fr_2fr] "}
-        gap-2 h-full [&>div]:rounded-md [&>div]:bg-surface [&>div]:border [&>div]:border-border`}>
-            <div className="rounded-xl border border-white/8 h-full relative">
+        ${width <= 750 ? "grid-cols-1" : "grid-cols-[3fr_2fr] grid-rows-1"}
+        gap-2 [&>div]:rounded-md [&>div]:bg-surface [&>div]:border [&>div]:border-border overflow-hidden`}>
                 <ActivityFeedTable/>
-            </div>
-            {/* Notifications */}
-            <div className="rounded-md border border-white/8 h-full relative">
+            
                 <NotificationTable/>
-            </div>
         </div>
     )
 }

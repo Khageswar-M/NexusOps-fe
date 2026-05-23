@@ -25,7 +25,7 @@ const Reports = () => {
 
   const width = useSelector((state) => state.app.width);
   const [openFilter, setOpenFilter] = useState(false);
-  const [checkAll, setCheckAll] = useState(true);
+  const [checkAll, setCheckAll] = useState(false);
   const [checkedRows, setCheckedRows] = useState({});
 
   useEffect(() => {
@@ -96,7 +96,7 @@ const Reports = () => {
   );
 
   const RowActions = ({ report }) => (
-    <div className="flex flex-row items-center gap-1.5 flex-wrap">
+    <div className="flex flex-row items-center gap-1.5 flex-wrap cursor-pointer">
       {report.status === "done" ? <><ViewBtn /><DLBtn /></> :
         report.status === "running" ? <><ViewBtn /></> :
           report.status === "failed" ? <><RetryBtn /></> :
@@ -193,7 +193,7 @@ const Reports = () => {
                 >
                   {col.key === "check" ? (
                     <div className="flex justify-center">
-                      <Checkbox checked={checkAll} onClick={handleCheckAll} />
+                      <Checkbox checked={checkAll} onClick={() => handleCheckAll()} />
                     </div>
                   ) : col.label}
                 </th>

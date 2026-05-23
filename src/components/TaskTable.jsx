@@ -2,34 +2,35 @@ import { useState } from "react";
 import EditIcon from '../assets/EditIcon.svg?react';
 import RetryIcon from '../assets/IconRetry.svg?react';
 import DeleteIcon from '../assets/TrashBin.svg?react';
+import CheckIcon from '../assets/Check.svg?react'
 
 // ─── Icons ─────────────────────────────────────────────────────────────────────
 const IconEdit = () => (
-  <EditIcon/>
+  <EditIcon />
 );
 const IconRetry = () => (
-  <RetryIcon/>
+  <RetryIcon />
 );
 const IconDelete = () => (
-  <DeleteIcon className="h-4 w-4"/>
+  <DeleteIcon className="h-4 w-4" />
 );
 
 // ─── Status config ─────────────────────────────────────────────────────────────
 const STATUS_CONFIG = {
   active: { label: "Active", dot: "bg-green-500", badge: "bg-green-500/10 text-green-400 border border-green-500/20" },
   paused: { label: "Paused", dot: "bg-amber-400", badge: "bg-amber-400/10 text-amber-400 border border-amber-400/20" },
-  failed: { label: "Failed", dot: "bg-red-500",   badge: "bg-red-500/10   text-red-400   border border-red-500/20"  },
-  idle:   { label: "Idle",   dot: "bg-gray-500",  badge: "bg-gray-500/10  text-gray-400  border border-gray-500/20" },
+  failed: { label: "Failed", dot: "bg-red-500", badge: "bg-red-500/10   text-red-400   border border-red-500/20" },
+  idle: { label: "Idle", dot: "bg-gray-500", badge: "bg-gray-500/10  text-gray-400  border border-gray-500/20" },
 };
 
 // ─── Sample data ───────────────────────────────────────────────────────────────
 const SAMPLE_TASKS = [
-  { id: 1, name: "Data Backup",   sub: "Storage › S3 bucket",    status: "active", freq: "Daily",    last: "Today 3:00 PM",     next: "Tomorrow 3:00 AM", rate: 96.56 },
-  { id: 2, name: "Email Digest",  sub: "Notifications › SMTP",   status: "active", freq: "Hourly",   last: "Today 4:00 PM",     next: "Today 5:00 PM",    rate: 88.2  },
-  { id: 3, name: "DB Cleanup",    sub: "Database › Postgres",    status: "paused", freq: "Weekly",   last: "May 9, 9:00 AM",    next: "May 16, 9:00 AM",  rate: 74.5  },
-  { id: 4, name: "Report Export", sub: "Analytics › PDF export", status: "failed", freq: "Monthly",  last: "May 1, 12:00 AM",   next: "Jun 1, 12:00 AM",  rate: 42.0  },
-  { id: 5, name: "Cache Warm-up", sub: "CDN › Edge nodes",       status: "active", freq: "Every 6h", last: "Today 12:00 PM",    next: "Today 6:00 PM",    rate: 99.1  },
-  { id: 6, name: "Sync Contacts", sub: "CRM › Salesforce",       status: "idle",   freq: "Daily",    last: "Yesterday 8:00 AM", next: "Today 8:00 AM",    rate: 61.3  },
+  { id: 1, name: "Data Backup", sub: "Storage › S3 bucket", status: "active", freq: "Daily", last: "Today 3:00 PM", next: "Tomorrow 3:00 AM", rate: 96.56 },
+  { id: 2, name: "Email Digest", sub: "Notifications › SMTP", status: "active", freq: "Hourly", last: "Today 4:00 PM", next: "Today 5:00 PM", rate: 88.2 },
+  { id: 3, name: "DB Cleanup", sub: "Database › Postgres", status: "paused", freq: "Weekly", last: "May 9, 9:00 AM", next: "May 16, 9:00 AM", rate: 74.5 },
+  { id: 4, name: "Report Export", sub: "Analytics › PDF export", status: "failed", freq: "Monthly", last: "May 1, 12:00 AM", next: "Jun 1, 12:00 AM", rate: 42.0 },
+  { id: 5, name: "Cache Warm-up", sub: "CDN › Edge nodes", status: "active", freq: "Every 6h", last: "Today 12:00 PM", next: "Today 6:00 PM", rate: 99.1 },
+  { id: 6, name: "Sync Contacts", sub: "CRM › Salesforce", status: "idle", freq: "Daily", last: "Yesterday 8:00 AM", next: "Today 8:00 AM", rate: 61.3 },
 ];
 
 // ─── Sub-components ────────────────────────────────────────────────────────────
@@ -52,9 +53,9 @@ function FreqBadge({ label }) {
 }
 
 function SuccessRate({ rate }) {
-  const pct   = Math.round(rate);
+  const pct = Math.round(rate);
   const color = rate >= 85 ? "text-green-400" : rate >= 60 ? "text-amber-400" : "text-red-400";
-  const bar   = rate >= 85 ? "bg-green-500"   : rate >= 60 ? "bg-amber-400"   : "bg-red-500";
+  const bar = rate >= 85 ? "bg-green-500" : rate >= 60 ? "bg-amber-400" : "bg-red-500";
   return (
     <div className="flex flex-col gap-1.5 w-full">
       <span className={`text-xs font-semibold tabular-nums ${color}`}>{rate.toFixed(1)}%</span>
@@ -87,10 +88,10 @@ function ActionBtn({ label, danger = false, onClick, children }) {
 
 // ─── Main component ────────────────────────────────────────────────────────────
 export default function TaskTable({ tasks = SAMPLE_TASKS }) {
-  const [data, setData]         = useState(tasks);
+  const [data, setData] = useState(tasks);
   const [selected, setSelected] = useState(new Set());
 
-  const allChecked  = selected.size === data.length && data.length > 0;
+  const allChecked = selected.size === data.length && data.length > 0;
   const someChecked = selected.size > 0 && !allChecked;
 
   const toggleAll = () =>
@@ -113,6 +114,37 @@ export default function TaskTable({ tasks = SAMPLE_TASKS }) {
     setSelected(new Set());
   };
 
+  const [checkAll, setCheckAll] = useState(false);
+  const [checkedRows, setCheckedRows] = useState({});
+  const handleCheckAll = () => {
+    const next = !checkAll;
+    setCheckAll(next);
+    if (next) {
+      const all = {};
+      SAMPLE_TASKS.forEach((_, i) => { all[i] = true; });
+      setCheckedRows(all);
+    } else {
+      setCheckedRows({});
+    }
+  };
+
+  const handleRowCheck = (i) => {
+    setCheckedRows(prev => {
+      const updated = { ...prev, [i]: !prev[i] };
+      const allChecked = SAMPLE_TASKS.every((_, idx) => updated[idx]);
+      setCheckAll(allChecked);
+      return updated;
+    });
+  };
+  const Checkbox = ({ checked, onClick }) => (
+    <div
+      className={`h-4 w-4 rounded-sm cursor-pointer flex items-center justify-center shrink-0 transition-colors duration-150 ${checked ? "bg-cyan-500" : "bg-gray-800 border border-gray-600"}`}
+      onClick={onClick}
+    >
+      {checked && <CheckIcon className="w-3 h-3 text-gray-900" />}
+    </div>
+  );
+
   return (
     <div className="w-full bg-surface  border border-white/10  overflow-hidden">
 
@@ -129,13 +161,13 @@ export default function TaskTable({ tasks = SAMPLE_TASKS }) {
           */}
           <colgroup>
             <col style={{ width: "40px" }} />   {/* checkbox      */}
-            <col style={{ width: "22%" }}  />   {/* task name     */}
-            <col style={{ width: "12%" }}  />   {/* status        */}
-            <col style={{ width: "10%" }}  />   {/* frequency     */}
-            <col style={{ width: "14%" }}  />   {/* last run      */}
-            <col style={{ width: "14%" }}  />   {/* next run      */}
-            <col style={{ width: "12%" }}  />   {/* success rate  */}
-            <col style={{ width: "10%" }}  />   {/* actions       */}
+            <col style={{ width: "22%" }} />   {/* task name     */}
+            <col style={{ width: "12%" }} />   {/* status        */}
+            <col style={{ width: "10%" }} />   {/* frequency     */}
+            <col style={{ width: "14%" }} />   {/* last run      */}
+            <col style={{ width: "14%" }} />   {/* next run      */}
+            <col style={{ width: "12%" }} />   {/* success rate  */}
+            <col style={{ width: "10%" }} />   {/* actions       */}
           </colgroup>
 
           {/* ── THEAD ─────────────────────────────────────────────────────────── */}
@@ -143,25 +175,27 @@ export default function TaskTable({ tasks = SAMPLE_TASKS }) {
             <tr className="border-b border-white/10">
               {/* Select-all */}
               <th className="px-3 py-3 text-center">
-                <input
+                {/* <input
                   type="checkbox"
                   checked={allChecked}
                   ref={(el) => { if (el) el.indeterminate = someChecked; }}
                   onChange={toggleAll}
                   aria-label="Select all tasks"
                   className="w-3.5 h-3.5 accent-indigo-500 cursor-pointer"
-                />
+                /> */}
+
+                <Checkbox checked={checkAll} onClick={() => handleCheckAll()}/>
               </th>
 
               {/* Column headers */}
               {[
-                { label: "Task Name",     align: "text-left"   },
-                { label: "Status",        align: "text-left"   },
-                { label: "Frequency",     align: "text-left"   },
-                { label: "Last Run",      align: "text-left"   },
-                { label: "Next Run",      align: "text-left"   },
-                { label: "Success Rate",  align: "text-left"   },
-                { label: "Actions",       align: "text-center" },
+                { label: "Task Name", align: "text-left" },
+                { label: "Status", align: "text-left" },
+                { label: "Frequency", align: "text-left" },
+                { label: "Last Run", align: "text-left" },
+                { label: "Next Run", align: "text-left" },
+                { label: "Success Rate", align: "text-left" },
+                { label: "Actions", align: "text-center" },
               ].map(({ label, align }) => (
                 <th
                   key={label}
@@ -183,24 +217,25 @@ export default function TaskTable({ tasks = SAMPLE_TASKS }) {
               </tr>
             )}
 
-            {data.map((task) => (
-              <tr
+            {data.map((task) => {
+              const isChecked = checkedRows[task.id] ?? checkAll;
+              return (<tr
                 key={task.id}
-                className={`transition-colors duration-100 ${
-                  selected.has(task.id)
+                className={`transition-colors duration-100 ${selected.has(task.id)
                     ? "bg-indigo-500/5"
                     : "hover:bg-white/2"
-                }`}
+                  }`}
               >
                 {/* Checkbox */}
                 <td className="px-3 py-4 text-center">
-                  <input
+                  {/* <input
                     type="checkbox"
                     checked={selected.has(task.id)}
                     onChange={() => toggleRow(task.id)}
                     aria-label={`Select ${task.name}`}
                     className="w-3.5 h-3.5 accent-indigo-500 cursor-pointer"
-                  />
+                  /> */}
+                  <Checkbox checked={isChecked} onClick={() => handleRowCheck(task.id)}/>
                 </td>
 
                 {/* Task name */}
@@ -239,10 +274,10 @@ export default function TaskTable({ tasks = SAMPLE_TASKS }) {
                 {/* Actions */}
                 <td className="px-3 py-4">
                   <div className="flex items-center gap-1">
-                    <ActionBtn label={`Edit ${task.name}`} onClick={() => {}}>
+                    <ActionBtn label={`Edit ${task.name}`} onClick={() => { }}>
                       <IconEdit />
                     </ActionBtn>
-                    <ActionBtn label={`Retry ${task.name}`} onClick={() => {}}>
+                    <ActionBtn label={`Retry ${task.name}`} onClick={() => { }}>
                       <IconRetry />
                     </ActionBtn>
                     <ActionBtn
@@ -254,8 +289,8 @@ export default function TaskTable({ tasks = SAMPLE_TASKS }) {
                     </ActionBtn>
                   </div>
                 </td>
-              </tr>
-            ))}
+              </tr>)
+})}
           </tbody>
         </table>
       </div>

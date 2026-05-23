@@ -64,7 +64,7 @@ const DataAnalytics = () => {
     <div className={`h-full grid grid-cols-1 gap-2 transition-all duration-500 ease-in-out ${
       width >= 1313 ? "grid-rows-[1fr_2fr] overflow-hidden" :
       width > 700   ? "grid-rows-3 overflow-hidden" :
-                      "auto-rows-auto overflow-y-auto"
+                      "grid-cols-1 overflow-y-auto"
     }`}>
 
       {/* ROW ONE */}

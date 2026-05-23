@@ -42,7 +42,7 @@ const App = () => {
   if (isLoading) {
     return (
       <div className="flex-1 h-full w-full absolute bg-surface">
-        <ApplicationLoader />
+        <ApplicationLoader /> 
       </div>
     )
   }

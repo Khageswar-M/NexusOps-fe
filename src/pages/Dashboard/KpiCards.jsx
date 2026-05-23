@@ -1,4 +1,5 @@
-import AreaChartNoGrid from "../../components/AreaChartNoGrid";
+import { lazy } from 'react';
+const AreaChartNoGrid = lazy(() => import('../../components/AreaChartNoGrid.jsx'));
 import OnlineTag from '../../components/OnlineTag.jsx';
 
 import { FaUsers } from "react-icons/fa";
@@ -9,6 +10,7 @@ import { TiArrowUp, TiArrowDown } from "react-icons/ti";
 import { FaHeartBroken } from "react-icons/fa";
 
 import { useSelector } from "react-redux";
+
 
 const KpiCards = () => {
 
@@ -157,9 +159,9 @@ const KpiCards = () => {
     }
     return (
         <div className={`rounded-md grid
-        ${width >= 1200 ? "grid-cols-4" : 
-            width >= 700 ? "grid-cols-2" : "grid-cols-1"
-        } gap-2 [&>div]:bg-surface [&>div]:rounded-md`}>
+        ${width >= 1200 ? "grid-cols-4" :
+                width >= 700 ? "grid-cols-2" : "grid-cols-1"
+            } gap-2 [&>div]:bg-surface [&>div]:rounded-md`}>
 
             {kpiCards.map((kpi, index) => {
                 const Icon = kpi.icon ?? (<HandleKpiIcons

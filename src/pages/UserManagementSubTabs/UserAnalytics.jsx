@@ -1,7 +1,8 @@
+import { lazy } from 'react';
 import React, { useEffect } from 'react'
 import OnlineTag from '../../components/OnlineTag.jsx';
-import UserLoginTrendsChart from '../../components/UserAnalytics/UserLoginTrendsChart.jsx'
-import CustomPieChart from '../../components/UserAnalytics/CustomPiChart.jsx';
+const UserLoginTrendsChart = lazy(() => import('../../components/UserAnalytics/UserLoginTrendsChart.jsx'));
+const CustomPieChart = lazy(() => import('../../components/UserAnalytics/CustomPiChart.jsx'));
 import { roleDistribution, accountStatus, loginPlatforms, topModulesUser, topCountries } from '../../config/RawData.js';
 
 // redux
