@@ -110,7 +110,7 @@ const AddUserForm = () => {
         return (
             <button
                 onClick={() => setTagCheck(tag)}
-                className={`border border-border cursor-pointer  p-1 rounded-full flex items-center justify-center ${tagCheck === tag && status[tag].borderCol}`}
+                className={`border border-border cursor-pointer  p-2 rounded-full flex items-center justify-center ${tagCheck === tag && status[tag].borderCol}`}
             >
                 {
                     tagCheck === tag && <OnlineTag diameter={10} bgColor={status[tag].color} />
@@ -137,7 +137,7 @@ const AddUserForm = () => {
                                         <div className='text-text-muted text-[10px]'>{sts.desc}</div>
                                     </div>
                                 </div>
-                                <div>
+                                <div className='rounded-full w-5 h-5 flex flex-row items-center justify-center bg-gray-600/10'>
                                     <TagCheck tag={index} />
                                 </div>
                             </div>
