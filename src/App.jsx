@@ -15,6 +15,7 @@ import AuthLayout from "./pages/LoginSignup/AuthLayout";
 import LoginPage from "./pages/LoginSignup/LoginPage";
 import SignupPage from "./pages/LoginSignup/SignupPage";
 import ForgetPasswordPage from "./pages/LoginSignup/ForgetPasswordPage";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   const location = useLocation();
@@ -57,61 +58,66 @@ const App = () => {
   }
 
   return (
+    <>
+      <Toaster
+        toastOptions={{
+          position: 'top-right',
+        }}
+      />
+      <main className={`h-screen p-2 overflow-hidden`}>
 
-    <main className={`h-screen p-2 overflow-hidden`}>
-
-      {
-        isLoggedIn ? (
-          <>
-          {
-            location.pathname.startsWith("/auth") && (
-              <Navigate to="/dashboard" replace/>
-            )
-          }
-            <div className={`h-full gap-2 flex flex-row relative`}>
+        {
+          isLoggedIn ? (
+            <>
               {
-                width <= 900 ? (
-                  <>
-                    {sidebarOpen &&
-                      <div
-                        className="h-full w-full z-40 bg-black/40 absolute"
-                        onClick={() => dispatch(setOpenSidebar(false))}
-                      />
-                    }
-
-                    <div className={`absolute z-50 top-0 left-0 h-full transform transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "-translate-x-[110%]"}`}>
-                      <AsideScreen />
-                    </div>
-                  </>
-                ) : (
-                  <AsideScreen />
+                location.pathname.startsWith("/auth") && (
+                  <Navigate to="/dashboard" replace />
                 )
               }
+              <div className={`h-full gap-2 flex flex-row relative`}>
+                {
+                  width <= 900 ? (
+                    <>
+                      {sidebarOpen &&
+                        <div
+                          className="h-full w-full z-40 bg-black/40 absolute"
+                          onClick={() => dispatch(setOpenSidebar(false))}
+                        />
+                      }
 
-              <div className={`h-full w-full`}>
-                <div className={`flex h-full w-full flex-col gap-2 overflow-hidden`}>
-                  <HeaderScreen />
-                  {isLocation && <OperationsSubTabs />}
-                  <HeroScreen />
+                      <div className={`absolute z-50 top-0 left-0 h-full transform transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "-translate-x-[110%]"}`}>
+                        <AsideScreen />
+                      </div>
+                    </>
+                  ) : (
+                    <AsideScreen />
+                  )
+                }
+
+                <div className={`h-full w-full`}>
+                  <div className={`flex h-full w-full flex-col gap-2 overflow-hidden`}>
+                    <HeaderScreen />
+                    {isLocation && <OperationsSubTabs />}
+                    <HeroScreen />
+                  </div>
                 </div>
               </div>
-            </div>
-          </>
+            </>
 
-        ) : (
-          <Routes>
-            <Route path="/auth" element={<AuthLayout />}>
-              <Route path="login" element={<LoginPage />} />
-              <Route path="sign-up" element={<SignupPage />} />
-              <Route path="forget-password" element={<ForgetPasswordPage />} />
-            </Route>
+          ) : (
+            <Routes>
+              <Route path="/auth" element={<AuthLayout />}>
+                <Route path="login" element={<LoginPage />} />
+                <Route path="sign-up" element={<SignupPage />} />
+                <Route path="forget-password" element={<ForgetPasswordPage />} />
+              </Route>
 
-            <Route path="*" element={<Navigate to="/auth/login" replace />} />
-          </Routes>
-        )
-      }
-
-    </main>
+              <Route path="*" element={<Navigate to="/auth/login" replace />} />
+            </Routes>
+          )
+        }
+      </main>
+    </>
   );
 };
 

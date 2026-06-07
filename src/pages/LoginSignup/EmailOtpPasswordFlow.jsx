@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import CircularProgress from '@mui/material/CircularProgress';
+import { verifyEmailOtp } from "../../api/auth/authApi";
+import toast from "react-hot-toast";
+
 
 const EmailOtpPasswordFlow = ({ mode }) => {
-    const [step, setStep] = useState(3);
+    const [step, setStep] = useState(1);
 
     const [email, setEmail] = useState("");
     const [otp, setOtp] = useState(["", "", "", "", "", ""]);
@@ -10,13 +14,24 @@ const EmailOtpPasswordFlow = ({ mode }) => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
-    const handleSendOtp = (e) => {
+    const [loading, setLoading] = useState(false);
+
+    const handleSendOtp = async (e) => {
         e.preventDefault();
-
+        if(email.trim().length == 0) return;
         // TODO:
-        // POST /auth/send-otp
-
-        setStep(2);
+        try {
+            setLoading(true);
+            const response = await verifyEmailOtp(email);
+            console.log(response);
+            toast.success(response.message);
+            setStep(2);
+        } catch (error) {
+            console.error(error.response?.data);
+            toast.error(error.response?.data.message);
+        }finally{
+            setLoading(false);
+        }
     };
 
     const handleVerifyOtp = (e) => {
@@ -138,9 +153,12 @@ const EmailOtpPasswordFlow = ({ mode }) => {
 
                         <button
                             type="submit"
+                            disabled={loading}
                             className=" mt-6 w-full py-3 rounded-xl font-semibold bg-linear-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 transition-all "
                         >
-                            Send OTP
+                            {
+                                loading ? <CircularProgress color="#fffff" size={20}/> : "Send OTP"
+                            }
                         </button>
 
                         <p className="text-center text-gray-400 mt-6 text-sm">
@@ -174,6 +192,7 @@ const EmailOtpPasswordFlow = ({ mode }) => {
                             {
                                 otp.map((digit, index) => (
                                     <input 
+                                        key={index}
                                         type="text"
                                         id={`otp-${index}`}
                                         type="number"
@@ -186,20 +205,14 @@ const EmailOtpPasswordFlow = ({ mode }) => {
                                 ))
                             }
                         </div>
-                        {/* <input
-                            type="text"
-                            placeholder="Enter OTP"
-                            value={otp}
-                            onChange={(e) => setOtp(e.target.value)}
-                            required
-                            className=" w-full px-4 py-3 rounded-xl bg-white/5 border border-gray-700 outline-none focus:border-cyan-400 focus:shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all "
-                        /> */}
 
                         <button
                             type="submit"
                             className=" mt-6 w-full py-3 rounded-xl font-semibold bg-linear-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 transition-all "
                         >
-                            Verify OTP
+                            {
+                                false ? <CircularProgress color="#fffff" size={20}/> : "Verify OTP"
+                            }
                         </button>
                     </form>
                 )}
