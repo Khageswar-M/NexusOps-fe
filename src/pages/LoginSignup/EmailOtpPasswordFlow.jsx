@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
-import { verifyEmailOtp } from "../../api/auth/authApi";
+import { register, resendOtp, verifyEmailOtp, verifyOtp } from "../../api/auth/authApi";
 import toast from "react-hot-toast";
 
 
@@ -15,10 +15,11 @@ const EmailOtpPasswordFlow = ({ mode }) => {
     const [confirmPassword, setConfirmPassword] = useState("");
 
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleSendOtp = async (e) => {
         e.preventDefault();
-        if(email.trim().length == 0) return;
+        if (email.trim().length == 0) return;
         // TODO:
         try {
             setLoading(true);
@@ -29,37 +30,65 @@ const EmailOtpPasswordFlow = ({ mode }) => {
         } catch (error) {
             console.error(error.response?.data);
             toast.error(error.response?.data.message);
-        }finally{
+        } finally {
             setLoading(false);
         }
     };
 
-    const handleVerifyOtp = (e) => {
+    const handleResendOtp = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
-        // TODO:
-        // POST /auth/verify-otp
+        try {
+            const response = await resendOtp(email);
+            console.log(response.message);
+            toast.success(response.message);
+        } catch (error) {
+            console.error(error.response?.data);
+            toast.error(error.response?.data.message);
+        }finally{
+            setLoading(false);
+        }
+    }
+
+    const handleVerifyOtp = async (e) => {
+        e.preventDefault();
+         setLoading(true);
+        try {
+            const response = await verifyOtp(email, otp.join(""));
+            console.log(response.message);
+            toast.success(response.message);
+        } catch (error) {
+            console.error(error.response?.data);
+            toast.error(error.response?.data.message);
+        }finally{
+            setLoading(false);
+        }
 
         setStep(3);
     };
 
-    const handleCreateAccount = (e) => {
+    const handleCreateAccount = async (e) => {
         e.preventDefault();
 
         if (password !== confirmPassword) {
             alert("Passwords do not match");
             return;
         }
+        console.log(password);
+        setLoading(true);
 
-        // TODO:
-        // POST /auth/register
-
-        console.log({
-            email,
-            password,
-        });
-
-        alert("Account Created Successfully");
+        try {
+            const response = await register(email, password);
+            console.log(response.message);
+            toast.success(response.message);
+            navigate("/dashboard");
+        } catch (error) {
+            console.error(error);
+            toast.error(error.response?.data.message);
+        }finally{
+            setLoading(false);
+        }
     };
 
     const handleOtpChange = (index, value) => {
@@ -69,13 +98,15 @@ const EmailOtpPasswordFlow = ({ mode }) => {
         newOtp[index] = value.slice(-1);
         setOtp(newOtp);
 
-        if(value && index < 5){
+        if (value && index < 5) {
             document.getElementById(`otp-${index + 1}`).focus();
         }
     }
 
+    
+
     const handleKeyDown = (index, e) => {
-        if(e.key === "Backspace" && !otp[index] && index > 0){
+        if (e.key === "Backspace" && !otp[index] && index > 0) {
             document.getElementById(`otp-${index - 1}`).focus();
         }
     }
@@ -157,7 +188,7 @@ const EmailOtpPasswordFlow = ({ mode }) => {
                             className=" mt-6 w-full py-3 rounded-xl font-semibold bg-linear-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 transition-all "
                         >
                             {
-                                loading ? <CircularProgress color="#fffff" size={20}/> : "Send OTP"
+                                loading ? <CircularProgress color="#fffff" size={20} /> : "Send OTP"
                             }
                         </button>
 
@@ -191,7 +222,7 @@ const EmailOtpPasswordFlow = ({ mode }) => {
                         <div className="flex justify-center gap-3 mt-4">
                             {
                                 otp.map((digit, index) => (
-                                    <input 
+                                    <input
                                         key={index}
                                         type="text"
                                         id={`otp-${index}`}
@@ -199,7 +230,7 @@ const EmailOtpPasswordFlow = ({ mode }) => {
                                         maxLength={1}
                                         value={digit}
                                         onChange={(e) => handleOtpChange(index, e.target.value)}
-                                        onKeyDown={(e) =>  handleKeyDown(index, e)}
+                                        onKeyDown={(e) => handleKeyDown(index, e)}
                                         className=" [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none w-12  h-12 text-center text-xl rounded-lg bg-white/5 border border-gray-700 outline-none focus:border-cyan-400 focus:shadow-[0_0_15px_rgba(34,211,238,0.3)]"
                                     />
                                 ))
@@ -207,11 +238,18 @@ const EmailOtpPasswordFlow = ({ mode }) => {
                         </div>
 
                         <button
+                            onClick={(e) => handleResendOtp(e)}
+                            disabled={loading}
+                            className="text-cyan-400 inline-block cursor-pointer hover:underline float-end py-1">
+                            Resend OTP
+                        </button>
+
+                        <button
                             type="submit"
                             className=" mt-6 w-full py-3 rounded-xl font-semibold bg-linear-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 transition-all "
                         >
                             {
-                                false ? <CircularProgress color="#fffff" size={20}/> : "Verify OTP"
+                                loading ? <CircularProgress color="#fffff" size={20} /> : "Verify OTP"
                             }
                         </button>
                     </form>
@@ -248,7 +286,7 @@ const EmailOtpPasswordFlow = ({ mode }) => {
                             type="submit"
                             className=" mt-6 w-full py-3 rounded-xl font-semibold bg-linear-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 transition-all "
                         >
-                            {
+                            { loading ? <CircularProgress size={20} color="#ffff"/> :
                                 mode === "signup" ? "Create Account" : "Reset Password"
                             }
                         </button>
