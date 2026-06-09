@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
-import { register, resendOtp, verifyEmailOtp, verifyOtp } from "../../api/auth/authApi";
+import { register, resendOtp, resetPassword, verifyEmailOtp, verifyOtp } from "../../api/auth/authApi";
 import toast from "react-hot-toast";
 
 
@@ -17,6 +17,7 @@ const EmailOtpPasswordFlow = ({ mode }) => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
+    // Send OTP to the valid email
     const handleSendOtp = async (e) => {
         e.preventDefault();
         if (email.trim().length == 0) return;
@@ -25,8 +26,15 @@ const EmailOtpPasswordFlow = ({ mode }) => {
             setLoading(true);
             const response = await verifyEmailOtp(email);
             console.log(response);
-            toast.success(response.message);
-            setStep(2);
+            
+
+            if(response.success){
+                setStep(2);
+                toast.success(response.message);
+            }else{
+                toast.error(response.message);
+            }
+            
         } catch (error) {
             console.error(error.response?.data);
             toast.error(error.response?.data.message);
@@ -35,22 +43,26 @@ const EmailOtpPasswordFlow = ({ mode }) => {
         }
     };
 
+    // Re-send OTP to the valid email
     const handleResendOtp = async (e) => {
         e.preventDefault();
         setLoading(true);
+        setOtp(["", "", "", "", "", ""]);
 
         try {
             const response = await resendOtp(email);
             console.log(response.message);
             toast.success(response.message);
+            setStep(2);
         } catch (error) {
             console.error(error.response?.data);
-            toast.error(error.response?.data.message);
+            toast.error(error.response?.data.response);
         }finally{
             setLoading(false);
         }
     }
 
+    // Verify OTP
     const handleVerifyOtp = async (e) => {
         e.preventDefault();
          setLoading(true);
@@ -58,21 +70,25 @@ const EmailOtpPasswordFlow = ({ mode }) => {
             const response = await verifyOtp(email, otp.join(""));
             console.log(response.message);
             toast.success(response.message);
+            setStep(3);
         } catch (error) {
             console.error(error.response?.data);
-            toast.error(error.response?.data.message);
+            toast.error(error.response?.data?.message ||
+                error.response?.data?.response
+            );
         }finally{
             setLoading(false);
         }
 
-        setStep(3);
+        
     };
 
+    // Register User
     const handleCreateAccount = async (e) => {
         e.preventDefault();
 
         if (password !== confirmPassword) {
-            alert("Passwords do not match");
+            toast.error("Passwords do not match");
             return;
         }
         console.log(password);
@@ -91,6 +107,27 @@ const EmailOtpPasswordFlow = ({ mode }) => {
         }
     };
 
+    // Reset Password
+    const handleResetPassword = async (e) => {
+        e.preventDefault();
+        if (password !== confirmPassword) {
+            toast.error("Passwords do not match");
+            return;
+        }
+        setLoading(true);
+        try {
+            const response = await resetPassword(email, password);
+            console.log(response);
+            toast.success(response.message);
+            navigate('/dashboard');
+        } catch (error) {
+            console.error(error);
+        }finally{
+            setLoading(false);
+        }
+    }
+
+    // Increment OTP input focus to ONE
     const handleOtpChange = (index, value) => {
         if (!/^\d*$/.test(value)) return;
 
@@ -103,13 +140,16 @@ const EmailOtpPasswordFlow = ({ mode }) => {
         }
     }
 
-    
-
+    // Decrement OTP input focus to ONE
     const handleKeyDown = (index, e) => {
         if (e.key === "Backspace" && !otp[index] && index > 0) {
             document.getElementById(`otp-${index - 1}`).focus();
         }
     }
+    
+
+    
+
 
     return (
         <div className="h-full w-full flex items-center justify-center">
@@ -168,7 +208,7 @@ const EmailOtpPasswordFlow = ({ mode }) => {
 
                 {/* STEP 1 */}
                 {step === 1 && (
-                    <form onSubmit={handleSendOtp}>
+                    <form onSubmit={mode === "signup" ? handleSendOtp : handleResendOtp}>
                         <h2 className="text-xl font-semibold mb-4">
                             Verify Email
                         </h2>
@@ -257,7 +297,7 @@ const EmailOtpPasswordFlow = ({ mode }) => {
 
                 {/* STEP 3 */}
                 {step === 3 && (
-                    <form onSubmit={handleCreateAccount}>
+                    <form onSubmit={mode === "signup" ? handleCreateAccount : handleResetPassword}>
                         <h2 className="text-xl font-semibold mb-4">
                             Create Password
                         </h2>

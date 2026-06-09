@@ -2,7 +2,7 @@ import AsideScreen from "./screens/Aside/AsideScreen";
 import HeaderScreen from "./screens/Header/HeaderScreen";
 import HeroScreen from "./screens/Hero/HeroScreen";
 import OperationsSubTabs from "./components/OperationsSubTabs";
-import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate, useNavigate } from "react-router-dom";
 import Loading from "./components/Loading";
 import ApplicationLoader from "./components/ApplicationLoader";
 import { Suspense, useEffect, useState } from "react";
@@ -16,24 +16,54 @@ import LoginPage from "./pages/LoginSignup/LoginPage";
 import SignupPage from "./pages/LoginSignup/SignupPage";
 import ForgetPasswordPage from "./pages/LoginSignup/ForgetPasswordPage";
 import { Toaster } from "react-hot-toast";
+import { isJwtExpired } from "./api/auth/authApi";
 
 const App = () => {
   const location = useLocation();
   const isLocation = location.pathname.startsWith("/user-management");
-
   const isLoggedIn = useSelector((state) => state.auth.loggedIn);
-
-
   const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
+  const navigate = useNavigate();
 
-    return () => clearTimeout(timer);
-  }, [])
+  // set the default loading screen time
+  useEffect(() => {
+    const checkJwt = async () => {
+
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      if (!user?.jwtToken) {
+        setIsLoading(false);
+        navigate("/auth/login");
+        return;
+      }
+
+      try {
+        const expired = await isJwtExpired(user.jwtToken);
+
+        if (expired) {
+          localStorage.removeItem("user");
+          dispatch(setLoggedIn(false));
+          navigate("/auth/login");
+          return;
+        }
+
+        dispatch(setLoggedIn(true));
+      } catch (error) {
+        console.error(error);
+        localStorage.removeItem("user");
+        dispatch(setLoggedIn(false));
+        navigate("/auth/login");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkJwt();
+  }, []);
 
   const dispatch = useDispatch();
+
+  // reset the screen width at the every window width changes
   useEffect(() => {
     const setWidth = () => {
       dispatch(setScreenWidth(window.innerWidth));
@@ -44,7 +74,9 @@ const App = () => {
     window.addEventListener("resize", setWidth);
 
     return () => window.removeEventListener("resize", setWidth);
-  }, [dispatch]);
+  }, [navigate, dispatch]);
+
+
   const width = useSelector((state) => state.app.width);
   const sidebarOpen = useSelector((state) => state.ui.openSidebar);
 
@@ -70,9 +102,12 @@ const App = () => {
           isLoggedIn ? (
             <>
               {
-                location.pathname.startsWith("/auth") && (
-                  <Navigate to="/dashboard" replace />
-                )
+                <Routes>
+                  <Route
+                    path="/auth/*"
+                    element={<Navigate to="/dashboard" replace />}
+                  />
+                </Routes>
               }
               <div className={`h-full gap-2 flex flex-row relative`}>
                 {

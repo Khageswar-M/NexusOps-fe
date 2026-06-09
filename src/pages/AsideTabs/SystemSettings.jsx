@@ -9,6 +9,7 @@ import IconPlug from '../../assets/PlugInIcon.svg?react';
 import IconGear from '../../assets/GearIcon.svg?react';
 import HamBurger from '../../assets/Hamburger.svg?react'
 import { setOpenSettingsSubBar } from "../../redux/uiSlice";
+import CircularProgress from "@mui/material/CircularProgress";
 
 
 // ─── Nav items ────────────────────────────────────────────────────────────────
@@ -168,30 +169,44 @@ const Badge = ({ label, color }) => {
 };
 
 // ─── Panes ────────────────────────────────────────────────────────────────────
-const GeneralPane = () => (
-  <>
-    <Card>
-      <CardHead icon={<IconGear className="h-5 w-5 text-white" />} iconBg="#2e2e2e" title="Workspace" sub="Basic identity and locale" />
-      <Row label="Workspace name" sub="Visible to all members">
-        <input placeholder="Acme Corp" className=" px-2.5 py-1.5 bg-surface-3 border border-[#3d3d3d] rounded-lg text-[#e0e0e0] text-[13.5px] font-inherit outline-none w-40" />
-      </Row>
-      <Row label="Timezone" sub="Used for scheduled tasks and reports">
-        <Select options={["UTC+05:30 Kolkata", "UTC+00:00 London", "UTC-08:00 Pacific"]} defaultValue="UTC+05:30 Kolkata" />
-      </Row>
-      <Row label="Language" sub="Interface and system messages">
-        <Select options={["English (US)", "English (UK)", "हिंदी"]} defaultValue="English (US)" />
-      </Row>
-    </Card>
-    <Card>
-      <CardHead icon={<IconGear className="h-5 w-5 text-white" />} iconBg="#2e2e2e" title="Appearance" sub="Display and theme preferences" />
-      <Row label="Compact mode" sub="Reduce spacing in lists and tables"><Toggle /></Row>
-      <Row label="Show activity status" sub="Let teammates see when you're active"><Toggle defaultChecked /></Row>
-      <Row label="Date format">
-        <Select options={["DD/MM/YYYY", "MM/DD/YYYY", "YYYY-MM-DD"]} defaultValue="DD/MM/YYYY" />
-      </Row>
-    </Card>
-  </>
-);
+const GeneralPane = () => {
+  const [workSpaceName, setWorkSpaceName] = useState('example@mail.com');
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (user?.email) {
+        setWorkSpaceName(user.email);
+      }
+      setLoading(false);
+    }, 500);
+    return () => clearTimeout(timeout);
+  }, [])
+  return (
+    <>
+      <Card>
+        <CardHead icon={<IconGear className="h-5 w-5 text-white" />} iconBg="#2e2e2e" title="Workspace" sub="Basic identity and locale" />
+        <Row label="Workspace name" sub="Visible to all members">
+          <span className=" px-2.5 py-1.5 bg-surface-3 border border-[#3d3d3d] rounded-lg text-[#e0e0e0] text-[13.5px] font-inherit outline-none ">{loading ? <CircularProgress size={15} color="#fff" /> : workSpaceName}</span>
+        </Row>
+        <Row label="Timezone" sub="Used for scheduled tasks and reports">
+          <Select options={["UTC+05:30 Kolkata", "UTC+00:00 London", "UTC-08:00 Pacific"]} defaultValue="UTC+05:30 Kolkata" />
+        </Row>
+        <Row label="Language" sub="Interface and system messages">
+          <Select options={["English (US)", "English (UK)", "हिंदी"]} defaultValue="English (US)" />
+        </Row>
+      </Card>
+      <Card>
+        <CardHead icon={<IconGear className="h-5 w-5 text-white" />} iconBg="#2e2e2e" title="Appearance" sub="Display and theme preferences" />
+        <Row label="Compact mode" sub="Reduce spacing in lists and tables"><Toggle /></Row>
+        <Row label="Show activity status" sub="Let teammates see when you're active"><Toggle defaultChecked /></Row>
+        <Row label="Date format">
+          <Select options={["DD/MM/YYYY", "MM/DD/YYYY", "YYYY-MM-DD"]} defaultValue="DD/MM/YYYY" />
+        </Row>
+      </Card>
+    </>
+  )
+};
 
 const SecurityPane = () => (
   <>

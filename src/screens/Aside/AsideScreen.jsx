@@ -121,28 +121,6 @@ const AsideScreen = ({ isLocation }) => {
               )
             })}
           </div>
-
-          <div className='absolute bottom-0 border-t border-border w-full py-3 flex items-center justify-center'>
-            <div className='flex flex-row items-center justify-between gap-3 bg-surface-2/50 border border-border px-5 py-2 w-[90%] max-w-[90%] rounded-md'>
-              <div className='flex flex-row gap-3'>
-                <div className="w-10 h-10 rounded-full bg-linear-to-br from-purple-500 via-pink-500 to-orange-400 flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">AD</span>
-                </div>
-
-                <div className='flex flex-col'>
-                  <h2 className='font-bold text-[16px] text-white'>Admin</h2>
-                  <h5 className='font-medium text-[13px] text-text-muted'>Super Admin</h5>
-                </div>
-              </div>
-              <div className='relative right-0 '>
-                <OnlineTag
-                  diameter={10}
-                  bgColor={"green"}
-                  shadow
-                />
-              </div>
-            </div>
-          </div>
         </div>
       </div>
   )

@@ -7,6 +7,16 @@ const api = axios.create({
     withCredentials: true
 })
 
+export const isJwtExpired = async(token) =>{
+    const response = await api.get("/is-jwt-expired",{
+        params:{
+            jwt: token
+        }
+    });
+
+    return response.data;
+};
+
 export const loginUser = async (email, password) => {
     const response = await api.post("/login", {
         email,
@@ -40,6 +50,15 @@ export const resendOtp = async (email) =>{
 export const register = async (email, password) => {
     const response = await api.post("/register", {
         email,
+        password
+    });
+
+    return response.data;
+}
+
+export const resetPassword = async (email, password) => {
+    const response = await api.post("/reset-password", {
+        email, 
         password
     });
 
