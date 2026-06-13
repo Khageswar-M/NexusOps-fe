@@ -4,6 +4,8 @@ import { loginUser } from '../../api/auth/authApi';
 import { setLoggedIn } from '../../redux/authSlice';
 import { useDispatch } from 'react-redux';
 import CircularProgress from '@mui/material/CircularProgress';
+import toast from 'react-hot-toast';
+import Swal from 'sweetalert2';
 
 const LoginPage = () => {
 
@@ -19,11 +21,19 @@ const LoginPage = () => {
         setLogging(true);
         try {
             const data = await loginUser(email, password);
-            console.log("Login Success:", data);
 
             localStorage.setItem("user", JSON.stringify(data));
             dispatch(setLoggedIn(true));
             navigate("/dashboard")
+            toast.success(data.response);
+            Swal.fire({
+                title: "Logged In",
+                text: "You logged in successfully!",
+                icon: "success",
+                customClass:{
+                    popup: "success-popup"
+                }
+            });
         } catch (error) {
             console.error(error.response?.data);
             setError(error.response?.data.message);

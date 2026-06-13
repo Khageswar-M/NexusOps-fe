@@ -56,6 +56,12 @@ export const register = async (email, password) => {
     return response.data;
 }
 
+export const logout = async () => {
+    const response = await api.post("/logout");
+
+    return response.data;
+}
+
 export const resetPassword = async (email, password) => {
     const response = await api.post("/reset-password", {
         email, 

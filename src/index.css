@@ -83,3 +83,16 @@
 .animate-glassFade{
     animation:glassFade 220ms ease-out forwards;
 }
+
+.warning-popup{
+  border: 2px solid #ef4444 !important;
+  background-color: #111520;
+  border-radius: 16px;
+  color: white;
+}
+
+.success-popup{
+  border: 2px solid #44ef52 !important;
+  border-radius: 16px;
+  background-color: #111520;
+}
