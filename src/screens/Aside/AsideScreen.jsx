@@ -9,6 +9,7 @@ import OnlineTag from '../../components/OnlineTag';
 import { useState } from 'react';
 import { setLoggedIn } from '../../redux/authSlice';
 import CircularProgress from '@mui/material/CircularProgress';
+import { showError, showSuccess } from '../../utils/alert';
 
 // redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -78,6 +79,7 @@ const AsideScreen = ({ isLocation }) => {
   const email = user.email;
   console.log(email);
   const [loading, setLoading] = useState(false);
+  const applicationName = useSelector((state) => state.app.appName);
 
   function getColorFromEmail(email) {
     let hash = 0;
@@ -121,8 +123,22 @@ const AsideScreen = ({ isLocation }) => {
     } catch (error) {
       console.error(error);
       toast.error(error.response?.data?.message);
+
+      if (error.code === "ERR_NETWORK"){
+        showError(
+          "Error",
+          "Server not responding!"
+        );
+        return;
+      }
+
+      showError(
+        "Error",
+        error.response?.data?.message || "Something went wrong!"
+      );
+
     } finally {
-      setLoading(false);
+      setLoading(false); 
     }
   }
 
@@ -133,7 +149,7 @@ const AsideScreen = ({ isLocation }) => {
       <div className=''>
         <div className='relative flex items-center justify-center flex-col border-b border-border px-0 py-5'>
           <h1 className='font-poppins text-cyan font-bold text-center text-4xl cursor-pointer'>
-            NexusOps
+            {applicationName}
           </h1>
           <p className='font-bold text-[12px] text-center text-text-muted'>
             Smart Operations Management Dashboard

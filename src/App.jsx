@@ -24,6 +24,7 @@ const App = () => {
   const isLoggedIn = useSelector((state) => state.auth.loggedIn);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+  
 
   // set the default loading screen time
   useEffect(() => {

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
 import { register, resendOtp, resetPassword, verifyEmailOtp, verifyOtp } from "../../api/auth/authApi";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 
 const EmailOtpPasswordFlow = ({ mode }) => {
@@ -16,6 +17,7 @@ const EmailOtpPasswordFlow = ({ mode }) => {
 
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const applicationName = useSelector((state) => state.app.appName);
 
     // Send OTP to the valid email
     const handleSendOtp = async (e) => {
@@ -160,8 +162,9 @@ const EmailOtpPasswordFlow = ({ mode }) => {
 
                 {/* Heading */}
                 <div className="text-center mb-8">
+                    <h1 className="text-4xl font-bold bg-linear-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent ">{applicationName}</h1>
                     <h1
-                        className=" text-4xl font-bold bg-linear-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent "
+                        className="text-xl font-bold bg-linear-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent "
                     >
                         {
                             mode === "signup" ? "Create Account" : "Reset Password"

@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../../api/auth/authApi';
 import { setLoggedIn } from '../../redux/authSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CircularProgress from '@mui/material/CircularProgress';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
+import {showSuccess, showWarning, showError} from '../../utils/alert.js';
 
 const LoginPage = () => {
 
@@ -15,6 +16,7 @@ const LoginPage = () => {
     const [password, setPassword] = useState('');
     const [logging, setLogging] = useState(false);
     const [error, setError] = useState('');
+    const applicationName = useSelector((state) => state.app.appName);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -26,17 +28,26 @@ const LoginPage = () => {
             dispatch(setLoggedIn(true));
             navigate("/dashboard")
             toast.success(data.response);
-            Swal.fire({
-                title: "Logged In",
-                text: "You logged in successfully!",
-                icon: "success",
-                customClass:{
-                    popup: "success-popup"
-                }
-            });
+            showSuccess(
+                "Logged In",
+                "You logged in successFully!"
+            );
         } catch (error) {
             console.error(error.response?.data);
-            setError(error.response?.data.message);
+            setError(error.response?.data?.message || "Server is not responding");
+            if (error.code === "ERR_NETWORK") {
+                showError(
+                    "Server Offline",
+                    "Cannot connect to the server."
+                );
+                return;
+            }
+
+            showError(
+                "Error",
+                error.response?.data?.message || "Something went wrong!"
+            );
+            
         } finally {
             setLogging(false);
         }
@@ -50,6 +61,7 @@ const LoginPage = () => {
     const passwordOnChange = (e) => {
         setPassword(e.target.value);
         setError('');
+        
     }
 
     return (
@@ -62,10 +74,10 @@ const LoginPage = () => {
 
                 <div className="text-center mb-8">
                     <h1 className=" text-4xl font-bold bg-linear-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent ">
-                        Welcome Back
+                        {applicationName}
                     </h1>
 
-                    <p className="text-gray-400 mt-2">
+                    <p className="text-xl font-bold bg-linear-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent ">
                         Sign in to continue
                     </p>
                 </div>
