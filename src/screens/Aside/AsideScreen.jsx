@@ -77,7 +77,6 @@ const AsideScreen = ({ isLocation }) => {
 
   const user = JSON.parse(localStorage.getItem("user"));
   const email = user.email;
-  console.log(email);
   const [loading, setLoading] = useState(false);
   const applicationName = useSelector((state) => state.app.appName);
 
@@ -95,7 +94,6 @@ const AsideScreen = ({ isLocation }) => {
 
 
   const bgColor = getColorFromEmail(email);
-  console.log(bgColor);
 
   const handleLogout = async () => {
 

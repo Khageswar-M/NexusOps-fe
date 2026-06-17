@@ -27,7 +27,6 @@ const LoginPage = () => {
             localStorage.setItem("user", JSON.stringify(data));
             dispatch(setLoggedIn(true));
             navigate("/dashboard")
-            toast.success(data.response);
             showSuccess(
                 "Logged In",
                 "You logged in successFully!"

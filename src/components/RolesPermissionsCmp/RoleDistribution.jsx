@@ -1,20 +1,44 @@
 import { IoSearchOutline as Search } from "react-icons/io5";
-import { rolesItem as Roles} from "../../config/RawData";
+import { rolesItem as Roles } from "../../config/RawData";
 import Pencil from '../../assets/Edit.svg?react';
 import Delete from '../../assets/TrashBin.svg?react';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomModal from '../CustomModal.jsx';
 import EmptyRoles from '../../assets/empty_roles.png';
 import { useSelector } from "react-redux";
+import { getAllRoles } from "../../api/rolesApi.js";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const RoleDistribution = () => {
 
     const rolesSize = Roles.length;
     const width = useSelector((state) => state.app.width);
-
     const [selectedRole, setSelectedRole] = useState(null);
-
     const [isEdit, setIsEdit] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [allRoles, setAllRoles] = useState([]);
+
+    const handleGetAllRoles = async () => {
+
+        setLoading(true);
+
+        try {
+            const response = await getAllRoles();
+            console.log(response);
+            setAllRoles(response);
+        } catch (error) {
+            console.error(error.response);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        handleGetAllRoles();
+    }, [])
+
+
+
     const handleEdit = (role) => {
         setIsEdit(true);
         setSelectedRole(role);
@@ -34,86 +58,82 @@ const RoleDistribution = () => {
     }
     return (
         <div className='h-full flex flex-col p-1'>
-            {/* Search Departments */}
-            <div className="flex flex-row w-full gap-2 pb-1 px-2 border-b border-border">
-                <div className="flex flex-row min-w-10 items-center relative border border-border rounded-md bg-surface-2">
-                    <Search size={20} className="text-text-muted absolute ml-3" />
-                    <input
-                        className='placeholder:text-text-muted p-1 pl-10 rounded-md text-white w-full outline-none border border-transparent focus:border-cyan-400 transition-colors duration-200'
-                        type='text'
-                        placeholder={rolesSize === 0 ? "Disabled due to empty roles" : "Enter role"}
-                        disabled={rolesSize === 0}
-                    />
-                </div>
-                <div id="search-button" className="bg-cyan-500 border border-border rounded-md flex items-center justify-center text-lg  text-gray-800 active:border-cyan-300 cursor-pointer select-none px-5 font-bold"
-                    onClick={() => {
-                        if (rolesSize > 0 && !isSearch) {
-                            handleSearch()
-                        } else {
-                            console.log("Empty roles");
-                        }
-                    }}
-                >
-                    {
-                        rolesSize > 0 ? (
-                            <div>
-                                {
-                                    isSearch ? "Searching..." : "Search"
-                                }
-                            </div>
-                        ) : (
-                            <div className="text-text-muted">
-                                Search
-                            </div>
-                        )
-                    }
-
-                </div>
-            </div>
 
             <div id="roles-container" className="h-full overflow-y-auto custom-scrollbar scroll-smooth p-2">
                 <div id="roles" className="flex flex-col gap-2">
-                    {rolesSize > 0 ? (
-                        Roles.map((role, idx) => (
-                            <div
-                                key={idx}
-                                className="flex flex-row items-center justify-between border border-border rounded-md p-2 hover:cursor-pointer hover:bg-surface-2"
-                            >
-                                <div className="flex flex-row items-center gap-2">
-                                    <div className={`${role.textCol} ${width > 500 && role.bgCol} h-15 w-15 rounded-full flex items-center justify-center`}>
-                                        {<role.Icon size={30} />}
+                    {loading ? (
+                        <div className="flex-1 flex items-center justify-center">
+                            <CircularProgress size={20} color="#fff"/>
+                        </div>
+                    ) :
+                        allRoles.length > 0 ? (
+                            allRoles.map((role) => (
+                                <div
+                                    key={role.id}
+                                    className="flex flex-row items-center justify-between border border-border rounded-md p-2 hover:cursor-pointer hover:bg-surface-2"
+                                >
+                                    <div className="flex flex-row items-center gap-2">
+                                        {/* <div className={`${role.textCol} ${width > 500 && role.bgCol} h-15 w-15 rounded-full flex items-center justify-center`}>
+                                            {<role.Icon size={30} />}
+                                        </div> */}
+                                        <div className="flex flex-col">
+                                            <div 
+                                                className={`text-[16px] text-white font-bold`}
+                                            >
+                                                {role.name}
+                                            </div>
+                                            <div 
+                                                className="text-[12px] text-text-muted"
+                                            >
+                                                {role.description}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="flex flex-col">
-                                        <div className={`text-[16px] ${role.textCol} font-bold`}>{role.title}</div>
-                                        <div className="text-[12px] text-text-muted">{role.desc}</div>
+                                    <div className="flex flex-row items-center gap-3 px-2">
+                                        <div className="text-text-muted text-[12px]">3 users</div>
+                                        <div className="flex flex-row items-center gap-3">
+                                            <div className="flex flex-row items-center text-[15px] gap-1 text-white/68 bg-surface-2 border border-border  rounded-md p-1"
+                                                onClick={() => handleEdit(role)}
+                                            >
+                                                <Pencil className="h-5 w-5 text-green-500" />
+                                            </div>
+                                            <div className="bg-surface-2 border border-border p-1 rounded-md"
+                                                onClick={() => handleDelete(role)}
+                                            >
+                                                <Delete className="h-5 w-5 text-red-500" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="flex flex-row items-center gap-3 px-2">
-                                    <div className="text-text-muted text-[12px]">3 users</div>
-                                    <div className="flex flex-row items-center gap-3">
-                                        <div className="flex flex-row items-center text-[15px] gap-1 text-white/68 bg-surface-2 border border-border  rounded-md p-1"
-                                            onClick={() => handleEdit(role)}
-                                        >
-                                            <Pencil className="h-5 w-5 text-green-500" />
-                                        </div>
-                                        <div className="bg-surface-2 border border-border p-1 rounded-md"
-                                            onClick={() => handleDelete(role)}
-                                        >
-                                            <Delete className="h-5 w-5 text-red-500" />
-                                        </div>
-                                    </div>
+                            ))
+                        ) : (
+                            <div className="flex-1 flex items-center justify-center p-6">
+                                <div
+                                    className="  w-full rounded-2xl  text-center "
+                                >
+                                    <img
+                                        src={EmptyRoles}
+                                        alt="Empty roles"
+                                        className="w-32 h-32 mx-auto mb-4"
+                                    />
+
+                                    <h2 className="text-2xl font-bold text-text-muted">
+                                        No Roles Yet
+                                    </h2>
+
+                                    <p className="text-text-muted mt-3">
+                                        Roles help organize permissions and control what users can access.
+                                        Create your first role to get started.
+                                    </p>
+
+                                    <button
+                                        className=" mt-6 px-6 py-3 rounded-xl bg-cyan-500 text-gray-900 font-semibold hover:bg-cyan-400 transition-colors "
+                                    >
+                                        Create Role
+                                    </button>
                                 </div>
                             </div>
-                        ))
-                    ) : (
-                        <div id="empty-roles" className="flex-1 flex items-center justify-center">
-                            <img
-                                src={EmptyRoles}
-                                alt="Empty roles"
-                                className="w-50 h-50"
-                            />
-                        </div>
-                    )
+                        )
                     }
                 </div>
             </div>
