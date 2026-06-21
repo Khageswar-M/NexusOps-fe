@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import CustomModal from '../CustomModal.jsx';
 import EmptyRoles from '../../assets/empty_roles.png';
 import { useSelector } from "react-redux";
-import { getAllRoles } from "../../api/rolesApi.js";
+import { getAllRoles, updateRole } from "../../api/rolesApi.js";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const RoleDistribution = () => {
@@ -17,6 +17,9 @@ const RoleDistribution = () => {
     const [isEdit, setIsEdit] = useState(false);
     const [loading, setLoading] = useState(false);
     const [allRoles, setAllRoles] = useState([]);
+    const [editItem, setEditItem] = useState(-1);
+    const [newRole, setNewRole] = useState('');
+    const [newRoleDesc, setNewRoleDesc] = useState('');
 
     const handleGetAllRoles = async () => {
 
@@ -24,7 +27,6 @@ const RoleDistribution = () => {
 
         try {
             const response = await getAllRoles();
-            console.log(response);
             setAllRoles(response);
         } catch (error) {
             console.error(error.response);
@@ -40,7 +42,9 @@ const RoleDistribution = () => {
 
 
     const handleEdit = (role) => {
-        setIsEdit(true);
+        setNewRole(role.name);
+        setNewRoleDesc(role.description);
+        setEditItem(role.id);
         setSelectedRole(role);
     }
 
@@ -56,6 +60,21 @@ const RoleDistribution = () => {
         setIsSearch(true);
         setTimeout(() => setIsSearch(false), 3000);
     }
+
+    const handleUpdateRole = async (roleId) => {
+        if(newRole.trim().length < 1 || newRoleDesc.trim().length < 1) return;
+        console.log(newRole, newRoleDesc);
+        try {
+            const response = await updateRole(roleId, newRole, newRoleDesc);
+            console.log(response);
+            await handleGetAllRoles();
+        } catch (error) {
+            console.log(error);
+        }finally{
+
+        }
+    }
+
     return (
         <div className='h-full flex flex-col p-1'>
 
@@ -63,47 +82,101 @@ const RoleDistribution = () => {
                 <div id="roles" className="flex flex-col gap-2">
                     {loading ? (
                         <div className="flex-1 flex items-center justify-center">
-                            <CircularProgress size={20} color="#fff"/>
+                            <CircularProgress size={20} color="#fff" />
                         </div>
                     ) :
                         allRoles.length > 0 ? (
                             allRoles.map((role) => (
-                                <div
-                                    key={role.id}
-                                    className="flex flex-row items-center justify-between border border-border rounded-md p-2 hover:cursor-pointer hover:bg-surface-2"
-                                >
-                                    <div className="flex flex-row items-center gap-2">
-                                        {/* <div className={`${role.textCol} ${width > 500 && role.bgCol} h-15 w-15 rounded-full flex items-center justify-center`}>
-                                            {<role.Icon size={30} />}
-                                        </div> */}
-                                        <div className="flex flex-col">
-                                            <div 
-                                                className={`text-[16px] text-white font-bold`}
-                                            >
-                                                {role.name}
+                                <div className="flex flex-col">
+                                    <div
+                                        key={role.id}
+                                        className="flex flex-row items-center justify-between border border-border rounded-md p-2 hover:cursor-pointer bg-surface-2"
+                                    >
+                                        <div className="flex flex-row items-center gap-2">
+
+                                            <div className="flex flex-col">
+                                                <div
+                                                    className={`text-[16px] text-white font-bold`}
+                                                >
+                                                    {role.name}
+                                                </div>
+                                                <div
+                                                    className="text-[12px] text-text-muted"
+                                                >
+                                                    {role.description}
+                                                </div>
                                             </div>
-                                            <div 
-                                                className="text-[12px] text-text-muted"
-                                            >
-                                                {role.description}
+                                        </div>
+                                        <div className="flex flex-row items-center gap-3 px-2">
+                                            <div className="text-text-muted text-[12px]">3 users</div>
+                                            <div className="flex flex-row items-center gap-3">
+                                                <div className="flex flex-row items-center text-[15px] gap-1 text-white/68 bg-surface-2 border border-border  rounded-md p-1"
+                                                    onClick={() => handleEdit(role)}
+                                                >
+                                                    <Pencil className="h-5 w-5 text-green-500" />
+                                                </div>
+                                                <div className="bg-surface-2 border border-border p-1 rounded-md"
+                                                    onClick={() => handleDelete(role)}
+                                                >
+                                                    <Delete className="h-5 w-5 text-red-500" />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="flex flex-row items-center gap-3 px-2">
-                                        <div className="text-text-muted text-[12px]">3 users</div>
-                                        <div className="flex flex-row items-center gap-3">
-                                            <div className="flex flex-row items-center text-[15px] gap-1 text-white/68 bg-surface-2 border border-border  rounded-md p-1"
-                                                onClick={() => handleEdit(role)}
-                                            >
-                                                <Pencil className="h-5 w-5 text-green-500" />
+
+                                    {
+                                        (editItem === role.id) && (
+                                            <div className="border-b border-l border-r border-border rounded-bl-md rounded-br-md px-2 bg-surface transition-all duration-200 flex flex-row items-center justify-between p-2">
+                                                <div className="flex md:flex-row gap-2 flex-col">
+                                                    {/* Input for Role Name */}
+                                                    <div>
+                                                        <input
+                                                            className="updateInput" 
+                                                            type="text" 
+                                                            placeholder="Enter role name"
+                                                            value={newRole}
+                                                            onChange={(e) => setNewRole(e.target.value)}
+                                                            required
+                                                        />
+                                                    </div>
+
+                                                    {/* Input for Role Description */}
+                                                    <div>
+                                                        <input 
+                                                            className="updateInput" 
+                                                            type="text" 
+                                                            placeholder="Enter role description"
+                                                            value={newRoleDesc}
+                                                            onChange={(e) => setNewRoleDesc(e.target.value)}
+                                                            required
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex md:flex-row items-center gap-2 text-white flex-col">
+                                                    {/* Button for Update */}
+                                                    <div>
+                                                        <button 
+                                                            className="bg-green-500 px-2 rounded-md text-sm py-1 font-bold cursor-pointer active:bg-green-300"
+                                                            onClick={() => handleUpdateRole(role.id)}
+                                                        >
+                                                            Update
+                                                        </button>
+                                                    </div>
+
+                                                    {/* Button for Delete */}
+                                                    <div>
+                                                        <button
+                                                            className="bg-red-500 px-2 rounded-md text-sm py-1 font-bold cursor-pointer active:bg-red-400"
+                                                            onClick={() => setEditItem(-1)}
+                                                        >
+                                                            Cancel
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div className="bg-surface-2 border border-border p-1 rounded-md"
-                                                onClick={() => handleDelete(role)}
-                                            >
-                                                <Delete className="h-5 w-5 text-red-500" />
-                                            </div>
-                                        </div>
-                                    </div>
+                                        ) 
+                                    }
                                 </div>
                             ))
                         ) : (

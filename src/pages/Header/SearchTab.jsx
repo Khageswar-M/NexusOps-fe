@@ -51,4 +51,4 @@ const SearchTab = ({setIsSearchOpen}) => {
     )
 }
 
-export default SearchTab
+export default SearchTab;

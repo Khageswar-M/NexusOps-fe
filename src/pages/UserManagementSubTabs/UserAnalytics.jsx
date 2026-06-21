@@ -71,7 +71,7 @@ const UserAnalytics = () => {
     totalCount
   }) => {
     return (
-      <div className='grid grid-rows-[1fr_5fr] grid-cols-1'>
+      <div className='grid grid-rows-[1fr_5fr] grid-cols-1  border border-border'>
         {/* Header */}
         <div className='border-b border-border flex items-center px-2'>
           <HeadBar title={barTitle} color={barTagCol} />
@@ -101,7 +101,7 @@ const UserAnalytics = () => {
     data
   }) => {
     return (
-      <div className='grid grid-rows-[1fr_5fr]'>
+      <div className='grid grid-rows-[1fr_5fr]  border border-border'>
         <div className='border-b border-border flex items-center px-2'>
           <HeadBar color={barTagCol} title={barTitle} />
         </div>
@@ -146,7 +146,7 @@ const UserAnalytics = () => {
   return (
     <div className={`grid ${width > 656 ? "grid-rows-3" : ""}  grid-cols-1 gap-2 h-full [&>div]:rounded-md overflow-y-auto`}>
       {/* ROW 1 */}
-      <div className={`h-full w-full gap-2 [&>div]:rounded-md grid ${width > 1277 ? "grid-cols-1" : width > 656 ? "grid-cols-2 grid-rows-1" : "grid-cols-1"}`}>
+      <div className={`h-full w-full gap-2 [&>div]:rounded-md grid ${width > 1277 ? "grid-cols-1" : width > 656 ? "grid-cols-2 grid-rows-1" : "grid-cols-1"}  border border-border`}>
         <div className={`grid grid-rows-[1fr_5fr] grid-cols-1 bg-surface ${width > 656 ? "h-full" : "h-50"}`}>
           {/* Header */}
           <div className='border-b border-border flex flex-row items-center px-2'>

@@ -80,6 +80,21 @@
     }
 }
 
+@layer components{
+  .updateInput{
+    @apply  
+    bg-surface-2 
+    outline-none 
+    border 
+    border-border 
+    focus:border-cyan-500 
+    text-white 
+    text-sm 
+    p-1 rounded-md
+    max-w-sm
+  }
+}
+
 .animate-glassFade{
     animation:glassFade 220ms ease-out forwards;
 }
