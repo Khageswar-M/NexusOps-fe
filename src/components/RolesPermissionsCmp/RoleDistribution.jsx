@@ -63,15 +63,13 @@ const RoleDistribution = () => {
 
     const handleUpdateRole = async (roleId) => {
         if(newRole.trim().length < 1 || newRoleDesc.trim().length < 1) return;
-        console.log(newRole, newRoleDesc);
         try {
             const response = await updateRole(roleId, newRole, newRoleDesc);
             console.log(response);
             await handleGetAllRoles();
+            setEditItem(-1);
         } catch (error) {
             console.log(error);
-        }finally{
-
         }
     }
 
