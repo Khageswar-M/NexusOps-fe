@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setTitle } from '../../redux/appSlice.js';
 import Swal from 'sweetalert2';
 import CustomModal from '../../components/CustomModal.jsx';
+import { createRole } from '../../api/rolesApi.js';
 
 const RolesPermissions = () => {
 
@@ -20,6 +21,8 @@ const RolesPermissions = () => {
   const [openCreate, setOpenCreate] = useState(false);
   const [roleName, setRoleName] = useState('');
   const [roleDesc, setRoleDesc] = useState('');
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     dispatch(setTitle(["User Management", "Roles & Permissions"]));
@@ -78,8 +81,18 @@ const RolesPermissions = () => {
     )
   }
 
-  const handleCreateRole = async () => {
+  const handleCreateRole = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
+    try {
+      const response = await createRole(roleName, roleDesc);
+      console.log(response);
+    } catch (error) {
+      console.log(error.response);
+    }finally{
+      setLoading(false);
+    }
   }
 
   return (
@@ -138,13 +151,8 @@ const RolesPermissions = () => {
       {
         openCreate && (
           <CustomModal open={setOpenCreate} onClose={() => setOpenCreate(false)}>
-            <div className='z-99 text-white md:w-100 bg-surface p-2 border border-border'>
-              {/* <div className='float-end text-xl cursor-pointer hover:bg-white/20 rounded-full flex items-center justify-center p-1'
-                onClick={() => setOpenCreate(false)}
-              >
-                <Plus className='rotate-45' />
-              </div> */}
-
+            <div className='z-99 rounded-lg text-white md:w-100 bg-surface p-10 border border-border'>
+              
               <form className='flex flex-col gap-4' >
                 <h3 className='text-center font-bold text-xl text-cyan-300'>Create Role</h3>
 
@@ -155,6 +163,8 @@ const RolesPermissions = () => {
                     type="text"
                     placeholder='Enter role name'
                     className='w-full updateInput py-2'
+                    maxLength={20}
+                    onChange={(e) => setRoleName(e.target.value)}
                   />
                 </div>
 
@@ -164,13 +174,19 @@ const RolesPermissions = () => {
                    id="role-desc"
                     placeholder='Enter description'
                     className='w-full updateInput'
+                    maxLength={100}
+                    onChange={(e) => setRoleDesc(e.target.value)}
                    >
                   </textarea>
                 </div>
 
-                <div id='role-error' className='text-sm text-red-500'></div>
+                {
+                  (error != null) &&(
+                    <div id='role-error' className='text-sm text-red-500'>{error}</div>
+                  )
+                }
 
-                <div className='flex flex-row items-center justify-around [&>button]:px-5 [&>button]:py-1 [&>button]:rounded-md [&>button]:cursor-pointer'>
+                <div className='flex flex-row items-center justify-around [&>button]:px-5 [&>button]:py-1 [&>button]:rounded-md [&>button]:cursor-pointer [&>button]:font-bold'>
                   <button
                     onClick={(e) => {
                       e.preventDefault();
@@ -182,9 +198,12 @@ const RolesPermissions = () => {
                   </button>
 
                   <button type='submit'
-                    className='bg-cyan-500'
+                    className={` ${loading ? "bg-cyan-700" : "bg-cyan-500"}`}
+                    onClick={(e) => handleCreateRole(e)}
                   >
-                    Create
+                    {
+                      loading ? "Creating..." : "Create"
+                    }
                   </button>
                 </div>
               </form>
