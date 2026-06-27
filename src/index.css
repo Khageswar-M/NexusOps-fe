@@ -93,6 +93,17 @@
     p-1 rounded-md
     max-w-sm
   }
+  .errorInput{
+    @apply
+    bg-surface-2 
+    outline-none 
+    border 
+    border-red-500 
+  text-white 
+    text-sm 
+    p-1 rounded-md
+    max-w-sm
+  }
 }
 
 .animate-glassFade{

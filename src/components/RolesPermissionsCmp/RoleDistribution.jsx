@@ -5,17 +5,25 @@ import Delete from '../../assets/TrashBin.svg?react';
 import { useEffect, useState } from "react";
 import CustomModal from '../CustomModal.jsx';
 import EmptyRoles from '../../assets/empty_roles.png';
-import { useSelector } from "react-redux";
-import { getAllRoles, updateRole } from "../../api/rolesApi.js";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteRole, getAllRoles, updateRole } from "../../api/rolesApi.js";
 import CircularProgress from "@mui/material/CircularProgress";
+import { showError, showWarning } from "../../utils/alert.js";
+import { setCreateRoleTrigger } from "../../redux/uiSlice.js";
+import Swal from "sweetalert2";
 
 const RoleDistribution = () => {
 
+    const dispatch = useDispatch();
     const rolesSize = Roles.length;
     const width = useSelector((state) => state.app.width);
+    const isNewRoleCreated = useSelector((state) => state.ui.createRoleTrigger);
     const [selectedRole, setSelectedRole] = useState(null);
     const [isEdit, setIsEdit] = useState(false);
+
     const [loading, setLoading] = useState(false);
+    const [dltLoading, setDltLoading] = useState(false);
+
     const [allRoles, setAllRoles] = useState([]);
     const [editItem, setEditItem] = useState(-1);
     const [newRole, setNewRole] = useState('');
@@ -34,10 +42,9 @@ const RoleDistribution = () => {
             setLoading(false);
         }
     }
-
     useEffect(() => {
         handleGetAllRoles();
-    }, [])
+    }, [isNewRoleCreated])
 
 
 
@@ -48,10 +55,37 @@ const RoleDistribution = () => {
         setSelectedRole(role);
     }
 
-    const [isDelete, setIsDelete] = useState(false);
-    const handleDelete = (role) => {
-        setIsDelete(true);
+    const handleDelete = async (role) => {
+        const confirmDelete = await Swal.fire({
+            title: "Delete Role",
+            text: "Are you sure ?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#ef4444",
+            confirmButtonText: "Yes, delete",
+            cancelButtonColor: "#6b7280",
+            cancelButtonText: "Cancel",
+            reverseButtons: true,
+            customClass: {
+                popup: "warning-popup"
+            }
+        })
+
+        if(!confirmDelete.isConfirmed) return;
+        
         setSelectedRole(role);
+        setDltLoading(true);
+
+        try {
+            const response = await deleteRole(role.id);
+            console.log(response);
+            handleGetAllRoles();
+        } catch (error) {
+            console.error(error);
+            showError("Error", "Something error found, please refresh the page!");
+        }finally{
+            setDltLoading(false);
+        }
     }
 
     const [isSearch, setIsSearch] = useState(false);
@@ -116,7 +150,15 @@ const RoleDistribution = () => {
                                                 <div className="bg-surface-2 border border-border p-1 rounded-md"
                                                     onClick={() => handleDelete(role)}
                                                 >
-                                                    <Delete className="h-5 w-5 text-red-500" />
+                                                   {
+                                                        dltLoading && (selectedRole?.id === role.id) ? (
+                                                            <div className="h-5 w-5 flex items-center justify-center text-white">
+                                                                <CircularProgress size={15}  color="#FFFFFF"/>
+                                                            </div>
+                                                        ) : (
+                                                            <Delete className="h-5 w-5 text-red-500" />
+                                                        )
+                                                   } 
                                                 </div>
                                             </div>
                                         </div>
@@ -219,19 +261,6 @@ const RoleDistribution = () => {
                     </CustomModal>
                 )
             }
-
-            {
-                isDelete && (
-                    <CustomModal open={isDelete} handleClose={() => setIsDelete(false)}>
-                        <div className="h-screen flex items-center justify-center text-white"
-                            onClick={() => setIsDelete(false)}
-                        >
-                            Opened for delete: {selectedRole?.title}
-                        </div>
-                    </CustomModal>
-                )
-            }
-
 
         </div>
     )

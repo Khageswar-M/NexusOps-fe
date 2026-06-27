@@ -10,9 +10,11 @@ import { LuClock3 as Clock } from "react-icons/lu";
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { setTitle } from '../../redux/appSlice.js';
+import { setCreateRoleTrigger } from '../../redux/uiSlice.js';
 import Swal from 'sweetalert2';
 import CustomModal from '../../components/CustomModal.jsx';
 import { createRole } from '../../api/rolesApi.js';
+import { showSuccess } from '../../utils/alert.js';
 
 const RolesPermissions = () => {
 
@@ -87,9 +89,13 @@ const RolesPermissions = () => {
 
     try {
       const response = await createRole(roleName, roleDesc);
+      setOpenCreate(false);
       console.log(response);
+      showSuccess("New role Created", response.message);
+      dispatch(setCreateRoleTrigger());
     } catch (error) {
-      console.log(error.response);
+      console.log(error.response.data);
+      setError(error.response.data.message);
     }finally{
       setLoading(false);
     }
@@ -162,9 +168,12 @@ const RolesPermissions = () => {
                     id='role-name'
                     type="text"
                     placeholder='Enter role name'
-                    className='w-full updateInput py-2'
+                    className={`w-full updateInput py-2`}
                     maxLength={20}
-                    onChange={(e) => setRoleName(e.target.value)}
+                    onChange={(e) =>{ 
+                      setRoleName(e.target.value);
+                      setError(null);
+                    }}
                   />
                 </div>
 
@@ -175,7 +184,10 @@ const RolesPermissions = () => {
                     placeholder='Enter description'
                     className='w-full updateInput'
                     maxLength={100}
-                    onChange={(e) => setRoleDesc(e.target.value)}
+                    onChange={(e) => {
+                      setRoleDesc(e.target.value);
+                      setError(null);
+                    }}
                    >
                   </textarea>
                 </div>

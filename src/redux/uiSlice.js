@@ -4,6 +4,7 @@ const initialState = {
     isNotificationOpen: false,
     openSidebar: false,
     openSettingsSubBar: false,
+    createRoleTrigger: false,
 };
 
 const uiSlice = createSlice({
@@ -21,6 +22,9 @@ const uiSlice = createSlice({
         },
         setOpenSettingsSubBar: (state, action) => {
             state.openSettingsSubBar = action.payload;
+        },
+        setCreateRoleTrigger: (state) => {
+            state.createRoleTrigger = !state.createRoleTrigger;
         }
     }
 });
@@ -29,7 +33,8 @@ export const {
     toggleNotification,
     setNotification,
     setOpenSidebar,
-    setOpenSettingsSubBar
+    setOpenSettingsSubBar,
+    setCreateRoleTrigger
 } = uiSlice.actions;
 
 export default uiSlice.reducer;

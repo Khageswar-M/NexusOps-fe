@@ -10,7 +10,6 @@ import useInitials from '../../hooks/useInitials.js';
 const AssignRoleToUser = () => {
   const [isUserSearch, setIsUserSearch] = useState(false);
   const [search, setSearch] = useState('John');
-  console.log(search);
 
   const [currentUser, setCurrentUser] = useState([]);
   const [checkRole, setCheckRole] = useState(-1);
@@ -159,7 +158,7 @@ const AssignRoleToUser = () => {
                 {roleSize > 0 ? (
                   Roles.map((role, idx) => {
                     return (
-                      <div className='px-2 py-1 rounded-md bg-surface-2 flex flex-row items-center justify-between border border-border cursor-pointer hover:bg-surface active:border-cyan-400'
+                      <div key={idx} className='px-2 py-1 rounded-md bg-surface-2 flex flex-row items-center justify-between border border-border cursor-pointer hover:bg-surface active:border-cyan-400'
                         onClick={() => setCheckRole(idx)}
                       >
                         <div className='flex flex-row gap-2 items-center'>
