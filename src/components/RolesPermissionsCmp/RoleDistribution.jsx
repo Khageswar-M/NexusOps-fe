@@ -140,7 +140,7 @@ const RoleDistribution = () => {
                                             </div>
                                         </div>
                                         <div className="flex flex-row items-center gap-3 px-2">
-                                            <div className="text-text-muted text-[12px]">3 users</div>
+                                            <div className="text-text-muted text-[12px]">{role.userCount} users</div>
                                             <div className="flex flex-row items-center gap-3">
                                                 <div className="flex flex-row items-center text-[15px] gap-1 text-white/68 bg-surface-2 border border-border  rounded-md p-1"
                                                     onClick={() => handleEdit(role)}

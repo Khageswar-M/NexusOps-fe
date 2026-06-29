@@ -3,7 +3,7 @@ import { api } from "./api.js";
 
 // Get all roles
 export const getAllRoles = async () => {
-    const response = await api.get("/all-roles");
+    const response = await api.get("/all-roles-user-count");
     return response.data;
 }
 

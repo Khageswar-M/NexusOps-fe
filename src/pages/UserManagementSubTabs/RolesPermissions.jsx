@@ -114,9 +114,6 @@ const RolesPermissions = () => {
                 title={"Role Distribution"}
               />
               <div className='flex flex-row items-center gap-2'>
-                <div className='text-text-muted text-[12px]'>
-                  {Roles.length} roles total
-                </div>
                 <button
                   className='text-[14px] flex flex-row items-center gap-1 text-black font-bold bg-cyan-300 px-3 py-0.5 rounded-md cursor-pointer active:bg-cyan-200'
 
