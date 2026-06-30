@@ -149,7 +149,7 @@ const UserList = () => {
 
                     {/* tbody */}
                     <tbody>
-                      {Array.from({ length: size }).map((_, index) => {
+                      {allUsers.map((user, index) => {
                         const isChecked = checkedUser[index] ?? false;
                         return (
                           <tr
@@ -167,29 +167,34 @@ const UserList = () => {
                               <div className='flex flex-row items-center gap-2'>
                                 <div className='shrink-0 flex items-center justify-center bg-linear-to-br
   from-blue-400 to-orange-500 w-9 h-9 rounded-full text-[13px] font-bold'>
-                                  JS
+                                  km
                                 </div>
                                 <div className='flex flex-col min-w-0'>
-                                  <span className='text-[13px] font-bold leading-tight truncate'>John Smith</span>
-                                  <span className='text-text-muted text-[10px] font-semibold'>Joined Jan 15,
-                                    2024</span>
+                                  <span className='text-[13px] font-bold leading-tight truncate'>
+                                    {`${user.firstName + " " + user.lastName}`}
+                                    </span>
+                                  <span className='text-text-muted text-[10px] font-semibold'>
+                                    {user.createdAt}
+                                    </span>
                                 </div>
                               </div>
                             </td>
 
                             {/* Email */}
                             <td className='px-3 py-3 text-text-muted text-[12px] min-w-45'>
-                              johnsmith@gmail.com
+                              {user.email}
                             </td>
 
                             {/* Role */}
                             <td className='px-3 py-3 min-w-25'>
-                              <HandleActivity item={rolesItem?.[5]} />
+                              {/* <HandleActivity item={rolesItem?.[5]} /> */}
+                              {user.roleName}
                             </td>
 
                             {/* Status */}
                             <td className='px-3 py-3 min-w-25'>
-                              <HandleActivity item={statusItem?.[3]} />
+                              {/* <HandleActivity item={statusItem?.[3]} /> */}
+                              {user.status}
                             </td>
 
                             {/* Last Active */}
